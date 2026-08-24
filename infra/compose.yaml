@@ -1,0 +1,46 @@
+services:
+  seaweedfs:
+    image: chrislusf/seaweedfs:latest
+    command: server -dir=/data -s3 -s3.port=8333
+    ports:
+      - "8334:8333"
+      - "9334:9333"
+    volumes:
+      - seaweed-data:/data
+
+  api:
+    build:
+      context: ../services/api
+    env_file: ../.env
+    environment:
+      S3_ENDPOINT: http://seaweedfs:8333
+      MCP_URL: http://mcp:8765/mcp
+    ports:
+      - "8100:8000"
+    depends_on:
+      - seaweedfs
+
+  mcp:
+    build:
+      context: ../services/mcp
+    environment:
+      MCP_HTTP_HOST: 0.0.0.0
+      MCP_HTTP_PORT: 8765
+      PARQUET_ROOT: /workspace/storage
+    volumes:
+      - ../storage:/workspace/storage:ro
+    ports:
+      - "8765:8765"
+
+  web:
+    build:
+      context: ../apps/web
+    environment:
+      API_URL: http://api:8000
+    ports:
+      - "3100:3000"
+    depends_on:
+      - api
+
+volumes:
+  seaweed-data:

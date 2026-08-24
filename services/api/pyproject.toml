@@ -1,0 +1,21 @@
+[project]
+name = "gemma-mcp-api"
+version = "0.1.0"
+description = "Personal LLM dashboard API with S3-backed conversations"
+requires-python = ">=3.12"
+dependencies = [
+  "boto3>=1.34",
+  "fastapi>=0.115",
+  "openai>=1.0",
+  "pydantic-settings>=2.3",
+  "python-multipart>=0.0.9",
+  "uvicorn[standard]>=0.30",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+

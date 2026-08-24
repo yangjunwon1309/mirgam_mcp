@@ -1,0 +1,10 @@
+.env
+**/.env
+**/node_modules/
+**/.next/
+**/__pycache__/
+**/*.py[cod]
+storage/**
+!storage/**/.gitkeep
+*.egg-info/
+
