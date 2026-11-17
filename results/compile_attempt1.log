@@ -1,0 +1,16 @@
+/home/nano/beacon/firmware/beacon_node/beacon_node.ino:20:10: fatal error: esp_reset_reason.h: No such file or directory
+   20 | #include <esp_reset_reason.h>
+      |          ^~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+
+Used library        Version Path
+Wire                3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/libraries/Wire
+HTTPClient          3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/libraries/HTTPClient
+Networking          3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/libraries/Network
+NetworkClientSecure 3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/libraries/NetworkClientSecure
+Preferences         3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/libraries/Preferences
+WiFi                3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/libraries/WiFi
+
+Used platform Version Path
+esp32:esp32   3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12
+Error during build: exit status 1

@@ -1,0 +1,1 @@
+"""Farm beacon server package."""

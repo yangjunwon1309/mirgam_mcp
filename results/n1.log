@@ -1,0 +1,43 @@
+test_checkin_attach_token_command_result_and_duplicate (test_http.HttpApiTests) ... {"time":"2026-11-09T12:29:12+00:00","node":"tc-a1b2c3","request":"/api/v1/checkin","result":"ok","ms":14.8}
+{"time":"2026-11-09T12:29:12+00:00","node":"-","request":"/admin/nodes/tc-a1b2c3/attach","result":"ok","ms":8.8}
+{"time":"2026-11-09T12:29:12+00:00","node":"-","request":"/admin/nodes/tc-a1b2c3/commands","result":"ok","ms":9.2}
+{"time":"2026-11-09T12:29:12+00:00","node":"tc-a1b2c3","request":"/api/v1/checkin","result":"ok","ms":21.2}
+{"time":"2026-11-09T12:29:12+00:00","node":"tc-a1b2c3","request":"/api/v1/poll","result":"http_401","ms":0.7}
+{"time":"2026-11-09T12:29:12+00:00","node":"tc-a1b2c3","request":"/api/v1/result","result":"ok","ms":9.0}
+{"time":"2026-11-09T12:29:12+00:00","node":"tc-a1b2c3","request":"/api/v1/result","result":"ok","ms":1.0}
+ok
+test_detached_node_cannot_queue_command (test_http.HttpApiTests) ... {"time":"2026-11-09T12:29:13+00:00","node":"-","request":"/admin/nodes/tc-a1b2c3/detach","result":"ok","ms":5.6}
+{"time":"2026-11-09T12:29:13+00:00","node":"-","request":"/admin/nodes/tc-a1b2c3/commands","result":"http_409","ms":0.8}
+ok
+test_jpeg_sof0_sof2_dimensions_and_bad_markers (test_http.HttpApiTests) ... ok
+test_long_poll_wakes_on_command_and_times_out (test_http.HttpApiTests) ... {"time":"2026-11-09T12:29:14+00:00","node":"tc-a1b2c3","request":"/api/v1/checkin","result":"ok","ms":14.2}
+{"time":"2026-11-09T12:29:14+00:00","node":"-","request":"/admin/nodes/tc-a1b2c3/attach","result":"ok","ms":5.1}
+{"time":"2026-11-09T12:29:14+00:00","node":"-","request":"/admin/nodes/tc-a1b2c3/session","result":"ok","ms":5.3}
+{"time":"2026-11-09T12:29:14+00:00","node":"tc-a1b2c3","request":"/api/v1/checkin","result":"ok","ms":18.6}
+{"time":"2026-11-09T12:29:14+00:00","node":"-","request":"/admin/nodes/tc-a1b2c3/commands","result":"ok","ms":10.2}
+{"time":"2026-11-09T12:29:14+00:00","node":"tc-a1b2c3","request":"/api/v1/poll","result":"ok","ms":117.8}
+{"time":"2026-11-09T12:29:15+00:00","node":"tc-a1b2c3","request":"/api/v1/poll","result":"ok","ms":1001.4}
+ok
+test_truncated_request_returns_400 (test_http.HttpApiTests) ... {"time":"2026-11-09T12:29:16+00:00","node":"tc-abcdef","request":"/api/v1/checkin","result":"http_400","ms":0.4}
+ok
+test_attached_priority_order (test_policy.PolicyTests) ... ok
+test_decide_returns_base_and_reason (test_policy.PolicyTests) ... ok
+test_jitter_and_bounds (test_policy.PolicyTests) ... ok
+test_jitter_boundary_clamps (test_policy.PolicyTests) ... ok
+test_jitter_randomized_bounds_property (test_policy.PolicyTests) ... ok
+test_online_threshold (test_policy.PolicyTests) ... ok
+test_state_defaults (test_policy.PolicyTests) ... ok
+test_test_mode_short_discovery (test_policy.PolicyTests) ... ok
+test_checkin_persists_energy_fields (test_store.StoreTests) ... ok
+test_dispatch_retry_limit_and_no_result (test_store.StoreTests) ... ok
+test_duplicate_result_and_cross_node_rejected (test_store.StoreTests) ... ok
+test_expiry_and_detach_expire_queued (test_store.StoreTests) ... ok
+test_image_result_deduplicates (test_store.StoreTests) ... ok
+test_low_battery_fails_queued_images (test_store.StoreTests) ... ok
+test_one_shot_token_and_token_reset (test_store.StoreTests) ... ok
+test_wal_and_attach_token (test_store.StoreTests) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 6.739s
+
+OK

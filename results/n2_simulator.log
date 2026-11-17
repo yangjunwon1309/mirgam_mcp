@@ -1,0 +1,8 @@
+{
+  "sim_report": "/mnt/nvme/beacon/sim_20261109_232253/sim_raw.json",
+  "acceptance": {
+    "AC2_command_completion_ge_99_percent": true,
+    "AC3_no_discovered_or_detached_dispatch": true,
+    "AC4_all_next_within_policy_jitter": true
+  }
+}

@@ -1,0 +1,29 @@
+N2 running 20 nodes for 300 s; data=/mnt/nvme/beacon/sim_20261109_232253
+{
+  "sim_report": "/mnt/nvme/beacon/sim_20261109_232253/sim_raw.json",
+  "acceptance": {
+    "AC2_command_completion_ge_99_percent": true,
+    "AC3_no_discovered_or_detached_dispatch": true,
+    "AC4_all_next_within_policy_jitter": true
+  }
+}
+server wait exit=0
+{
+  "acceptance": {
+    "AC2_command_completion_ge_99_percent": true,
+    "AC3_no_discovered_or_detached_dispatch": true,
+    "AC4_all_next_within_policy_jitter": true
+  },
+  "database": {
+    "commands_created": 24,
+    "commands_found": 24,
+    "commands_processed_before_expiry": 24,
+    "command_processing_ratio": 1.0,
+    "nonattached_dispatched_commands": 0,
+    "duplicate_result_rows": 0
+  }
+}
+AC2_command_completion_ge_99_percent=PASS AC3_no_discovered_or_detached_dispatch=PASS AC4_all_next_within_policy_jitter=PASS
+server shutdown confirmed (wait exit=0, post-stop curl exit=7)
+N2 exit=0
+AC2=AC2_command_completion_ge_99_percent=PASS AC3=AC3_no_discovered_or_detached_dispatch=PASS AC4=AC4_all_next_within_policy_jitter=PASS

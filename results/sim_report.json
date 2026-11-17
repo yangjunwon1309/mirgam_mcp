@@ -1,0 +1,7810 @@
+{
+  "run": {
+    "n": 20,
+    "duration_s": 300,
+    "seed": 1
+  },
+  "faults": {
+    "wifi_failure_rate": 0.05,
+    "result_upload_loss_rate_per_attempt": 0.1,
+    "truncated_response_rate": 0.02,
+    "longpoll_disconnect_rate": 0.02,
+    "observed_wifi_failures": 46,
+    "observed_result_upload_losses": 4,
+    "observed_truncated_responses": 11,
+    "observed_longpoll_disconnects": 0,
+    "observed_duplicate_result_replies": 1
+  },
+  "protocol": {
+    "checkins": 1067,
+    "fast_path_success_rate": 0.91,
+    "median_prev_awake_ms": 23,
+    "next_values_checked": 1067,
+    "next_values_within_policy_jitter": 1067,
+    "all_next_values_within_policy_jitter": true,
+    "nonattached_command_rejections_http_409": 2,
+    "next_records": [
+      {
+        "node_id": "tc-000007",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "watch",
+        "base_s": 60,
+        "next_s": 57,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000013",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000d",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000f",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000e",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000010",
+        "state": "DETACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000012",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000001",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000a",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000009",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000008",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000007",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000006",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000002",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000c",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000003",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-00000b",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000005",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000011",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000014",
+        "state": "DISCOVERED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      },
+      {
+        "node_id": "tc-000004",
+        "state": "ATTACHED",
+        "base_s": 5,
+        "next_s": 5,
+        "within_policy_jitter": true
+      }
+    ]
+  },
+  "database": {
+    "commands_created": 24,
+    "commands_found": 24,
+    "commands_processed_before_expiry": 24,
+    "command_processing_ratio": 1.0,
+    "nonattached_dispatched_commands": 0,
+    "duplicate_result_rows": 0
+  },
+  "scenario": {
+    "command_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "attached_ids": [
+      "tc-000001",
+      "tc-000002",
+      "tc-000003",
+      "tc-000004",
+      "tc-000005",
+      "tc-000006",
+      "tc-000007",
+      "tc-000008",
+      "tc-000009",
+      "tc-00000a",
+      "tc-00000b",
+      "tc-00000c",
+      "tc-00000d",
+      "tc-00000e",
+      "tc-00000f",
+      "tc-000010"
+    ]
+  },
+  "acceptance": {
+    "AC2_command_completion_ge_99_percent": true,
+    "AC3_no_discovered_or_detached_dispatch": true,
+    "AC4_all_next_within_policy_jitter": true
+  },
+  "admin_actions": [
+    {
+      "action": "attach",
+      "node": "tc-000001",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-000002",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-000003",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-000004",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-000005",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-000006",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-000007",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-000008",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-000009",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-00000a",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-00000b",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-00000c",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-00000d",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-00000e",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-00000f",
+      "status": 200
+    },
+    {
+      "action": "attach",
+      "node": "tc-000010",
+      "status": 200
+    },
+    {
+      "action": "detach",
+      "node": "tc-00000d",
+      "status": 200
+    },
+    {
+      "action": "detach",
+      "node": "tc-00000e",
+      "status": 200
+    },
+    {
+      "action": "detach",
+      "node": "tc-00000f",
+      "status": 200
+    },
+    {
+      "action": "detach",
+      "node": "tc-000010",
+      "status": 200
+    },
+    {
+      "action": "sensor",
+      "node": "tc-000001",
+      "status": 202
+    },
+    {
+      "action": "image",
+      "node": "tc-000001",
+      "status": 202
+    },
+    {
+      "action": "sensor",
+      "node": "tc-000002",
+      "status": 202
+    },
+    {
+      "action": "image",
+      "node": "tc-000002",
+      "status": 202
+    },
+    {
+      "action": "sensor",
+      "node": "tc-000003",
+      "status": 202
+    },
+    {
+      "action": "image",
+      "node": "tc-000003",
+      "status": 202
+    },
+    {
+      "action": "sensor",
+      "node": "tc-000004",
+      "status": 202
+    },
+    {
+      "action": "image",
+      "node": "tc-000004",
+      "status": 202
+    },
+    {
+      "action": "sensor",
+      "node": "tc-000005",
+      "status": 202
+    },
+    {
+      "action": "image",
+      "node": "tc-000005",
+      "status": 202
+    },
+    {
+      "action": "sensor",
+      "node": "tc-000006",
+      "status": 202
+    },
+    {
+      "action": "image",
+      "node": "tc-000006",
+      "status": 202
+    },
+    {
+      "action": "sensor",
+      "node": "tc-000007",
+      "status": 202
+    },
+    {
+      "action": "image",
+      "node": "tc-000007",
+      "status": 202
+    },
+    {
+      "action": "sensor",
+      "node": "tc-000008",
+      "status": 202
+    },
+    {
+      "action": "image",
+      "node": "tc-000008",
+      "status": 202
+    },
+    {
+      "action": "sensor",
+      "node": "tc-000009",
+      "status": 202
+    },
+    {
+      "action": "config",
+      "node": "tc-000009",
+      "status": 202
+    },
+    {
+      "action": "sensor",
+      "node": "tc-00000a",
+      "status": 202
+    },
+    {
+      "action": "config",
+      "node": "tc-00000a",
+      "status": 202
+    },
+    {
+      "action": "sensor",
+      "node": "tc-00000b",
+      "status": 202
+    },
+    {
+      "action": "config",
+      "node": "tc-00000b",
+      "status": 202
+    },
+    {
+      "action": "sensor",
+      "node": "tc-00000c",
+      "status": 202
+    },
+    {
+      "action": "config",
+      "node": "tc-00000c",
+      "status": 202
+    },
+    {
+      "action": "session",
+      "node": "tc-000001",
+      "status": 200
+    },
+    {
+      "action": "session",
+      "node": "tc-000002",
+      "status": 200
+    },
+    {
+      "action": "session",
+      "node": "tc-000003",
+      "status": 200
+    },
+    {
+      "action": "watch",
+      "node": "tc-000004",
+      "status": 200
+    },
+    {
+      "action": "reject_nonattached",
+      "node": "tc-000014",
+      "status": 409
+    },
+    {
+      "action": "reject_nonattached",
+      "node": "tc-00000d",
+      "status": 409
+    }
+  ],
+  "warnings": []
+}

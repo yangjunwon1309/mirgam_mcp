@@ -1,0 +1,72 @@
+/home/nano/beacon/firmware/beacon_node/beacon_node.ino: In function 'void setup()':
+/home/nano/beacon/firmware/beacon_node/beacon_node.ino:370:47: error: no matching function for call to 'max(unsigned int, uint32_t&)'
+  370 |     uint32_t backoff = min((uint32_t)3600, max(30U, nextSaved) * multiplier);
+      |                                            ~~~^~~~~~~~~~~~~~~~
+In file included from /mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/algorithm:61,
+                 from /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/cores/esp32/Arduino.h:190,
+                 from /home/nano/beacon/firmware/beacon_node/camera_cap.h:3,
+                 from /home/nano/beacon/firmware/beacon_node/beacon_node.ino:9:
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algo.h:5715:5: note: candidate: 'template<class _Tp, class _Compare> constexpr _Tp std::max(initializer_list<_Tp>, _Compare)'
+ 5715 |     max(initializer_list<_Tp> __l, _Compare __comp)
+      |     ^~~
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algo.h:5715:5: note:   template argument deduction/substitution failed:
+/home/nano/beacon/firmware/beacon_node/beacon_node.ino:370:47: note:   mismatched types 'std::initializer_list<_Tp>' and 'unsigned int'
+  370 |     uint32_t backoff = min((uint32_t)3600, max(30U, nextSaved) * multiplier);
+      |                                            ~~~^~~~~~~~~~~~~~~~
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algo.h:5705:5: note: candidate: 'template<class _Tp> constexpr _Tp std::max(initializer_list<_Tp>)'
+ 5705 |     max(initializer_list<_Tp> __l)
+      |     ^~~
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algo.h:5705:5: note:   candidate expects 1 argument, 2 provided
+In file included from /mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/specfun.h:43,
+                 from /mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/cmath:3898,
+                 from /mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/math.h:36,
+                 from /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/cores/esp32/esp32-hal.h:30,
+                 from /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/cores/esp32/Arduino.h:44:
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algobase.h:303:5: note: candidate: 'template<class _Tp, class _Compare> constexpr const _Tp& std::max(const _Tp&, const _Tp&, _Compare)'
+  303 |     max(const _Tp& __a, const _Tp& __b, _Compare __comp)
+      |     ^~~
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algobase.h:303:5: note:   candidate expects 3 arguments, 2 provided
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algobase.h:257:5: note: candidate: 'template<class _Tp> constexpr const _Tp& std::max(const _Tp&, const _Tp&)'
+  257 |     max(const _Tp& __a, const _Tp& __b)
+      |     ^~~
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algobase.h:257:5: note:   template argument deduction/substitution failed:
+/home/nano/beacon/firmware/beacon_node/beacon_node.ino:370:47: note:   deduced conflicting types for parameter 'const _Tp' ('unsigned int' and 'uint32_t' {aka 'long unsigned int'})
+  370 |     uint32_t backoff = min((uint32_t)3600, max(30U, nextSaved) * multiplier);
+      |                                            ~~~^~~~~~~~~~~~~~~~
+/home/nano/beacon/firmware/beacon_node/beacon_node.ino:379:47: error: no matching function for call to 'max(unsigned int, uint32_t&)'
+  379 |     uint32_t backoff = min((uint32_t)3600, max(30U, nextSaved) * multiplier);
+      |                                            ~~~^~~~~~~~~~~~~~~~
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algo.h:5715:5: note: candidate: 'template<class _Tp, class _Compare> constexpr _Tp std::max(initializer_list<_Tp>, _Compare)'
+ 5715 |     max(initializer_list<_Tp> __l, _Compare __comp)
+      |     ^~~
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algo.h:5715:5: note:   template argument deduction/substitution failed:
+/home/nano/beacon/firmware/beacon_node/beacon_node.ino:379:47: note:   mismatched types 'std::initializer_list<_Tp>' and 'unsigned int'
+  379 |     uint32_t backoff = min((uint32_t)3600, max(30U, nextSaved) * multiplier);
+      |                                            ~~~^~~~~~~~~~~~~~~~
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algo.h:5705:5: note: candidate: 'template<class _Tp> constexpr _Tp std::max(initializer_list<_Tp>)'
+ 5705 |     max(initializer_list<_Tp> __l)
+      |     ^~~
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algo.h:5705:5: note:   candidate expects 1 argument, 2 provided
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algobase.h:303:5: note: candidate: 'template<class _Tp, class _Compare> constexpr const _Tp& std::max(const _Tp&, const _Tp&, _Compare)'
+  303 |     max(const _Tp& __a, const _Tp& __b, _Compare __comp)
+      |     ^~~
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algobase.h:303:5: note:   candidate expects 3 arguments, 2 provided
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algobase.h:257:5: note: candidate: 'template<class _Tp> constexpr const _Tp& std::max(const _Tp&, const _Tp&)'
+  257 |     max(const _Tp& __a, const _Tp& __b)
+      |     ^~~
+/mnt/nvme/arduino/data/packages/esp32/tools/esp-x32/2601/xtensa-esp-elf/include/c++/14.2.0/bits/stl_algobase.h:257:5: note:   template argument deduction/substitution failed:
+/home/nano/beacon/firmware/beacon_node/beacon_node.ino:379:47: note:   deduced conflicting types for parameter 'const _Tp' ('unsigned int' and 'uint32_t' {aka 'long unsigned int'})
+  379 |     uint32_t backoff = min((uint32_t)3600, max(30U, nextSaved) * multiplier);
+      |                                            ~~~^~~~~~~~~~~~~~~~
+
+Used library        Version Path
+Wire                3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/libraries/Wire
+HTTPClient          3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/libraries/HTTPClient
+Networking          3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/libraries/Network
+NetworkClientSecure 3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/libraries/NetworkClientSecure
+Preferences         3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/libraries/Preferences
+WiFi                3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12/libraries/WiFi
+
+Used platform Version Path
+esp32:esp32   3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12
+Error during build: exit status 1

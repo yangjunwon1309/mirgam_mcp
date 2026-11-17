@@ -1,0 +1,3 @@
+Used platform Version Path
+esp32:esp32   3.3.12  /mnt/nvme/arduino/data/packages/esp32/hardware/esp32/3.3.12
+Error during build: open /home/nano/.cache/arduino/sketches/172797F540A4FDC95BEA3F83B03C5267/build.options.json: read-only file system
