@@ -1,0 +1,6 @@
+
+> gemma-mcp-web@0.1.0 lint
+> tsc --noEmit
+
+components/beacon/ui/Menu.tsx(34,116): error TS2352: Conversion of type 'ToggleEvent<HTMLDivElement>' to type 'ToggleEvent' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type 'ToggleEvent<HTMLDivElement>' is missing the following properties from type 'ToggleEvent': cancelBubble, composed, returnValue, srcElement, and 7 more.
