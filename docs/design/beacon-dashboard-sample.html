@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mirgam mcp · Beacon 대시보드 샘플 v2</title>
+<style>
+/* =========================================================
+   TOKENS v1.1 — 원래 브랜드(짙은 녹색 #10251d · 녹색 #295b3b · 주황 #e67c2d · 크림 #f0f0e7) 기준
+   ========================================================= */
+:root{
+  --font:"Pretendard Variable",Pretendard,Inter,ui-sans-serif,system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+  --bg:#f0f0e7; --surface:#fdfdf9; --surface-2:#f5f8f0; --sunken:#e9efe3;
+  --border:#d9e3d3; --border-strong:#bccdb7; --divider:#e6ece1;
+  --text:#173d2b; --text-2:#4d6d54; --text-3:#7a907f; --text-inv:#f2f5ec;
+
+  --forest:#10251d; --forest-2:#1a382a; --green:#295b3b; --green-hover:#214c31; --green-soft:#e3eddf; --green-line:#b9d0b6;
+  --orange:#e67c2d; --orange-hover:#d66e24; --orange-soft:#fff2e4; --orange-line:#f2c49c; --orange-text:#b9581c;
+
+  --ok:#3d8a4f; --ok-soft:#e6f2e3; --ok-line:#bcdcbf;
+  --warn:#b26a12; --warn-soft:#fdf0dc; --warn-line:#efcf98;
+  --danger:#c03d2a; --danger-soft:#fbe7e3; --danger-line:#efbcb2;
+  --idle:#7f8f84; --idle-soft:#edf0ea; --idle-line:#d5ddd2;
+
+  --r-sm:7px; --r-md:10px; --r-lg:14px; --r-xl:18px; --r-pill:999px;
+  --shadow-1:0 1px 2px rgba(16,37,29,.06);
+  --shadow-2:0 10px 28px -8px rgba(16,37,29,.22),0 2px 6px rgba(16,37,29,.06);
+  --shadow-3:0 28px 70px -14px rgba(16,37,29,.42);
+  --ring:0 0 0 3px rgba(230,124,45,.35);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:var(--font);font-size:13px;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;overflow:hidden}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+:focus-visible{outline:none;box-shadow:var(--ring);border-radius:var(--r-sm)}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--mono);font-size:.92em}
+.muted{color:var(--text-3)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+svg.i{width:16px;height:16px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+svg.i.sm{width:14px;height:14px}
+
+/* ---------- shell ---------- */
+.workspace{height:100vh;display:grid;grid-template-columns:minmax(0,42fr) 10px minmax(0,58fr)}
+.workspace.wide{grid-template-columns:0fr 0 minmax(0,1fr)}
+.workspace.wide .chat-mock,.workspace.wide .handle{visibility:hidden}
+.chat-mock{background:var(--forest);color:#dfe7dc;display:grid;grid-template-rows:auto 1fr auto;min-width:0;overflow:hidden}
+.chat-mock header{padding:22px 26px 18px;border-bottom:1px solid #ffffff1a;display:flex;align-items:center;gap:10px}
+.brand-mark{width:26px;height:26px;border-radius:9px 9px 3px 9px;background:var(--orange);color:var(--forest);display:grid;place-items:center;font-weight:900}
+.chat-mock header small{display:block;color:#9db2a3;font-size:11px}
+.chat-mock .msgs{padding:24px 26px;display:grid;align-content:start;gap:16px}
+.bubble{max-width:520px;line-height:1.65;font-size:13.5px}
+.bubble.u{justify-self:end;background:#1a382a;padding:10px 14px;border-radius:12px 12px 4px 12px}
+.chat-mock footer{margin:16px 26px 22px;border:1px solid #ffffff22;border-radius:12px;padding:14px;color:#8fa596}
+.handle{background:var(--bg);display:grid;place-items:center}
+.handle:after{content:"";width:5px;height:100%;background:var(--orange);border-radius:4px;box-shadow:0 0 0 1px #9b4e21}
+.dash{container-type:inline-size;container-name:dash;min-width:0;height:100vh;overflow:auto;scrollbar-gutter:stable;padding:28px clamp(18px,3vw,44px) 56px}
+
+/* ---------- header & tabs (원래 폴더 탭의 녹색 채움을 알약형으로) ---------- */
+.page-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.eyebrow{color:#c86322;font-size:11px;font-weight:800;letter-spacing:.12em}
+.page-head h1{margin:5px 0 0;font-size:28px;letter-spacing:-.05em;line-height:1.15}
+.collapse{height:30px;padding:0 10px;border:1px solid var(--border);border-radius:var(--r-sm);color:var(--text-2);background:var(--surface-2);font-size:12px;font-weight:700}
+.tabs{display:inline-flex;gap:3px;padding:4px;margin-bottom:16px;border-radius:12px;background:#e2e9dc;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.tab{height:34px;padding:0 14px;border-radius:9px;color:var(--text-2);font-weight:700;font-size:13px;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tab:hover{color:var(--text);background:#ffffff80}
+.tab[aria-selected=true]{background:var(--green);color:#fff;box-shadow:0 1px 2px rgba(16,37,29,.25)}
+.tab .count{font-size:11px;padding:1px 6px;border-radius:var(--r-pill);background:#ffffff2e}
+.tab[aria-selected=false] .count{background:var(--sunken)}
+
+.context{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.farm-switch{position:relative;display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 10px 0 6px;border:1px solid var(--border-strong);border-radius:var(--r-sm);background:var(--surface);font-weight:700}
+.farm-switch .dot{width:20px;height:20px;border-radius:6px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:800}
+.farm-switch select{appearance:none;-webkit-appearance:none;border:0;background:transparent;font-weight:700;padding-right:18px;cursor:pointer;outline:none}
+.farm-switch svg{position:absolute;right:8px;pointer-events:none;color:var(--text-3)}
+.sys-pill{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 10px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface);color:var(--text-2);font-size:12px;font-weight:700}
+.sys-pill:hover{border-color:var(--border-strong)}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pulse 2.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(61,138,79,.5)}70%{box-shadow:0 0 0 6px rgba(61,138,79,0)}100%{box-shadow:0 0 0 0 rgba(61,138,79,0)}}
+.sync{margin-left:auto;color:var(--text-3);font-size:12px;display:flex;align-items:center;gap:6px}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 12px;border-radius:var(--r-sm);font-size:13px;font-weight:700;white-space:nowrap;transition:background .15s,border-color .15s,color .15s}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:inset 0 -1px 0 rgba(0,0,0,.14)}
+.btn-primary:hover{background:var(--orange-hover)}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover{background:var(--green-hover)}
+.btn-secondary{background:var(--surface);border:1px solid var(--border-strong);color:var(--text)}
+.btn-secondary:hover{border-color:var(--green-line);background:var(--surface-2)}
+.btn-secondary[aria-pressed=true]{background:var(--green-soft);border-color:var(--green);color:var(--green)}
+.btn-ghost{color:var(--text-2)}
+.btn-ghost:hover{background:var(--sunken);color:var(--text)}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-danger:hover{background:#a8321f}
+.btn-danger-ghost{border:1px solid var(--danger-line);color:var(--danger);background:var(--surface)}
+.btn-danger-ghost:hover{background:var(--danger-soft)}
+.btn-icon{width:32px;padding:0}
+.btn-sm{height:28px;padding:0 10px;font-size:12px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-group{display:inline-flex}
+.btn-group .btn:first-child{border-top-right-radius:0;border-bottom-right-radius:0}
+.btn-group .btn:last-child{border-top-left-radius:0;border-bottom-left-radius:0;margin-left:-1px}
+
+/* ---------- badges ---------- */
+.badge{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 8px;border-radius:var(--r-pill);font-size:12px;font-weight:700;border:1px solid;white-space:nowrap}
+.badge:before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.badge.plain:before{display:none}
+.b-ok{color:var(--ok);background:var(--ok-soft);border-color:var(--ok-line)}
+.b-warn{color:var(--warn);background:var(--warn-soft);border-color:var(--warn-line)}
+.b-danger{color:var(--danger);background:var(--danger-soft);border-color:var(--danger-line)}
+.b-info{color:var(--green);background:var(--green-soft);border-color:var(--green-line)}
+.b-idle{color:var(--idle);background:var(--idle-soft);border-color:var(--idle-line)}
+.b-orange{color:var(--orange-text);background:var(--orange-soft);border-color:var(--orange-line)}
+
+/* =========================================================
+   BEACON 기본 화면 — 요약 배너 + 카드
+   ========================================================= */
+.hero{position:relative;overflow:hidden;border-radius:var(--r-xl);padding:18px 20px;background:linear-gradient(120deg,var(--forest) 0%,var(--forest-2) 60%,#244a35 100%);color:var(--text-inv);display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(230,124,45,.28),transparent 65%)}
+.hero .ttl{display:grid;gap:4px;min-width:150px;position:relative;z-index:1}
+.hero .ttl small{color:#f3b27a;font-size:11px;font-weight:800;letter-spacing:.12em}
+.hero .ttl strong{font-size:22px;letter-spacing:-.04em}
+.hero .ttl strong b{color:#ffb978}
+.hero .ttl span{color:#a9bdae;font-size:12px}
+.hero .stats{display:flex;gap:6px;flex-wrap:wrap;position:relative;z-index:1}
+.hstat{display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border-radius:10px;background:#ffffff12;border:1px solid #ffffff1c;color:#dfe8dc;font-weight:700}
+.hstat:hover{background:#ffffff1f}
+.hstat[aria-pressed=true]{background:#fdfdf9;color:var(--forest);border-color:#fdfdf9}
+.hstat i{width:8px;height:8px;border-radius:50%}
+.hstat b{font-size:16px}
+.hero .grow{flex:1}
+.hero .btn-primary{position:relative;z-index:1}
+
+.sec-head{display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.sec-head h2{margin:0;font-size:15px;letter-spacing:-.02em}
+.sec-head .spacer{flex:1}
+.search{position:relative;display:flex;align-items:center}
+.search svg{position:absolute;left:9px;color:var(--text-3)}
+.search input{height:30px;width:190px;padding:0 10px 0 30px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface);outline:none}
+.search input:focus{border-color:var(--orange-line);box-shadow:var(--ring)}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.dcard{position:relative;text-align:left;padding:14px 14px 12px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-1);display:grid;gap:12px;transition:border-color .15s,box-shadow .15s,transform .15s}
+.dcard:hover{border-color:var(--orange-line);box-shadow:var(--shadow-2);transform:translateY(-1px)}
+.dcard .top{display:flex;align-items:flex-start;gap:10px}
+.dico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--green-soft);color:var(--green);flex:0 0 auto}
+.dcard.off .dico{background:var(--idle-soft);color:var(--idle)}
+.dcard .nm{flex:1;min-width:0}
+.dcard .nm strong{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dcard .nm small{display:block;color:var(--text-3);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.dcard .vals{display:flex;gap:18px}
+.dcard .val b{display:block;font-size:24px;letter-spacing:-.04em;line-height:1.05;color:var(--text)}
+.dcard .val b small{font-size:13px;color:var(--text-3);letter-spacing:0;margin-left:2px}
+.dcard .val span{font-size:12px;color:var(--text-3)}
+.dcard.off .val b{color:var(--text-3)}
+.dcard .foot{display:flex;align-items:center;gap:8px;white-space:nowrap;padding-top:10px;border-top:1px solid var(--divider);font-size:12px;color:var(--text-3)}
+.dcard .foot .sp{flex:1}
+.pend{display:inline-flex;align-items:center;gap:4px;height:20px;padding:0 7px;border-radius:var(--r-pill);background:var(--orange-soft);color:var(--orange-text);font-weight:700;font-size:11px}
+.batt{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--text-2)}
+.batt-bar{position:relative;width:22px;height:11px;border:1.5px solid currentColor;border-radius:3px;padding:1.5px;color:var(--ok)}
+.batt-bar:after{content:"";position:absolute;right:-3.5px;top:2.5px;width:2px;height:3px;border-radius:0 1px 1px 0;background:currentColor}
+.batt-bar i{display:block;height:100%;border-radius:1px;background:currentColor}
+.batt.warn .batt-bar{color:var(--warn)}.batt.danger .batt-bar{color:var(--danger)}
+.batt.warn{color:var(--warn)}.batt.danger{color:var(--danger)}
+.add-card{border:1.5px dashed var(--border-strong);border-radius:var(--r-lg);display:grid;place-items:center;gap:6px;padding:20px;color:var(--text-3);font-weight:700;min-height:168px;background:transparent}
+.add-card:hover{border-color:var(--orange);color:var(--orange-text);background:var(--orange-soft)}
+.add-card .plus{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--sunken)}
+
+/* =========================================================
+   OVERLAY / DIALOGS
+   ========================================================= */
+.backdrop{position:fixed;inset:0;z-index:60;background:rgba(16,37,29,.42);backdrop-filter:blur(3px);display:none;place-items:center;padding:24px;animation:fade .15s}
+.backdrop.open{display:grid}
+@keyframes fade{from{opacity:0}}
+.dialog{width:min(560px,100%);max-height:calc(100vh - 48px);display:flex;flex-direction:column;background:var(--surface);border-radius:var(--r-xl);box-shadow:var(--shadow-3);overflow:hidden;animation:rise .22s var(--ease)}
+.dialog.lg{width:min(660px,100%)}
+@keyframes rise{from{opacity:0;transform:translateY(10px) scale(.985)}}
+.dialog header{padding:18px 20px 14px;display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--divider)}
+.dialog header h3{margin:0;font-size:17px;letter-spacing:-.02em}
+.dialog header p{margin:3px 0 0;color:var(--text-3)}
+.dialog header .x{margin-left:auto}
+.dialog .body{padding:16px 20px 18px;overflow:auto;display:grid;gap:14px}
+.dialog footer{padding:12px 20px;border-top:1px solid var(--divider);display:flex;gap:8px;justify-content:flex-end;align-items:center;background:var(--surface-2)}
+.dialog footer .left{margin-right:auto}
+@media (max-width:640px){.backdrop{padding:0;align-items:end}.dialog,.dialog.lg{width:100%;max-height:92vh;border-radius:var(--r-xl) var(--r-xl) 0 0}}
+
+/* device detail popup */
+.dd-head{background:linear-gradient(180deg,var(--surface-2),var(--surface))}
+.dd-head .dico{width:42px;height:42px;border-radius:12px;background:var(--forest);color:#ffb978}
+.dd-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:5px;color:var(--text-3);font-size:12px}
+.copy{display:inline-flex;align-items:center;gap:4px;padding:1px 6px;border-radius:5px;background:var(--sunken);color:var(--text-2)}
+.dd-actions{display:flex;gap:6px;align-items:center;padding:12px 20px 0}
+.dd-actions .sp{flex:1}
+.delivery{margin:12px 20px 0;padding:11px 12px;border-radius:var(--r-md);background:var(--green-soft);border:1px solid var(--green-line);display:grid;gap:8px}
+.delivery.off{background:var(--danger-soft);border-color:var(--danger-line)}
+.delivery .row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-2)}
+.delivery .row strong{color:var(--text)}
+.delivery .row .end{margin-left:auto;font-weight:700;color:var(--green)}
+.cycle{position:relative;height:6px;border-radius:3px;background:#ffffffb0;overflow:hidden}
+.cycle i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--green),var(--orange));border-radius:3px;transition:width 1s linear}
+.subtabs{display:flex;gap:2px;padding:0 14px;border-bottom:1px solid var(--divider);margin-top:12px}
+.subtab{position:relative;height:38px;padding:0 10px;color:var(--text-3);font-weight:700}
+.subtab[aria-selected=true]{color:var(--text)}
+.subtab[aria-selected=true]:after{content:"";position:absolute;left:6px;right:6px;bottom:-1px;height:2px;background:var(--orange);border-radius:2px}
+.dd-body{padding:14px 20px 20px;display:grid;gap:14px;overflow:auto}
+.stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.stat{padding:10px 12px;border:1px solid var(--divider);border-radius:var(--r-md);display:grid;gap:2px;min-width:0;background:var(--surface)}
+.stat .k{color:var(--text-3);font-size:12px;display:flex;align-items:center;gap:5px;font-weight:600}
+.stat .v{font-size:17px;font-weight:800;letter-spacing:-.02em}
+.stat .v small{font-size:12px;font-weight:600;color:var(--text-3);margin-left:2px}
+.stat .d{font-size:11px;color:var(--text-3)}
+.spark{width:100%;height:28px;display:block;margin-top:4px}
+.sig{display:inline-flex;align-items:flex-end;gap:2px;height:13px;margin-left:4px}
+.sig i{width:3px;border-radius:1px;background:var(--border-strong)}
+.sig i:nth-child(1){height:4px}.sig i:nth-child(2){height:7px}.sig i:nth-child(3){height:10px}.sig i:nth-child(4){height:13px}
+.sig.l1 i:nth-child(-n+1),.sig.l2 i:nth-child(-n+2),.sig.l3 i:nth-child(-n+3),.sig.l4 i{background:var(--green)}
+.sec-title{display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;color:var(--text-2)}
+.sec-title button{font-weight:700;color:var(--orange-text);font-size:12px;display:inline-flex;align-items:center;gap:2px}
+.sensor-row{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--divider);border-radius:var(--r-md)}
+.sensor-row+.sensor-row{margin-top:6px}
+.s-ico{width:30px;height:30px;border-radius:8px;display:grid;place-items:center}
+.s-ico.t{background:var(--orange-soft);color:var(--orange-text)}.s-ico.h{background:var(--green-soft);color:var(--green)}
+.sensor-row .name{font-weight:700}
+.sensor-row .meta{font-size:11px;color:var(--text-3)}
+.sensor-row .val{font-size:17px;font-weight:800;text-align:right}
+.sensor-row .val small{font-size:12px;color:var(--text-3);font-weight:600}
+.energy{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:12px;border-radius:var(--r-md);background:var(--surface-2);border:1px solid var(--divider)}
+.energy .lab{font-size:12px;font-weight:700;color:var(--text-3)}
+.energy .big{font-size:20px;font-weight:800;letter-spacing:-.03em}
+.energy .big small{font-size:12px;color:var(--text-3);font-weight:600}
+.energy .note{grid-column:1/-1;font-size:11px;color:var(--text-3);display:flex;gap:5px;line-height:1.5}
+.timeline{display:grid}
+.tl-item{display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;position:relative}
+.tl-item:not(:last-child):before{content:"";position:absolute;left:10px;top:28px;bottom:-6px;width:1.5px;background:var(--divider)}
+.tl-dot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;border:1.5px solid}
+.tl-dot.ok{color:var(--ok);border-color:var(--ok-line);background:var(--ok-soft)}
+.tl-dot.wait{color:var(--orange-text);border-color:var(--orange-line);background:var(--orange-soft)}
+.tl-dot.fail{color:var(--danger);border-color:var(--danger-line);background:var(--danger-soft)}
+.tl-item .t{font-weight:700}
+.tl-item .s,.tl-item .r{font-size:12px;color:var(--text-3)}
+.tl-item .r{text-align:right}
+.steps{display:flex;gap:4px;margin-top:6px}
+.steps span{height:4px;flex:1;border-radius:2px;background:var(--sunken)}
+.steps span.on{background:var(--orange)}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:10px 12px}
+.kv dt{color:var(--text-3)}
+.kv dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+.danger-zone{border:1px solid var(--danger-line);border-radius:var(--r-md);padding:12px;display:grid;gap:10px}
+.dz-row{display:flex;align-items:center;gap:12px}
+.dz-row div{flex:1}
+.dz-row strong{display:block}
+.dz-row small{color:var(--text-3);font-size:12px}
+
+/* menus / popovers */
+.pop{position:fixed;z-index:90;min-width:220px;padding:6px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);box-shadow:var(--shadow-2);display:none;animation:fade .12s}
+.pop.open{display:block}
+.mi{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border-radius:7px;text-align:left}
+.mi:hover,.mi:focus-visible{background:var(--sunken)}
+.mi small{display:block;color:var(--text-3);font-size:11px}
+.mi.danger{color:var(--danger)}.mi.danger:hover{background:var(--danger-soft)}
+.mi .kbd{margin-left:auto;color:var(--text-3);font-size:11px}
+.msep{height:1px;background:var(--divider);margin:6px 4px}
+.mlabel{padding:6px 10px 4px;font-size:11px;font-weight:800;color:var(--text-3);letter-spacing:.04em}
+.sys-pop{width:340px;padding:0}
+.sys-pop .sec{padding:12px 14px;border-bottom:1px solid var(--divider)}
+.sys-pop .sec:last-child{border-bottom:0}
+.svc,.port{display:flex;gap:10px;align-items:center}
+.svc .ic{width:32px;height:32px;border-radius:8px;background:var(--green-soft);color:var(--green);display:grid;place-items:center}
+.svc small,.port small{display:block;color:var(--text-3);font-size:11px}
+.port{padding:8px 0}
+.port .ic{width:28px;height:28px;border-radius:7px;background:var(--sunken);display:grid;place-items:center}
+.port div{flex:1}
+
+/* =========================================================
+   DATA SERVER
+   ========================================================= */
+.explorer{display:grid;grid-template-columns:210px minmax(0,1fr);min-height:600px;overflow:hidden;border-radius:var(--r-lg);border:1px solid var(--border);background:var(--surface);box-shadow:var(--shadow-1);position:relative}
+@container dash (max-width:700px){.explorer{grid-template-columns:1fr}.src-rail{border-right:0;border-bottom:1px solid var(--divider);max-height:210px}}
+.src-rail{border-right:1px solid var(--divider);background:var(--surface-2);display:flex;flex-direction:column;min-height:0}
+.src-rail .search{padding:12px 12px 6px}
+.src-rail .search svg{left:21px}
+.src-rail .search input{width:100%}
+.src-list{overflow:auto;padding:0 8px 8px}
+.src-group{padding:10px 8px 4px;font-size:11px;font-weight:800;color:var(--text-3);letter-spacing:.06em;display:flex;justify-content:space-between}
+.src{display:flex;align-items:center;gap:8px;width:100%;padding:8px;border-radius:8px;text-align:left}
+.src:hover{background:var(--sunken)}
+.src[aria-current=true]{background:var(--green);color:#fff}
+.src[aria-current=true] .ct{color:#cfe0d1}
+.src .st{width:7px;height:7px;border-radius:50%;flex:0 0 auto}
+.src[aria-current=true] .st{box-shadow:0 0 0 1.5px #fdfdf9}
+.src .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.src .ct{font-size:11px;color:var(--text-3)}
+.src-foot{margin-top:auto;padding:10px 14px;border-top:1px solid var(--divider);font-size:11px;color:var(--text-3);display:grid;gap:6px}
+.src-foot span{display:grid;grid-template-columns:14px 1fr;column-gap:6px;align-items:center}
+.src-foot .mono{grid-column:2;font-size:10.5px}
+.ex-main{display:flex;flex-direction:column;min-width:0;min-height:0}
+.ex-head{padding:14px 16px 0;display:grid;gap:12px}
+.crumbs{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--text-3);flex-wrap:wrap}
+.crumbs b{color:var(--text)}
+.crumbs svg{width:12px;height:12px}
+.ex-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.ex-row .sp{flex:1}
+.segmented{display:inline-flex;padding:3px;border-radius:10px;background:var(--sunken);gap:2px}
+.segmented button{height:28px;padding:0 11px;border-radius:7px;font-weight:700;color:var(--text-2);display:inline-flex;align-items:center;gap:6px}
+.segmented button[aria-pressed=true]{background:var(--surface);color:var(--green);box-shadow:var(--shadow-1)}
+.segmented em{font-style:normal;font-size:11px;color:var(--text-3)}
+.src-chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 8px;border-radius:6px;background:var(--surface-2);border:1px solid var(--divider);font-size:11px;color:var(--text-2)}
+.ex-body{padding:14px 16px 16px;display:grid;gap:14px;min-width:0}
+
+.metric-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.metric{flex:1;min-width:150px;text-align:left;padding:12px 14px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface);display:grid;gap:2px}
+.metric[aria-pressed=true]{border-color:var(--orange);box-shadow:0 0 0 1px var(--orange);background:linear-gradient(180deg,var(--orange-soft),var(--surface) 70%)}
+.metric .k{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-3);font-weight:700}
+.metric .v{font-size:24px;font-weight:800;letter-spacing:-.03em}
+.metric .v small{font-size:13px;color:var(--text-3)}
+.metric .d{font-size:12px;color:var(--text-3)}
+.chart-card{border:1px solid var(--divider);border-radius:var(--r-md);padding:12px 12px 8px;position:relative}
+.chart-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.chart-head .ttl{font-weight:700}
+.chart-head .stats{display:flex;gap:14px;font-size:12px;color:var(--text-3)}
+.chart-head .stats b{color:var(--text)}
+svg.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart .grid line{stroke:var(--divider)}
+.chart .axis text{font-size:10.5px;fill:var(--text-3);font-family:var(--font)}
+.tip{position:absolute;pointer-events:none;background:var(--forest);color:var(--text-inv);font-size:12px;padding:6px 9px;border-radius:7px;white-space:nowrap;transform:translate(-50%,-115%);opacity:0;transition:opacity .1s;box-shadow:var(--shadow-2)}
+
+.data-scroll{max-height:320px;overflow:auto;border:1px solid var(--divider);border-radius:var(--r-md)}
+table.data{width:100%;border-collapse:separate;border-spacing:0}
+.data th{position:sticky;top:0;z-index:1;background:var(--surface-2);text-align:left;font-size:11px;font-weight:800;color:var(--text-3);letter-spacing:.04em;padding:8px 10px;border-bottom:1px solid var(--divider);white-space:nowrap}
+.data td{padding:8px 10px;border-bottom:1px solid var(--divider);white-space:nowrap}
+.data tr:hover td{background:var(--surface-2)}
+.data tr.picked td{background:var(--orange-soft)}
+.data .exp td{background:var(--surface-2);white-space:normal}
+.data pre{margin:0;font:12px/1.55 var(--mono);color:var(--text-2);white-space:pre-wrap}
+.cb-col{width:34px}
+.cb{appearance:none;-webkit-appearance:none;width:16px;height:16px;border:1.5px solid var(--border-strong);border-radius:4px;background:var(--surface);display:inline-grid;place-items:center;cursor:pointer;vertical-align:middle;margin:0}
+.cb:checked,.cb:indeterminate{background:var(--orange);border-color:var(--orange)}
+.cb:checked:after{content:"";width:8px;height:4px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.cb:indeterminate:after{content:"";width:8px;height:2px;background:#fff}
+.cb:disabled{opacity:.35;cursor:not-allowed}
+
+.day-label{font-size:12px;font-weight:800;color:var(--text-2);display:flex;align-items:center;gap:8px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.shot{position:relative;border:1px solid var(--divider);border-radius:var(--r-md);overflow:hidden;text-align:left;background:var(--surface);transition:box-shadow .15s}
+.shot:hover{box-shadow:var(--shadow-2)}
+.shot .img{aspect-ratio:4/3;display:block;width:100%}
+.shot .cap{padding:8px 10px;display:grid;gap:1px}
+.shot .cap b{font-size:12px}
+.shot .cap small{font-size:11px;color:var(--text-3)}
+.shot .cb{position:absolute;top:8px;left:8px;width:20px;height:20px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.shot.picked{box-shadow:0 0 0 2px var(--orange)}
+.shot.picked .img{opacity:.75}
+
+.bulkbar{position:sticky;bottom:12px;margin:0 16px 14px;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 14px;border-radius:12px;background:var(--forest);color:var(--text-inv);box-shadow:var(--shadow-3);animation:rise .18s var(--ease);z-index:3}
+.bulkbar b{font-size:14px}
+.bulkbar .sp{flex:1}
+.bulkbar .btn-ghost{color:#c6d4c8}
+.bulkbar .btn-ghost:hover{background:#ffffff14;color:#fff}
+
+.empty{padding:40px 20px;text-align:center;color:var(--text-3);display:grid;gap:8px;justify-items:center}
+.empty .ic{width:44px;height:44px;border-radius:12px;background:var(--sunken);display:grid;place-items:center;color:var(--text-2)}
+.empty strong{color:var(--text);font-size:14px}
+
+/* delete dialogs */
+.del-ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--danger-soft);color:var(--danger);flex:0 0 auto}
+.summary{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;padding:12px 14px;border-radius:var(--r-md);background:var(--surface-2);border:1px solid var(--divider)}
+.summary dt{color:var(--text-3)}
+.summary dd{margin:0;font-weight:700}
+.callout{display:flex;gap:8px;padding:10px 12px;border-radius:var(--r-md);font-size:12px;line-height:1.55}
+.callout.warn{background:var(--warn-soft);color:#7d4c0d}
+.callout.info{background:var(--green-soft);color:var(--green)}
+.radio-list{display:grid;gap:6px}
+.radio-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--r-md);text-align:left}
+.radio-row[aria-checked=true]{border-color:var(--orange);box-shadow:0 0 0 1px var(--orange);background:var(--orange-soft)}
+.radio-row .r{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--border-strong);display:grid;place-items:center;background:var(--surface)}
+.radio-row[aria-checked=true] .r{border-color:var(--orange)}
+.radio-row[aria-checked=true] .r:after{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.radio-row small{display:block;color:var(--text-3);font-size:12px}
+.radio-row .cnt{font-weight:800;color:var(--text-2)}
+.field{display:grid;gap:6px}
+.field .lab{font-size:12px;font-weight:700;color:var(--text-2)}
+.field input[type=text]{height:36px;padding:0 12px;border:1px solid var(--border-strong);border-radius:8px;outline:none;background:var(--surface)}
+.field input:focus{border-color:var(--orange);box-shadow:var(--ring)}
+.field .hint{font-size:12px;color:var(--text-3)}
+
+/* add device stepper */
+.stepper{display:flex;gap:6px;padding:12px 20px;border-bottom:1px solid var(--divider);background:var(--surface-2)}
+.stp{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-3);font-weight:700;flex:1}
+.stp i{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;border:1.5px solid var(--border-strong);background:var(--surface)}
+.stp.on{color:var(--text)}.stp.on i{border-color:var(--orange);background:var(--orange);color:#fff}
+.stp.done i{border-color:var(--green);background:var(--green);color:#fff}
+.stp:not(:last-child):after{content:"";flex:1;height:1.5px;background:var(--border)}
+.presets{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.preset{padding:10px;border:1px solid var(--border);border-radius:var(--r-md);text-align:left;display:grid;gap:2px}
+.preset b{font-size:14px}.preset small{font-size:11px;color:var(--text-3)}
+.preset[aria-pressed=true]{border-color:var(--green);box-shadow:0 0 0 1px var(--green);background:var(--green-soft)}
+.mini-map{position:relative;height:200px;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border);cursor:crosshair}
+.mini-map svg{width:100%;height:100%;display:block}
+.mini-map .pin{position:absolute;transform:translate(-50%,-100%);pointer-events:none}
+.mini-map .pin svg{width:28px;height:28px;fill:var(--orange);stroke:#fff;stroke-width:1.5}
+.mini-map .hint-ov{position:absolute;left:10px;bottom:10px;background:rgba(16,37,29,.85);color:#fff;font-size:12px;padding:6px 9px;border-radius:7px}
+
+/* toast */
+.toasts{position:fixed;right:20px;bottom:68px;z-index:100;display:grid;gap:8px}
+.toast{min-width:300px;max-width:400px;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:12px 12px 12px 14px;border-radius:12px;background:var(--forest);color:var(--text-inv);box-shadow:var(--shadow-3);animation:rise .22s var(--ease);position:relative;overflow:hidden}
+.toast .ic{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#ffffff1a;color:#9fe0b0}
+.toast strong{display:block}
+.toast small{color:#b8c8bb;font-size:12px;line-height:1.5}
+.toast .undo{height:28px;padding:0 10px;border-radius:7px;background:#ffffff1a;color:#ffb978;font-weight:800;font-size:12px}
+.toast .undo:hover{background:#ffffff2a}
+.toast .bar{position:absolute;left:0;bottom:0;height:2px;background:var(--orange);animation:shrink linear forwards}
+@keyframes shrink{from{width:100%}to{width:0}}
+
+.demo-switch{position:fixed;right:20px;bottom:20px;z-index:70;display:flex;gap:4px;padding:4px;background:#0b1b14ee;border-radius:10px;box-shadow:var(--shadow-2)}
+.demo-switch button{height:28px;padding:0 10px;border-radius:7px;color:#b8c8bb;font-size:12px;font-weight:700}
+.demo-switch button[aria-pressed=true]{background:#ffffff1f;color:#fff}
+@media (max-width:1100px){.workspace{grid-template-columns:0fr 0 1fr}.chat-mock,.handle,.demo-switch{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8"/><path d="M21 4v5h-5M3 20v-5h5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-beacon" viewBox="0 0 24 24"><rect x="7" y="9" width="10" height="12" rx="2"/><circle cx="12" cy="15" r="2"/><path d="M8.5 5.5a5 5 0 0 1 7 0M6 3a8.5 8.5 0 0 1 12 0"/></symbol>
+  <symbol id="i-therm" viewBox="0 0 24 24"><path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0Z"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11Z"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13.5" r="3.5"/></symbol>
+  <symbol id="i-activity" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-chevd" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-12a7 7 0 0 0-14 0c0 5.9 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+  <symbol id="i-pinfill" viewBox="0 0 24 24"><path d="M12 22s7-6.4 7-12.5a7 7 0 0 0-14 0C5 15.6 12 22 12 22Z"/><circle cx="12" cy="9.5" r="2.6" fill="#fff" stroke="none"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></symbol>
+  <symbol id="i-usb" viewBox="0 0 24 24"><path d="M12 3v14M9 6l3-3 3 3M7 10v2l5 3 5-3V9"/><circle cx="12" cy="19" r="2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 2.5 20h19L12 4Z"/><path d="M12 10v4M12 17h.01"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></symbol>
+  <symbol id="i-unlink" viewBox="0 0 24 24"><path d="M9 7H7a5 5 0 0 0 0 10h2M15 7h2a5 5 0 0 1 3.5 8.6M8 12h3M3 3l18 18"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h10"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="17" height="10" rx="2"/><path d="M22 11v2"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></symbol>
+  <symbol id="i-select" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><path d="m5 6.5 1.5 1.5L9 5"/><path d="M13 6.5h8M13 17.5h8"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+</defs></svg>
+
+<div class="workspace" id="ws">
+  <section class="chat-mock" aria-hidden="true">
+    <header><span class="brand-mark">◒</span><div><strong>mirgam mcp</strong><small>smart farm agent</small></div></header>
+    <div class="msgs">
+      <div class="bubble u">북쪽 하우스 습도 지금 몇이야?</div>
+      <div class="bubble">북쪽 하우스 1 Beacon이 1분 전 체크인에서 보고한 상대습도는 <b>63.2%</b>, 온도는 <b>21.4 °C</b>입니다.</div>
+      <div class="bubble u">사진도 한 장 찍어줘</div>
+      <div class="bubble">촬영 명령 #31을 대기열에 넣었습니다. 약 3분 후 다음 체크인 때 촬영해 올립니다.</div>
+    </div>
+    <footer>예: 오늘 한라봉 1농장의 온도와 습도 추이를 알려줘</footer>
+  </section>
+  <div class="handle" aria-hidden="true"></div>
+
+  <section class="dash" aria-label="농장 대시보드">
+    <div class="page-head">
+      <div><div class="eyebrow" id="eyebrow">BEACON DEVICES</div><h1 id="pageTitle">Beacon 관리</h1></div>
+      <button class="collapse">접기 ⟶</button>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="대시보드 화면">
+      <button class="tab" role="tab" aria-selected="false" data-tab="farm">농장 현황</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="weather">제주 날씨</button>
+      <button class="tab" role="tab" aria-selected="true" data-tab="beacon">Beacon <span class="count" id="tabCount">6</span></button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="data">데이터 서버</button>
+    </nav>
+    <div class="context">
+      <label class="farm-switch"><span class="dot">한</span><span class="sr">농장 선택</span><select><option>한라봉 1농장</option><option>표선 감귤농장</option></select><svg class="i sm"><use href="#i-chevd"/></svg></label>
+      <button class="sys-pill" id="sysBtn" aria-haspopup="dialog" aria-expanded="false"><span class="pulse"></span>수신 서버 정상<svg class="i sm"><use href="#i-chevd"/></svg></button>
+      <span class="sync"><svg class="i sm"><use href="#i-refresh"/></svg><span id="syncTxt">방금 동기화</span></span>
+    </div>
+
+    <!-- BEACON: 단순한 기본 화면 -->
+    <div id="view-beacon">
+      <section class="hero" aria-label="Beacon 요약">
+        <div class="ttl"><small>FARM NETWORK</small><strong id="heroTitle"></strong><span id="heroSub"></span></div>
+        <div class="stats" role="group" aria-label="상태로 거르기" id="heroStats"></div>
+        <span class="grow"></span>
+        <button class="btn btn-primary" data-act="add"><svg class="i sm"><use href="#i-plus"/></svg>장치 추가</button>
+      </section>
+      <div class="sec-head"><h2 id="listTitle">장치</h2><span class="spacer"></span>
+        <label class="search"><svg class="i sm"><use href="#i-search"/></svg><span class="sr">장치 검색</span><input id="q" placeholder="이름 또는 위치" autocomplete="off"></label>
+      </div>
+      <div class="cards" id="cards"></div>
+    </div>
+
+    <!-- DATA SERVER -->
+    <div id="view-data" hidden>
+      <section class="explorer">
+        <aside class="src-rail" aria-label="데이터 소스">
+          <label class="search"><svg class="i sm"><use href="#i-search"/></svg><span class="sr">장치 검색</span><input id="srcQ" placeholder="장치 검색" autocomplete="off"></label>
+          <div class="src-list" id="srcList"></div>
+          <div class="src-foot">
+            <span><svg class="i sm"><use href="#i-db"/></svg>측정·이벤트 · SQLite<span class="mono">state/mirgam.db</span></span>
+            <span><svg class="i sm"><use href="#i-folder"/></svg>이미지 사본 · SSD<span class="mono">raw/beacons/</span></span>
+          </div>
+        </aside>
+        <div class="ex-main">
+          <div class="ex-head">
+            <div class="crumbs" id="crumbs"></div>
+            <div class="ex-row">
+              <div class="segmented" role="group" aria-label="자료 종류" id="kinds"></div>
+              <span class="sp"></span>
+              <span class="src-chip" id="srcChip"></span>
+              <button class="btn btn-secondary btn-sm" id="selBtn" aria-pressed="false"><svg class="i sm"><use href="#i-select"/></svg>선택</button>
+              <button class="btn btn-secondary btn-sm" id="csvBtn"><svg class="i sm"><use href="#i-download"/></svg>CSV</button>
+              <button class="btn btn-secondary btn-sm btn-icon" id="dataMore" aria-label="데이터 관리" aria-haspopup="menu"><svg class="i sm"><use href="#i-more"/></svg></button>
+            </div>
+          </div>
+          <div class="ex-body" id="exBody"></div>
+          <div id="bulk"></div>
+        </div>
+      </section>
+    </div>
+  </section>
+</div>
+
+<!-- popovers -->
+<div class="pop sys-pop" id="sysPop" role="dialog" aria-label="시스템 상태">
+  <div class="sec"><div class="svc"><span class="ic"><svg class="i"><use href="#i-server"/></svg></span><div style="flex:1"><strong>ESP32 수신 서버</strong><small>Docker · beacon-server · 노드 API <span class="mono">:8080</span></small></div><span class="badge b-ok">실행 중</span></div></div>
+  <div class="sec"><div class="sec-title" style="margin-bottom:4px">USB 직렬 포트</div>
+    <div class="port"><span class="ic"><svg class="i sm"><use href="#i-usb"/></svg></span><div><b>CP2104 USB-UART</b><small class="mono">/dev/ttyUSB0</small></div><button class="btn btn-secondary btn-sm" id="usbReset">리셋 후 확인</button></div>
+    <div class="muted" style="font-size:12px;line-height:1.5">리셋은 보드만 재시작하며 Wi-Fi 설정은 바꾸지 않습니다.</div></div>
+</div>
+<div class="pop" id="menu" role="menu"></div>
+
+<!-- overlays -->
+<div class="backdrop" id="ov"><div class="dialog lg" role="dialog" aria-modal="true" id="ovDialog"></div></div>
+<div class="backdrop" id="ov2"><div class="dialog" role="dialog" aria-modal="true" id="ov2Dialog"></div></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<div class="demo-switch" role="group" aria-label="데모: 대시보드 너비"><button aria-pressed="true" data-w="split">채팅과 나란히</button><button aria-pressed="false" data-w="wide">대시보드 전체</button></div>
+
+<script>
+/* =================== MOCK DATA (실제 API 필드명) =================== */
+const NOW=Date.now()/1000;
+function rng(seed){let s=seed;return()=>{s=(s*16807)%2147483647;return(s-1)/2147483646}}
+function genCheckins(seed,vb,rssi,interval,n=48){const r=rng(seed);const out=[];for(let i=n-1;i>=0;i--){const fast=r()<.9?1:0;out.push({checkin_id:seed*1000+i,received_at:NOW-i*interval-r()*20,vbat_mv:Math.round(vb+i*1.6+(r()-.5)*14),rssi:Math.round(rssi+(r()-.5)*4),wifi_ms:Math.round(fast?520+r()*260:2300+r()*1200),fast,prev_awake_ms:Math.round(1700+r()*900),prev_result:r()<.96?"ok":"wifi_fail",boot:"rtc",next_given:interval})}return out}
+const nodes=[
+ {node_id:"tc-a1b2c3",label:"북쪽 하우스 1",state:"ATTACHED",online:true,loc:"북쪽 하우스 · 3열 입구",interval_s:300,last_seen:NOW-74,next_given:300,last_vbat_mv:3982,last_rssi:-55,last_ch:6,last_ip:"192.168.25.41",fw:"beacon-0.1.0",pending_commands:1,requested_data:["sensor","image"],sensors:[{id:"s1",type:"temperature",name:"온도",model:"SHT30",addr:68,u:"°C",base:19.5,amp:4.2},{id:"s2",type:"humidity",name:"습도",model:"SHT30",addr:68,u:"%",base:66,amp:9}]},
+ {node_id:"tc-4f9e21",label:"북쪽 하우스 2",state:"ATTACHED",online:true,loc:"북쪽 하우스 · 7열 중앙",interval_s:300,last_seen:NOW-201,next_given:300,last_vbat_mv:3874,last_rssi:-63,last_ch:6,last_ip:"192.168.25.42",fw:"beacon-0.1.0",pending_commands:0,requested_data:["sensor"],sensors:[{id:"s3",type:"temperature",name:"온도",model:"DHT20",addr:56,u:"°C",base:19.9,amp:3.8},{id:"s4",type:"humidity",name:"습도",model:"DHT20",addr:56,u:"%",base:67,amp:8}]},
+ {node_id:"tc-e2a917",label:"남쪽 하우스 중앙",state:"ATTACHED",online:true,watch:true,loc:"남쪽 하우스 · 5열",interval_s:300,last_seen:NOW-22,next_given:60,last_vbat_mv:3921,last_rssi:-59,last_ch:6,last_ip:"192.168.25.47",fw:"beacon-0.1.0",pending_commands:0,requested_data:["sensor"],sensors:[{id:"s5",type:"temperature",name:"온도",model:"SHT30",addr:68,u:"°C",base:21.2,amp:3.6},{id:"s6",type:"humidity",name:"습도",model:"SHT30",addr:68,u:"%",base:59,amp:7}]},
+ {node_id:"tc-07d3aa",label:"남쪽 하우스 입구",state:"ATTACHED",online:true,loc:"남쪽 하우스 · 1열",interval_s:600,last_seen:NOW-410,next_given:600,last_vbat_mv:3611,last_rssi:-71,last_ch:11,last_ip:"192.168.25.50",fw:"beacon-0.1.0",pending_commands:0,requested_data:["sensor"],sensors:[{id:"s7",type:"temperature",name:"온도",model:"SHT30",addr:69,u:"°C",base:18.6,amp:3.2}]},
+ {node_id:"tc-b88e10",label:"육묘장",state:"ATTACHED",online:true,loc:"육묘장 · 선반 B",interval_s:300,last_seen:NOW-560,next_given:1200,last_vbat_mv:3428,last_rssi:-68,last_ch:6,last_ip:"192.168.25.53",fw:"beacon-0.1.0",pending_commands:0,requested_data:["sensor"],sensors:[{id:"s8",type:"temperature",name:"온도",model:"SHT30",addr:68,u:"°C",base:23,amp:2.5},{id:"s9",type:"humidity",name:"습도",model:"SHT30",addr:68,u:"%",base:72,amp:6}]},
+ {node_id:"tc-19c0f4",label:"창고 앞",state:"ATTACHED",online:false,loc:"창고 동측 벽",interval_s:900,last_seen:NOW-3*3600-640,next_given:900,last_vbat_mv:3291,last_rssi:-82,last_ch:1,last_ip:"192.168.25.58",fw:"beacon-0.1.0",pending_commands:1,requested_data:["sensor"],sensors:[{id:"s10",type:"temperature",name:"온도",model:"SHT30",addr:68,u:"°C",base:11.5,amp:3}]},
+];
+nodes.forEach((n,i)=>{n.next_expected_at=n.last_seen+n.next_given;n.checkins=genCheckins(7+i*13,n.last_vbat_mv,n.last_rssi,n.next_given)});
+const discovered=[{node_id:"tc-5ac3d0",last_ip:"192.168.25.57",last_seen:NOW-48,isNew:true},{node_id:"tc-91f0b2",last_ip:"192.168.25.63",last_seen:NOW-640,isNew:false}];
+/* 측정: 14일 × 30분 간격 (API 상세는 최근 96건만 반환한다는 점을 반영해 화면은 최근 96건) */
+const READ={};
+nodes.forEach((n,ni)=>n.sensors.forEach((s,si)=>{const r=rng(31+ni*17+si*5);const out=[];const last=n.last_seen;for(let i=671;i>=0;i--){const t=last-i*1800;const h=new Date(t*1000).getHours()+new Date(t*1000).getMinutes()/60;out.push({reading_id:`${s.id}-${i}`,recorded_at:t,value:+(s.base+s.amp*Math.sin((h-9)/24*2*Math.PI)+(r()-.5)*s.amp*.18).toFixed(1),unit:s.u,quality:r()<.985?"reported":"suspect"})}READ[s.id]=out;s.v=out[out.length-1].value.toFixed(1)}));
+const IMG={};nodes.forEach((n,ni)=>{IMG[n.node_id]=n.requested_data.includes("image")?Array.from({length:40},(_,i)=>({asset_id:`beacon-command-${900-i}`,captured_at:NOW-i*3*3600-412,byte_size:(42+((i*7)%15))*1024,width:640,height:480})):[]});
+const CMD={"tc-a1b2c3":[
+ {command_id:31,command_type:"image",state:"queued",created_at:NOW-40,params:{fs:"VGA",q:12,warm:500}},
+ {command_id:30,command_type:"sensor",state:"done",created_at:NOW-480,done_at:NOW-374,result:{ok:1,sensors:[{type:"sht30",addr:68,t_c:21.43,rh:63.2}]}},
+ {command_id:29,command_type:"image",state:"done",created_at:NOW-3900,done_at:NOW-3712,params:{fs:"VGA",q:12,warm:500},result:{bytes:48213,width:640,height:480}},
+ {command_id:28,command_type:"sensor",state:"failed",reason:"no_result",created_at:NOW-9200,done_at:NOW-8300},
+ {command_id:27,command_type:"sensor",state:"done",created_at:NOW-14400,done_at:NOW-14210,result:{ok:1}}]};
+nodes.forEach(n=>{if(!CMD[n.node_id])CMD[n.node_id]=[{command_id:12,command_type:"sensor",state:"done",created_at:NOW-900,done_at:NOW-700,result:{ok:1}},...(n.pending_commands?[{command_id:13,command_type:"sensor",state:"queued",created_at:NOW-300}]:[])]});
+
+/* =================== FORMAT =================== */
+const VB={full:4200,empty:3300,warn:3450,crit:3300};
+const STATE_LABEL={ATTACHED:"연결됨",DISCOVERED:"발견됨",DETACHED:"해제됨",HIBERNATING:"절전"};
+const now=()=>Date.now()/1000;
+function rel(s){s=Math.max(0,Math.round(s));if(s<45)return"방금";if(s<3600)return`${Math.round(s/60)}분 전`;if(s<86400)return`${Math.floor(s/3600)}시간 전`;return`${Math.floor(s/86400)}일 전`}
+function dur(s){s=Math.max(0,Math.round(s));const m=Math.floor(s/60),x=s%60;return m?`${m}분 ${String(x).padStart(2,"0")}초`:`${x}초`}
+function ival(s){return s%3600===0?`${s/3600}시간`:s%60===0?`${s/60}분`:`${s}초`}
+function clock(t){return new Intl.DateTimeFormat("ko-KR",{hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date(t*1000))}
+function dt(t){return new Intl.DateTimeFormat("ko-KR",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date(t*1000))}
+function day(t){return new Intl.DateTimeFormat("ko-KR",{month:"long",day:"numeric",weekday:"short"}).format(new Date(t*1000))}
+function vLevel(mv){return mv<VB.crit?"danger":mv<VB.warn?"warn":"ok"}
+function vFill(mv){return Math.max(.06,Math.min(1,(mv-VB.empty)/(VB.full-VB.empty)))}
+function sigLevel(r){return r>=-55?4:r>=-67?3:r>=-75?2:1}
+function bytes(b){return b<1048576?`${(b/1024).toFixed(1)} KB`:`${(b/1048576).toFixed(2)} MB`}
+function health(n){if(n.state!=="ATTACHED")return{cls:"b-idle",t:STATE_LABEL[n.state],key:"idle"};if(!n.online)return{cls:"b-danger",t:"오프라인",key:"offline"};const l=vLevel(n.last_vbat_mv);if(l==="danger")return{cls:"b-danger",t:"배터리 위험",key:"warn"};if(l==="warn")return{cls:"b-warn",t:"배터리 낮음",key:"warn"};if(n.watch)return{cls:"b-info",t:"자주 확인 중",key:"ok"};return{cls:"b-ok",t:"정상",key:"ok"}}
+const I=(id,c="i sm")=>`<svg class="${c}"><use href="#i-${id}"/></svg>`;
+function median(a){const s=[...a].sort((x,y)=>x-y);return s[Math.floor(s.length/2)]}
+function estDays(T,img){return Math.round(1560/(86400/T*0.05+(img?24*0.053:0)+0.48))}
+function daysLabel(d){return d>365?"1년 이상":`약 ${d}일`}
+function sparkPath(v,w=160,h=28,p=2){const mn=Math.min(...v),mx=Math.max(...v),rg=Math.max(mx-mn,1e-6);return v.map((x,i)=>`${i?"L":"M"}${(i/(v.length-1)*(w-2*p)+p).toFixed(1)},${(h-p-(x-mn)/rg*(h-2*p)).toFixed(1)}`).join("")}
+function spark(v,c){const p=sparkPath(v);return`<svg class="spark" viewBox="0 0 160 28" preserveAspectRatio="none"><path d="${p}L158,28L2,28Z" fill="${c}" opacity=".1"/><path d="${p}" fill="none" stroke="${c}" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>`}
+
+/* =================== STATE =================== */
+const S={tab:"beacon",filter:"all",q:"",open:null,itab:"overview",dataNode:"tc-a1b2c3",kind:"sensor",metric:"s1",selMode:false,picked:new Set(),trash:new Set(),expanded:null,add:null,del:null};
+const live=(arr,key)=>arr.filter(x=>!S.trash.has(String(x[key])));
+
+/* =================== BEACON 기본 화면 =================== */
+function renderBeacon(){
+  const c={all:nodes.length,ok:0,warn:0,offline:0};nodes.forEach(n=>c[health(n).key]=(c[health(n).key]||0)+1);
+  document.getElementById("heroTitle").innerHTML=`Beacon <b class="num">${nodes.length}</b>대 연결`;
+  const latest=Math.max(...nodes.map(n=>n.last_seen));
+  document.getElementById("heroSub").textContent=`마지막 수신 ${rel(now()-latest)} · 전달 대기 ${nodes.reduce((a,n)=>a+n.pending_commands,0)}건`;
+  const L=[["all","전체","#cfe0d1"],["ok","정상","#7fd08f"],["warn","주의","#f2b14f"],["offline","오프라인","#ff8a73"]];
+  document.getElementById("heroStats").innerHTML=L.map(([k,l,col])=>`<button class="hstat" aria-pressed="${S.filter===k}" data-f="${k}">${k==="all"?"":`<i style="background:${col}"></i>`}${l} <b class="num">${c[k]||0}</b></button>`).join("");
+  const list=nodes.filter(n=>(S.filter==="all"||health(n).key===S.filter)&&(!S.q||(n.label+n.loc+n.node_id).toLowerCase().includes(S.q.toLowerCase())));
+  const order={offline:0,warn:1,ok:2,idle:3};list.sort((a,b)=>order[health(a).key]-order[health(b).key]);
+  document.getElementById("listTitle").textContent=S.filter==="all"?"장치":`장치 · ${L.find(x=>x[0]===S.filter)[1]}`;
+  document.getElementById("cards").innerHTML=list.map(n=>{const h=health(n);const lv=vLevel(n.last_vbat_mv);
+    return`<button class="dcard${n.online?"":" off"}" data-open="${n.node_id}" aria-label="${n.label} 상세 열기">
+      <div class="top"><span class="dico">${I("beacon","i")}</span><span class="nm"><strong>${n.label}</strong><small>${n.loc}</small></span><span class="badge ${h.cls}">${h.t}</span></div>
+      <div class="vals">${n.sensors.slice(0,2).map(s=>`<div class="val"><b class="num">${s.v}<small>${s.u}</small></b><span>${s.name}</span></div>`).join("")}</div>
+      <div class="foot"><span class="batt ${lv}" title="${n.last_vbat_mv} mV"><span class="batt-bar"><i style="width:${vFill(n.last_vbat_mv)*100}%"></i></span><span class="num">${(n.last_vbat_mv/1000).toFixed(2)} V</span></span><span>·</span><span>${rel(now()-n.last_seen)}</span><span class="sp"></span>${n.pending_commands?`<span class="pend">${I("clock")}대기 ${n.pending_commands}</span>`:""}</div>
+    </button>`}).join("")+(S.filter==="all"&&!S.q?`<button class="add-card" data-act="add"><span class="plus">${I("plus","i")}</span>새 Beacon 연결</button>`:"")
+    ||`<div class="empty" style="grid-column:1/-1"><span class="ic">${I("search","i")}</span><strong>조건에 맞는 장치가 없습니다</strong></div>`;
+  document.getElementById("tabCount").textContent=nodes.length;
+}
+
+/* =================== 상세 팝업 =================== */
+function openDevice(id){S.open=id;S.itab="overview";renderDevice();showOv("ov")}
+function renderDevice(){
+  const n=nodes.find(x=>x.node_id===S.open);if(!n)return;const h=health(n);
+  document.getElementById("ovDialog").setAttribute("aria-labelledby","ddTitle");
+  document.getElementById("ovDialog").innerHTML=`
+   <header class="dd-head"><span class="dico">${I("beacon","i")}</span><div style="min-width:0"><h3 id="ddTitle">${n.label}</h3><div class="dd-meta"><button class="copy mono" data-copy="${n.node_id}">${n.node_id} ${I("copy")}</button>${I("pin")}<span>${n.loc}</span></div></div>
+    <span class="badge ${h.cls}" style="margin-left:auto">${h.t}</span><button class="btn btn-ghost btn-icon" data-close aria-label="닫기">${I("x","i")}</button></header>
+   <div class="dd-actions"><button class="btn btn-primary" data-act="sensor">${I("therm")}센서 읽기</button>
+     <div class="btn-group"><button class="btn btn-secondary" data-act="image">${I("camera")}촬영</button><button class="btn btn-secondary btn-icon" data-menu="cam" aria-label="촬영 해상도" aria-haspopup="menu">${I("chevd")}</button></div>
+     <span class="sp"></span><button class="btn btn-ghost" data-act="data">${I("db")}데이터</button><button class="btn btn-ghost btn-icon" data-menu="more" aria-label="더 보기" aria-haspopup="menu">${I("more")}</button></div>
+   ${delivery(n)}
+   <div class="subtabs" role="tablist">${[["overview","상태"],["activity","작업"],["settings","설정"]].map(([k,l])=>`<button class="subtab" role="tab" aria-selected="${S.itab===k}" data-itab="${k}">${l}${k==="activity"&&n.pending_commands?` <span class="pend">${n.pending_commands}</span>`:""}</button>`).join("")}</div>
+   <div class="dd-body">${S.itab==="overview"?overview(n):S.itab==="activity"?activity(n):settings(n)}</div>`;
+}
+function cyc(n){const left=n.next_expected_at-now();return{pct:Math.min(100,(now()-n.last_seen)/n.next_given*100),left,late:left<-30}}
+function delivery(n){
+  if(!n.online)return`<div class="delivery off"><div class="row">${I("alert")}<span><strong>${rel(now()-n.last_seen)}</strong> 이후 체크인이 없습니다. 대기 작업은 다시 연결되면 전달됩니다.</span></div></div>`;
+  const c=cyc(n);
+  return`<div class="delivery"><div class="row">${I("clock")}<span>요청은 <strong>다음 체크인</strong>에 전달됩니다</span><span class="end num" data-live="deliv">${c.late?dur(-c.left)+" 지연":"약 "+dur(c.left)+" 후"}</span></div>
+   <div class="cycle"><i data-live="cycle" style="width:${c.pct}%"></i></div>
+   <div class="row" style="font-size:11px"><span class="muted">마지막 체크인 ${clock(n.last_seen)}</span><span class="muted" style="margin-left:auto">주기 ${ival(n.next_given)}${n.watch?" · 자주 확인 모드":n.next_given>n.interval_s?" · 저전압으로 연장됨":""}</span></div></div>`;
+}
+function overview(n){
+  const ck=n.checkins,lv=vLevel(n.last_vbat_mv),col={ok:"#3d8a4f",warn:"#b26a12",danger:"#c03d2a"}[lv];
+  const days=estDays(n.next_given,n.requested_data.includes("image"));
+  return`<div class="stat-grid">
+   <div class="stat"><span class="k">${I("battery")}배터리 전압</span><span class="v num" style="color:${lv==="ok"?"inherit":col}">${(n.last_vbat_mv/1000).toFixed(2)}<small>V</small></span>${spark(ck.map(c=>c.vbat_mv),col)}<span class="d">최근 ${ck.length}회 체크인</span></div>
+   <div class="stat"><span class="k">${I("wifi")}신호 세기 <span class="sig l${sigLevel(n.last_rssi)}"><i></i><i></i><i></i><i></i></span></span><span class="v num">${n.last_rssi}<small>dBm</small></span>${spark(ck.map(c=>c.rssi),"#295b3b")}<span class="d">채널 ${n.last_ch} · ${n.last_ip}</span></div>
+   <div class="stat"><span class="k">${I("zap")}Wi-Fi 접속</span><span class="v num">${median(ck.map(c=>c.wifi_ms))}<small>ms</small></span><span class="d">빠른 접속 ${Math.round(ck.filter(c=>c.fast).length/ck.length*100)}% · 중앙값</span></div>
+   <div class="stat"><span class="k">${I("cpu")}깨어 있는 시간</span><span class="v num">${(median(ck.map(c=>c.prev_awake_ms))/1000).toFixed(1)}<small>초</small></span><span class="d">사이클당 중앙값 · 상한 25초</span></div></div>
+   <div><div class="sec-title" style="margin-bottom:8px">센서 <button data-act="data">데이터 서버 ${I("chev")}</button></div>
+   ${n.sensors.map(s=>`<div class="sensor-row"><span class="s-ico ${s.type==="temperature"?"t":"h"}">${I(s.type==="temperature"?"therm":"drop")}</span><div><div class="name">${s.name}</div><div class="meta">${s.model} · <span class="mono">0x${s.addr.toString(16)}</span> · ${rel(now()-n.last_seen)}</div></div><div class="val num">${s.v}<small> ${s.u}</small></div></div>`).join("")}</div>
+   <div class="energy"><div><div class="lab">예상 소모</div><div class="big num">${(1560/days).toFixed(1)}<small> mAh/일</small></div></div><div style="text-align:right"><div class="lab">만충 기준 수명</div><div class="big num">${days}<small> 일</small></div></div>
+   <div class="note">${I("alert")}<span>서버 설정의 전류 가정값으로 계산한 추정치이며, 현재 잔량이 아닙니다.</span></div></div>`;
+}
+function activity(n){
+  const L={sensor:"센서 읽기",image:"촬영"};
+  return`<div class="timeline">${CMD[n.node_id].map(c=>{const cls=c.state==="done"?"ok":c.state==="failed"||c.state==="expired"?"fail":"wait";
+   const st={queued:"대기 · 다음 체크인에 전달",dispatched:"전달됨 · 결과 대기",done:"완료",failed:"실패 · 결과 없음(3회 전달)",expired:"만료"}[c.state];
+   return`<div class="tl-item"><span class="tl-dot ${cls}">${I(cls==="ok"?"check":cls==="fail"?"x":"clock")}</span><div><div class="t">${L[c.command_type]} <span class="muted mono" style="font-weight:400">#${c.command_id}</span></div><div class="s">${st}${c.params?.fs?` · ${c.params.fs}`:""}</div>${cls==="wait"?`<div class="steps"><span class="on"></span><span class="${c.state==="dispatched"?"on":""}"></span><span></span></div>`:""}</div><div class="r num">${clock(c.done_at||c.created_at)}${c.done_at?`<br>${Math.round(c.done_at-c.created_at)}초 소요`:""}</div></div>`}).join("")}</div>`;
+}
+function settings(n){
+  return`<dl class="kv"><dt>표시 이름</dt><dd>${n.label}</dd><dt>설치 위치</dt><dd>${n.loc}</dd><dt>수집 주기</dt><dd>${ival(n.interval_s)}</dd><dt>수집 데이터</dt><dd>${n.requested_data.map(d=>d==="sensor"?"센서":"이미지").join(", ")}</dd><dt>펌웨어</dt><dd class="mono">${n.fw}</dd></dl>
+   <div><button class="btn btn-secondary" data-act="edit">${I("gear")}설정 편집</button></div>
+   <div class="danger-zone"><div class="dz-row"><div><strong>절전</strong><small>타이머 없이 전원을 끕니다. 다시 켜려면 장치에 전원을 넣어야 합니다.</small></div><button class="btn btn-danger-ghost btn-sm" data-act="hibernate">절전</button></div>
+   <div class="dz-row"><div><strong>연결 해제</strong><small>대기 작업은 만료되고, 장치는 1시간마다 짧게 체크인합니다.</small></div><button class="btn btn-danger-ghost btn-sm" data-act="detach">연결 해제</button></div></div>`;
+}
+
+/* =================== DATA SERVER =================== */
+function counts(n){return{sensor:n.sensors.reduce((a,s)=>a+live(READ[s.id],"reading_id").length,0),image:live(IMG[n.node_id],"asset_id").length,checkin:live(n.checkins,"checkin_id").length,command:live(CMD[n.node_id],"command_id").length}}
+function renderSrc(){const q=(document.getElementById("srcQ").value||"").toLowerCase();const list=nodes.filter(n=>(n.label+n.node_id).toLowerCase().includes(q));
+  document.getElementById("srcList").innerHTML=`<div class="src-group"><span>BEACONS</span><span class="num">${list.length}</span></div>`+list.map(n=>{const c=counts(n);return`<button class="src" aria-current="${S.dataNode===n.node_id}" data-src="${n.node_id}"><span class="st" style="background:${n.online?"var(--ok)":"var(--danger)"}"></span><span class="nm">${n.label}</span><span class="ct num">${(c.sensor+c.image+c.checkin).toLocaleString()}</span></button>`}).join("")}
+function renderData(){
+  const n=nodes.find(x=>x.node_id===S.dataNode);const c=counts(n);
+  const K=[["sensor","센서","therm"],["image","이미지","image"],["checkin","체크인","activity"],["command","작업","list"]];
+  document.getElementById("kinds").innerHTML=K.map(([k,l,ic])=>`<button aria-pressed="${S.kind===k}" data-kind="${k}">${I(ic)}${l} <em class="num">${c[k].toLocaleString()}</em></button>`).join("");
+  const sub={sensor:"sensors",image:"images",checkin:"checkins",command:"commands"}[S.kind];
+  document.getElementById("crumbs").innerHTML=`${I("folder")}<span>한라봉 1농장</span>${I("chev")}<span>beacons</span>${I("chev")}<b>${n.label}</b>${I("chev")}<span class="mono">${sub}</span>`;
+  document.getElementById("srcChip").innerHTML=S.kind==="image"?`${I("folder")}SSD · raw/beacons/${n.node_id}/`:`${I("db")}SQLite · ${{sensor:"sensor_readings",checkin:"beacon_node_checkins",command:"beacon_commands"}[S.kind]}`;
+  document.getElementById("selBtn").setAttribute("aria-pressed",S.selMode);
+  document.getElementById("csvBtn").hidden=S.kind==="image";
+  const b=document.getElementById("exBody");
+  b.innerHTML=S.kind==="sensor"?sensorView(n):S.kind==="image"?imageView(n):S.kind==="checkin"?checkinView(n):commandView(n);
+  if(S.kind==="sensor")wireChart();
+  renderBulk();renderSrc();
+}
+function cbAll(ids){const p=ids.filter(id=>S.picked.has(id)).length;return`<input type="checkbox" class="cb" data-all aria-label="모두 선택" ${p&&p===ids.length?"checked":""} data-ind="${p>0&&p<ids.length}">`}
+function cb(id,dis=false,title=""){return`<input type="checkbox" class="cb" data-pick="${id}" aria-label="선택" ${S.picked.has(id)?"checked":""} ${dis?`disabled title="${title}"`:""}>`}
+function sensorView(n){
+  if(!n.sensors.find(s=>s.id===S.metric))S.metric=n.sensors[0].id;
+  const s=n.sensors.find(x=>x.id===S.metric);const all=live(READ[s.id],"reading_id");const data=all.slice(-96);
+  if(!data.length)return`<div class="empty"><span class="ic">${I("therm","i")}</span><strong>측정 기록이 없습니다</strong><span>센서 읽기를 요청하면 다음 체크인 후 여기에 쌓입니다.</span></div>`;
+  const vals=data.map(d=>d.value),mn=Math.min(...vals),mx=Math.max(...vals),avg=vals.reduce((a,b)=>a+b,0)/vals.length;
+  const rows=[...data].reverse();const ids=rows.map(r=>r.reading_id);
+  return`<div class="metric-tabs">${n.sensors.map(x=>{const d=live(READ[x.id],"reading_id");const lv=d.at(-1)?.value,prev=d.at(-3)?.value;const last=lv!=null?lv.toFixed(1):"—";const diff=prev!=null&&lv!=null?(lv-prev).toFixed(1):"";return`<button class="metric" aria-pressed="${x.id===S.metric}" data-metric="${x.id}"><span class="k">${I(x.type==="temperature"?"therm":"drop")}${x.name} · ${x.model}</span><span class="v num">${last}<small> ${x.u}</small></span><span class="d">1시간 전 대비 ${diff>0?"+":""}${diff} · ${d.length.toLocaleString()}건 저장</span></button>`}).join("")}</div>
+   <div class="chart-card" id="chartCard"><div class="chart-head"><span class="ttl">${s.name} 추이 <span class="muted" style="font-weight:400">· 최근 ${data.length}건</span></span><span class="stats"><span>최저 <b class="num">${mn.toFixed(1)}</b></span><span>평균 <b class="num">${avg.toFixed(1)}</b></span><span>최고 <b class="num">${mx.toFixed(1)}</b></span></span></div>
+   ${chartSvg(data,s.u,Math.max(300,(document.getElementById("exBody").clientWidth||700)-32-26))}<div class="tip" id="tip"></div></div>
+   <div class="data-scroll"><table class="data"><thead><tr>${S.selMode?`<th class="cb-col">${cbAll(ids)}</th>`:""}<th>수신 시각</th><th>값</th><th>단위</th><th>품질</th></tr></thead><tbody>${rows.map(r=>`<tr class="${S.picked.has(r.reading_id)?"picked":""}">${S.selMode?`<td>${cb(r.reading_id)}</td>`:""}<td class="num">${dt(r.recorded_at)}</td><td class="num"><b>${r.value.toFixed(1)}</b></td><td class="muted">${r.unit}</td><td>${r.quality==="reported"?`<span class="badge b-ok">정상</span>`:`<span class="badge b-warn">확인 필요</span>`}</td></tr>`).join("")}</tbody></table></div>`;
+}
+let CH=null;
+function niceStep(r){const e=Math.pow(10,Math.floor(Math.log10(r)));const f=r/e;return(f<1.5?1:f<3?2:f<7?5:10)*e}
+function chartSvg(data,unit,W){
+  const H=210,L=36,R=8,T=10,B=24;const vals=data.map(d=>d.value);const st=niceStep((Math.max(...vals)-Math.min(...vals))/4||1);const mn=Math.floor(Math.min(...vals)/st)*st,mx=Math.ceil(Math.max(...vals)/st)*st||mn+st;
+  const x=i=>L+i/Math.max(1,data.length-1)*(W-L-R),y=v=>T+(1-(v-mn)/(mx-mn))*(H-T-B);
+  const p=data.map((d,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(d.value).toFixed(1)}`).join("");
+  let g="",yl="";for(let v=mn;v<=mx+1e-9;v+=st){g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/>`;yl+=`<text x="${L-6}" y="${y(v)+3.5}" text-anchor="end">${+v.toFixed(1)}</text>`}
+  let xl="";const xs=W<480?32:16;for(let i=0;i<data.length;i+=xs)xl+=`<text x="${x(i)}" y="${H-6}" text-anchor="${i?"middle":"start"}">${clock(data[i].recorded_at)}</text>`;
+  CH={data,x,y,W,H,L,R,unit};
+  return`<svg class="chart" id="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="센서 추이"><defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e67c2d" stop-opacity=".22"/><stop offset="1" stop-color="#e67c2d" stop-opacity="0"/></linearGradient></defs>
+   <g class="grid">${g}</g><g class="axis">${yl}${xl}</g><path d="${p}L${x(data.length-1)},${H-B}L${L},${H-B}Z" fill="url(#ga)"/><path d="${p}" fill="none" stroke="#e67c2d" stroke-width="2" stroke-linejoin="round"/>
+   ${data.map((d,i)=>d.quality==="suspect"?`<circle cx="${x(i)}" cy="${y(d.value)}" r="3.5" fill="#b26a12" stroke="#fff" stroke-width="1.5"/>`:"").join("")}
+   <line id="cx" y1="10" y2="${H-B}" stroke="#173d2b" stroke-opacity=".3" stroke-dasharray="3 3" visibility="hidden"/><circle id="cd" r="4.5" fill="#fff" stroke="#295b3b" stroke-width="2" visibility="hidden"/><rect x="${L}" y="${T}" width="${W-L-R}" height="${H-T-B}" fill="transparent" id="hit"/></svg>`;
+}
+function wireChart(){const svg=document.getElementById("chart"),hit=document.getElementById("hit");if(!hit)return;const tip=document.getElementById("tip"),card=document.getElementById("chartCard"),cx=document.getElementById("cx"),cd=document.getElementById("cd");
+  hit.addEventListener("mousemove",e=>{const b=svg.getBoundingClientRect();const px=(e.clientX-b.left)/b.width*CH.W;const i=Math.max(0,Math.min(CH.data.length-1,Math.round((px-CH.L)/(CH.W-CH.L-CH.R)*(CH.data.length-1))));const d=CH.data[i];
+   cx.setAttribute("x1",CH.x(i));cx.setAttribute("x2",CH.x(i));cx.setAttribute("visibility","visible");cd.setAttribute("cx",CH.x(i));cd.setAttribute("cy",CH.y(d.value));cd.setAttribute("visibility","visible");
+   const cb=card.getBoundingClientRect();tip.style.left=(b.left-cb.left+CH.x(i)/CH.W*b.width)+"px";tip.style.top=(b.top-cb.top+CH.y(d.value)/CH.H*b.height-8)+"px";tip.style.opacity=1;tip.innerHTML=`<b class="num">${d.value.toFixed(1)} ${CH.unit}</b> · ${dt(d.recorded_at)}`});
+  hit.addEventListener("mouseleave",()=>{tip.style.opacity=0;cx.setAttribute("visibility","hidden");cd.setAttribute("visibility","hidden")})}
+function plant(seed,w=320,h=240){const r=rng(seed);let l="";for(let i=0;i<14;i++){const x=r()*w,y=h*.35+r()*h*.6;l+=`<ellipse cx="${x|0}" cy="${y|0}" rx="${18+r()*36|0}" ry="${10+r()*18|0}" transform="rotate(${r()*80-40|0} ${x|0} ${y|0})" fill="hsl(${95+r()*30},${35+r()*20}%,${28+r()*22}%)"/>`}for(let i=0;i<5;i++)l+=`<circle cx="${r()*w|0}" cy="${h*.4+r()*h*.4|0}" r="${6+r()*5|0}" fill="hsl(${28+r()*10},85%,${54+r()*6}%)"/>`;return`<svg class="img" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sk${seed}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9efe1"/><stop offset=".45" stop-color="#cfdcc0"/><stop offset="1" stop-color="#6f8a55"/></linearGradient></defs><rect width="${w}" height="${h}" fill="url(#sk${seed})"/>${l}</svg>`}
+function imageView(n){
+  const imgs=live(IMG[n.node_id],"asset_id");
+  if(!imgs.length)return`<div class="empty"><span class="ic">${I("image","i")}</span><strong>저장된 이미지가 없습니다</strong><span>장치 상세에서 촬영을 요청하면 다음 체크인 때 SSD에 저장됩니다.</span></div>`;
+  const groups={};imgs.forEach(m=>{(groups[day(m.captured_at)]=groups[day(m.captured_at)]||[]).push(m)});
+  return Object.entries(groups).map(([d,arr])=>`<div class="day-label">${S.selMode?cbAll(arr.map(m=>m.asset_id)).replace("data-all","data-all-group"):""}${d} <span class="muted" style="font-weight:600">${arr.length}장 · ${bytes(arr.reduce((a,m)=>a+m.byte_size,0))}</span></div><div class="gallery">${arr.map(m=>{const i=+m.asset_id.split("-").pop();return`<div class="shot${S.picked.has(m.asset_id)?" picked":""}" ${S.selMode?"":`role="button" tabindex="0"`} data-shot="${m.asset_id}">${plant(i)}${S.selMode?cb(m.asset_id):""}<span class="cap"><b class="num">${clock(m.captured_at)}</b><small class="num">${m.width}×${m.height} · ${bytes(m.byte_size)}</small></span></div>`}).join("")}</div>`).join("");
+}
+function checkinView(n){
+  const R={ok:"b-ok",wifi_fail:"b-warn"};const rows=[...live(n.checkins,"checkin_id")].reverse();const ids=rows.map(c=>String(c.checkin_id));
+  return`<div class="data-scroll" style="max-height:520px"><table class="data"><thead><tr>${S.selMode?`<th class="cb-col">${cbAll(ids)}</th>`:""}<th>수신 시각</th><th>전압</th><th>RSSI</th><th>Wi-Fi 접속</th><th>활성 시간</th><th>직전 결과</th></tr></thead><tbody>${rows.map(c=>`<tr class="${S.picked.has(String(c.checkin_id))?"picked":""}">${S.selMode?`<td>${cb(String(c.checkin_id))}</td>`:""}<td class="num">${dt(c.received_at)}</td><td class="num" style="color:var(--${vLevel(c.vbat_mv)==="ok"?"text":vLevel(c.vbat_mv)})">${(c.vbat_mv/1000).toFixed(3)} V</td><td class="num">${c.rssi} dBm</td><td class="num">${c.wifi_ms} ms ${c.fast?`<span class="badge plain b-ok" style="height:18px;font-size:11px">빠름</span>`:`<span class="badge plain b-idle" style="height:18px;font-size:11px">전체 스캔</span>`}</td><td class="num">${(c.prev_awake_ms/1000).toFixed(1)} s</td><td><span class="badge ${R[c.prev_result]}">${c.prev_result}</span></td></tr>`).join("")}</tbody></table></div>`;
+}
+function commandView(n){
+  const B={queued:"b-orange",dispatched:"b-orange",done:"b-ok",failed:"b-danger",expired:"b-idle"},T={queued:"대기",dispatched:"전달됨",done:"완료",failed:"실패",expired:"만료"};
+  const rows=live(CMD[n.node_id],"command_id");const ids=rows.filter(c=>!["queued","dispatched"].includes(c.state)).map(c=>String(c.command_id));
+  return`<div class="data-scroll" style="max-height:520px"><table class="data"><thead><tr>${S.selMode?`<th class="cb-col">${cbAll(ids)}</th>`:""}<th>ID</th><th>종류</th><th>상태</th><th>요청</th><th>소요</th><th></th></tr></thead><tbody>${rows.map(c=>{const busy=["queued","dispatched"].includes(c.state);return`<tr class="${S.picked.has(String(c.command_id))?"picked":""}">${S.selMode?`<td>${cb(String(c.command_id),busy,"진행 중인 작업은 삭제할 수 없습니다")}</td>`:""}<td class="mono">#${c.command_id}</td><td>${c.command_type==="sensor"?"센서 읽기":"촬영"}</td><td><span class="badge ${B[c.state]}">${T[c.state]}</span></td><td class="num">${dt(c.created_at)}</td><td class="num">${c.done_at?Math.round(c.done_at-c.created_at)+"초":"—"}</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" data-exp="${c.command_id}">${S.expanded===c.command_id?"접기":"JSON"}</button></td></tr>${S.expanded===c.command_id?`<tr class="exp"><td colspan="7"><pre>${JSON.stringify({params:c.params??null,result:c.result??null,reason:c.reason??null},null,2)}</pre></td></tr>`:""}`}).join("")}</tbody></table></div>`;
+}
+function renderBulk(){
+  const el=document.getElementById("bulk");
+  if(!S.selMode){el.innerHTML="";return}
+  const k=S.picked.size;
+  el.innerHTML=`<div class="bulkbar" role="region" aria-label="선택 작업"><span><b class="num">${k}</b>개 선택됨</span><span class="sp"></span>${k?`<button class="btn btn-ghost btn-sm" data-act="clearPick">선택 해제</button>`:`<span style="color:#9fb3a2;font-size:12px">항목을 선택하세요</span>`}<button class="btn btn-ghost btn-sm" data-act="exitSel">완료</button><button class="btn btn-danger btn-sm" data-act="delPicked" ${k?"":"disabled"}>${I("trash")}삭제</button></div>`;
+  document.querySelectorAll(".cb[data-ind=true]").forEach(c=>c.indeterminate=true);
+}
+
+/* =================== 삭제 흐름 =================== */
+const KIND_LABEL={sensor:"센서 측정",image:"이미지",checkin:"체크인 기록",command:"작업 기록"};
+const KIND_UNIT={sensor:"건",image:"장",checkin:"건",command:"건"};
+function itemsOf(kind,n){if(kind==="sensor")return n.sensors.flatMap(s=>live(READ[s.id],"reading_id").map(r=>({id:r.reading_id,t:r.recorded_at,s:s.id})));if(kind==="image")return live(IMG[n.node_id],"asset_id").map(m=>({id:m.asset_id,t:m.captured_at,b:m.byte_size}));if(kind==="checkin")return live(n.checkins,"checkin_id").map(c=>({id:String(c.checkin_id),t:c.received_at}));return live(CMD[n.node_id],"command_id").filter(c=>!["queued","dispatched"].includes(c.state)).map(c=>({id:String(c.command_id),t:c.created_at}))}
+function openDeletePicked(){
+  const n=nodes.find(x=>x.node_id===S.dataNode);const items=itemsOf(S.kind,n).filter(x=>S.picked.has(x.id));
+  S.del={mode:"picked",ids:items.map(x=>x.id),items};renderDelete();showOv("ov2");
+}
+function openDeleteRange(){const n=nodes.find(x=>x.node_id===S.dataNode);S.del={mode:"range",range:"30",scope:S.kind==="sensor"?"metric":"node",confirm:""};renderDelete();showOv("ov2")}
+function rangeItems(){const n=nodes.find(x=>x.node_id===S.dataNode);let it=itemsOf(S.kind,n);if(S.kind==="sensor"&&S.del.scope==="metric")it=it.filter(x=>x.s===S.metric);const days={"7":7,"30":30}[S.del.range];if(days)it=it.filter(x=>x.t<now()-days*86400);if(S.del.range==="3")it=it.filter(x=>x.t<now()-3*86400);return it}
+function renderDelete(){
+  const n=nodes.find(x=>x.node_id===S.dataNode);const D=S.del;const d=document.getElementById("ov2Dialog");
+  const items=D.mode==="picked"?D.items:rangeItems();const k=items.length;const unit=KIND_UNIT[S.kind];
+  const ts=items.map(x=>x.t);const span=k?`${dt(Math.min(...ts))} ~ ${dt(Math.max(...ts))}`:"—";
+  const size=S.kind==="image"?bytes(items.reduce((a,x)=>a+(x.b||0),0)):null;
+  const metricName=n.sensors.find(s=>s.id===S.metric)?.name;
+  const where={sensor:"SQLite · sensor_readings",image:"SSD 사본 raw/beacons/ + SQLite · camera_assets",checkin:"SQLite · beacon_node_checkins",command:"SQLite · beacon_commands, beacon_sensor_results"}[S.kind];
+  const needType=D.mode==="range"&&D.range==="all";
+  const ok=k>0&&(!needType||D.confirm.trim()===n.label);
+  let body="";
+  if(D.mode==="range"){
+    const opt=(v,l,s)=>{const save=D.range;D.range=v;const c=rangeItems().length;D.range=save;return`<button class="radio-row" role="radio" aria-checked="${D.range===v}" data-range="${v}"><span class="r"></span><span><b>${l}</b><small>${s}</small></span><span class="cnt num">${c.toLocaleString()}${unit}</span></button>`};
+    body+=`${S.kind==="sensor"?`<div class="field"><span class="lab">대상</span><div class="radio-list" role="radiogroup"><button class="radio-row" role="radio" aria-checked="${D.scope==="metric"}" data-scope="metric"><span class="r"></span><span><b>${metricName}만</b><small>현재 보고 있는 센서</small></span><span></span></button><button class="radio-row" role="radio" aria-checked="${D.scope==="node"}" data-scope="node"><span class="r"></span><span><b>이 장치의 모든 센서</b><small>${n.sensors.map(s=>s.name).join(", ")}</small></span><span></span></button></div></div>`:""}
+     <div class="field"><span class="lab">기간</span><div class="radio-list" role="radiogroup">${opt("3","3일보다 오래된 기록","최근 3일은 남깁니다")}${opt("7","7일보다 오래된 기록","최근 7일은 남깁니다")}${opt("30","30일보다 오래된 기록","최근 30일은 남깁니다")}${opt("all","전체 삭제","이 장치의 해당 기록을 모두 지웁니다")}</div></div>
+     ${needType?`<div class="field"><label class="lab" for="confirmIn">확인을 위해 장치 이름 <b>${n.label}</b>을 입력하세요</label><input type="text" id="confirmIn" value="${D.confirm}" autocomplete="off"></div>`:""}`;
+  }
+  body+=`<dl class="summary"><dt>장치</dt><dd>${n.label} <span class="mono muted" style="font-weight:400">${n.node_id}</span></dd><dt>종류</dt><dd>${KIND_LABEL[S.kind]}${S.kind==="sensor"&&!(D.mode==="range"&&D.scope==="node")&&D.mode==="range"?` · ${metricName}`:""}</dd><dt>삭제 대상</dt><dd class="num">${k.toLocaleString()}${unit}${size?` · ${size}`:""}</dd><dt>기간</dt><dd class="num">${span}</dd><dt>저장 위치</dt><dd style="font-weight:500">${where}</dd></dl>
+   <div class="callout warn">${I("alert")}<span>삭제한 기록은 되돌릴 수 없습니다. 차트, 데이터 서버, 농장 AI의 답변 근거에서도 사라집니다.${S.kind==="image"?" Beacon 수신 서버에 남은 원본(<span class='mono'>/mnt/nvme/beacon/images</span>)은 이 화면에서 지우지 않습니다.":""}${S.kind==="command"?" 대기·전달 중인 작업은 삭제되지 않습니다.":""}</span></div>`;
+  d.setAttribute("aria-labelledby","delTitle");
+  d.innerHTML=`<header><span class="del-ico">${I("trash","i")}</span><div><h3 id="delTitle">${D.mode==="picked"?`${KIND_LABEL[S.kind]} ${k.toLocaleString()}${unit}을 삭제할까요?`:`${KIND_LABEL[S.kind]} 기간으로 삭제`}</h3><p>${D.mode==="picked"?"선택한 항목만 지웁니다.":"조건에 맞는 기록을 한 번에 지웁니다."}</p></div><button class="btn btn-ghost btn-icon x" data-close aria-label="닫기">${I("x","i")}</button></header>
+   <div class="body">${body}</div>
+   <footer><span class="left muted" style="font-size:12px">삭제 후 6초 동안 실행 취소할 수 있습니다</span><button class="btn btn-secondary" data-close>취소</button><button class="btn btn-danger" id="doDelete" ${ok?"":"disabled"}>${I("trash")}${k.toLocaleString()}${unit} 삭제</button></footer>`;
+}
+function doDelete(){
+  const n=nodes.find(x=>x.node_id===S.dataNode);const ids=S.del.mode==="picked"?S.del.ids:rangeItems().map(x=>x.id);
+  ids.forEach(id=>S.trash.add(String(id)));S.picked.clear();closeOv("ov2");renderData();
+  const kind=S.kind,unit=KIND_UNIT[kind];
+  /* 실제 구현: 6초 뒤 POST /dashboard/beacons/{id}/data/delete 호출. 실행 취소 시 호출하지 않음 */
+  toast(`${KIND_LABEL[kind]} ${ids.length.toLocaleString()}${unit} 삭제됨`,`${n.label} · 6초 후 서버에서 확정됩니다`,"ok",{label:"실행 취소",fn:()=>{ids.forEach(id=>S.trash.delete(String(id)));renderData();toast("삭제를 취소했습니다",`${ids.length.toLocaleString()}${unit}을 되돌렸습니다`)}},6000);
+}
+
+/* =================== 장치 추가 =================== */
+function renderAdd(){
+  const A=S.add,d=document.getElementById("ov2Dialog");const st=(i,l)=>`<span class="stp ${A.step===i?"on":A.step>i?"done":""}"><i>${A.step>i?"✓":i}</i>${l}</span>`;let body="";
+  if(A.step===1)body=`<div class="radio-list" role="radiogroup">${discovered.map(x=>`<button class="radio-row" role="radio" aria-checked="${A.node===x.node_id}" data-pickdev="${x.node_id}"><span class="r"></span><span><b class="mono">${x.node_id}</b><small>${x.last_ip} · ${rel(now()-x.last_seen)} 체크인</small></span>${x.isNew?`<span class="badge b-orange">새로 발견</span>`:`<span class="badge b-idle">발견됨</span>`}</button>`).join("")}</div><div class="field"><span class="hint">목록에 없으면 장치 전원, Wi-Fi, 서버 주소를 확인하세요. 발견된 장치는 15분마다 체크인합니다.</span></div>`;
+  if(A.step===2)body=`<div class="field"><label class="lab" for="lbl">표시 이름</label><input type="text" id="lbl" value="${A.label}" placeholder="예: 북쪽 하우스 3"></div><div class="field"><span class="lab">체크인 주기</span><div class="presets">${[[60,"1분"],[300,"5분"],[900,"15분"],[3600,"1시간"]].map(([v,l])=>`<button class="preset" aria-pressed="${A.interval===v}" data-iv="${v}"><b>${l}</b><small>${daysLabel(estDays(v,A.image))}</small></button>`).join("")}</div><span class="hint">짧을수록 요청이 빨리 전달되지만 배터리를 더 씁니다. 만충 기준 추정입니다.</span></div><div class="field"><span class="lab">수집할 데이터</span><div class="radio-list"><button class="radio-row" role="checkbox" aria-checked="${A.sensor}" data-tg="sensor"><span class="r" style="border-radius:4px"></span><span><b>센서 측정</b><small>온·습도</small></span><span></span></button><button class="radio-row" role="checkbox" aria-checked="${A.image}" data-tg="image"><span class="r" style="border-radius:4px"></span><span><b>카메라 이미지</b><small>하루 24장 가정 · 전력 사용 증가</small></span><span></span></button></div></div><div class="callout info">${I("zap")}<span>예상 배터리 수명 <b>${daysLabel(estDays(A.interval,A.image))}</b> · 목표 30일 ${estDays(A.interval,A.image)>=30?"충족":"미달"}</span></div>`;
+  if(A.step===3)body=`<div class="field"><span class="lab">설치 위치</span><div class="mini-map" id="miniMap">${mapSvg()}${A.pin?`<span class="pin" style="left:${A.pin[0]}%;top:${A.pin[1]}%"><svg viewBox="0 0 24 24"><use href="#i-pinfill"/></svg></span>`:""}<span class="hint-ov">${A.pin?"다른 곳을 눌러 바꿀 수 있습니다":"농장 경계 안을 눌러 위치를 지정하세요"}</span></div><span class="hint">실제 구현은 농장 지도 배치 모드로 전환했다가 이 단계로 돌아옵니다.</span></div>`;
+  const can=A.step===1?!!A.node:A.step===2?!!(A.label.trim()&&(A.sensor||A.image)):!!A.pin;
+  d.setAttribute("aria-labelledby","addTitle");
+  d.innerHTML=`<header><span class="del-ico" style="background:var(--orange-soft);color:var(--orange-text)">${I("plus","i")}</span><div><h3 id="addTitle">${A.edit?"설정 편집":"장치 추가"}</h3><p>${A.edit?"이름, 수집 방식, 위치를 바꿉니다.":"체크인한 Beacon을 이 농장에 연결합니다."}</p></div><button class="btn btn-ghost btn-icon x" data-close aria-label="닫기">${I("x","i")}</button></header>
+   ${A.edit?"":`<div class="stepper">${st(1,"장치 선택")}${st(2,"이름·수집")}${st(3,"설치 위치")}</div>`}<div class="body">${body}</div>
+   <footer>${A.step>(A.edit?2:1)?`<button class="btn btn-ghost left" id="back">이전</button>`:`<span class="left"></span>`}<button class="btn btn-secondary" data-close>취소</button><button class="btn btn-primary" id="next" ${can?"":"disabled"}>${A.step<3?"다음":A.edit?"저장":"연결하고 저장"}</button></footer>`;
+}
+function mapSvg(){return`<svg viewBox="0 0 100 60" preserveAspectRatio="none"><defs><pattern id="rows" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)"><rect width="4" height="4" fill="#cfe0c2"/><rect width="4" height="1.2" fill="#b7cfa6"/></pattern></defs><rect width="100" height="60" fill="#e6ecdc"/><polygon points="12,8 86,5 92,48 18,55" fill="url(#rows)" stroke="#295b3b" stroke-width=".6" stroke-dasharray="1.5 1"/>${[[30,20],[64,18],[48,42],[70,40],[38,24]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="1.4" fill="#10251d" stroke="#fff" stroke-width=".5"/>`).join("")}</svg>`}
+
+/* =================== GLUE =================== */
+function showOv(id){document.getElementById(id).classList.add("open");setTimeout(()=>document.querySelector(`#${id} [data-close]`)?.focus(),20)}
+function closeOv(id){document.getElementById(id).classList.remove("open");closePops()}
+function toast(title,msg,kind="ok",action=null,ms=5200){const t=document.createElement("div");t.className="toast";t.innerHTML=`<span class="ic" style="color:${kind==="ok"?"#9fe0b0":"#ffb978"}">${I(kind==="ok"?"check":"clock")}</span><div><strong>${title}</strong><small>${msg}</small></div>${action?`<button class="undo">${action.label}</button>`:`<button aria-label="닫기" style="color:#b8c8bb">${I("x")}</button>`}<span class="bar" style="animation-duration:${ms}ms"></span>`;
+  t.querySelector("button").onclick=()=>{if(action)action.fn();t.remove()};document.getElementById("toasts").appendChild(t);setTimeout(()=>t.remove(),ms)}
+function openPop(id,a,align="left"){closePops();const p=document.getElementById(id);p.classList.add("open");const r=a.getBoundingClientRect();const w=p.offsetWidth;p.style.top=(r.bottom+6)+"px";p.style.left=Math.max(8,Math.min(innerWidth-w-8,align==="right"?r.right-w:r.left))+"px";a.setAttribute("aria-expanded","true")}
+function closePops(){document.querySelectorAll(".pop.open").forEach(p=>p.classList.remove("open"));document.querySelectorAll("[aria-expanded=true]").forEach(b=>b.setAttribute("aria-expanded","false"))}
+function setTab(t){if(t==="farm"||t==="weather"){toast("샘플 범위 밖","이 샘플은 Beacon과 데이터 서버만 다룹니다.","wait");return}S.tab=t;document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));document.getElementById("view-beacon").hidden=t!=="beacon";document.getElementById("view-data").hidden=t!=="data";document.getElementById("eyebrow").textContent=t==="beacon"?"BEACON DEVICES":"DATA SERVER";document.getElementById("pageTitle").textContent=t==="beacon"?"Beacon 관리":"데이터 서버";if(t==="data")renderData()}
+function queue(type,fs){const n=nodes.find(x=>x.node_id===S.open);const id=Math.max(...Object.values(CMD).flat().map(c=>c.command_id))+1;CMD[n.node_id].unshift({command_id:id,command_type:type,state:"queued",created_at:now(),params:type==="image"?{fs:fs||"VGA",q:12,warm:500}:undefined});n.pending_commands++;
+  toast(`${type==="sensor"?"센서 읽기":"촬영"} #${id} 요청됨`,n.online?`약 ${dur(Math.max(0,n.next_expected_at-now()))} 후 다음 체크인 때 실행됩니다`:"장치가 다시 연결되면 전달됩니다","wait");S.itab="activity";renderDevice();renderBeacon()}
+function resetSel(){S.picked.clear();S.expanded=null}
+
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button,[data-shot],#miniMap,input.cb");
+  if(!t){if(!e.target.closest(".pop"))closePops();return}
+  if(t.matches("input.cb")){
+    if(t.dataset.pick){t.checked?S.picked.add(t.dataset.pick):S.picked.delete(t.dataset.pick)}
+    else{const scope=t.dataset.allGroup!==undefined?t.closest(".day-label").nextElementSibling:document.getElementById("exBody");const boxes=[...scope.querySelectorAll(".cb[data-pick]:not(:disabled)")];const on=t.checked;boxes.forEach(b=>on?S.picked.add(b.dataset.pick):S.picked.delete(b.dataset.pick))}
+    renderData();return}
+  const d=t.dataset;
+  if(d.tab)return setTab(d.tab);
+  if(d.f){S.filter=d.f;renderBeacon();return}
+  if(d.open)return openDevice(d.open);
+  if(d.itab){S.itab=d.itab;renderDevice();return}
+  if(d.copy){navigator.clipboard?.writeText(d.copy);toast("ID를 복사했습니다",d.copy);return}
+  if(t.hasAttribute("data-close")){t.closest(".backdrop").classList.remove("open");closePops();return}
+  if(d.menu==="more"){const m=document.getElementById("menu");m.innerHTML=`<div class="mlabel">응답 모드</div><button class="mi" data-act="session">${I("zap")}<span>1분간 즉시 응답<small>다음 체크인부터 세션 유지</small></span></button><button class="mi" data-act="watch">${I("eye")}<span>10분간 자주 확인<small>체크인 주기를 1분으로</small></span></button><div class="msep"></div><button class="mi" data-act="edit">${I("gear")}<span>설정 편집</span></button><button class="mi danger" data-act="hibernate">${I("moon")}<span>절전</span></button><button class="mi danger" data-act="detach">${I("unlink")}<span>연결 해제</span></button>`;openPop("menu",t,"right");return}
+  if(d.menu==="cam"){const m=document.getElementById("menu");m.innerHTML=`<div class="mlabel">해상도</div>${[["QVGA","320×240 · 가장 빠름"],["VGA","640×480 · 기본"],["SVGA","800×600"],["XGA","1024×768 · 업로드 증가"]].map(([f,x])=>`<button class="mi" data-cam="${f}">${I("camera")}<span>${f}<small>${x}</small></span>${f==="VGA"?`<span class="kbd">기본</span>`:""}</button>`).join("")}`;openPop("menu",t);return}
+  if(d.cam){closePops();return queue("image",d.cam)}
+  if(t.id==="dataMore"){const m=document.getElementById("menu");m.innerHTML=`<div class="mlabel">${KIND_LABEL[S.kind]} 관리</div><button class="mi" data-act="selOn">${I("select")}<span>항목 선택해서 삭제<small>표나 사진에서 골라 지웁니다</small></span></button><button class="mi danger" data-act="range">${I("calendar")}<span>기간으로 삭제…<small>오래된 기록을 한 번에 정리</small></span></button>`;openPop("menu",t,"right");return}
+  if(d.act){closePops();const a=d.act;
+    if(a==="add"){S.add={step:1,node:null,label:"",interval:300,sensor:true,image:false,pin:null};renderAdd();return showOv("ov2")}
+    if(a==="sensor")return queue("sensor");
+    if(a==="image")return queue("image");
+    if(a==="data"){S.dataNode=S.open;S.kind="sensor";resetSel();closeOv("ov");return setTab("data")}
+    if(a==="session")return toast("즉시 응답 모드 요청","다음 체크인부터 60초간 요청이 1초 안에 전달됩니다","wait");
+    if(a==="watch"){const n=nodes.find(x=>x.node_id===S.open);n.watch=true;renderDevice();renderBeacon();return toast("10분간 자주 확인","다음 체크인부터 1분마다 확인합니다","wait")}
+    if(a==="edit"){const n=nodes.find(x=>x.node_id===S.open);S.add={edit:true,step:2,node:n.node_id,label:n.label,interval:n.interval_s,sensor:true,image:n.requested_data.includes("image"),pin:[40,40]};renderAdd();return showOv("ov2")}
+    if(a==="hibernate"||a==="detach")return toast("확인 모달로 이동","실제 구현은 장치 이름을 입력해야 실행됩니다(명세 6.7)","wait");
+    if(a==="selOn"){S.selMode=true;resetSel();return renderData()}
+    if(a==="exitSel"){S.selMode=false;resetSel();return renderData()}
+    if(a==="clearPick"){S.picked.clear();return renderData()}
+    if(a==="delPicked")return openDeletePicked();
+    if(a==="range")return openDeleteRange();
+  }
+  if(t.id==="selBtn"){S.selMode=!S.selMode;resetSel();return renderData()}
+  if(t.id==="csvBtn")return toast("CSV 내보내기","현재 보기의 행을 CSV로 내려받습니다");
+  if(t.id==="sysBtn"){return document.getElementById("sysPop").classList.contains("open")?closePops():openPop("sysPop",t)}
+  if(t.id==="usbReset"){t.disabled=true;t.textContent="확인 중…";setTimeout(()=>{t.disabled=false;t.textContent="리셋 후 확인";toast("새 체크인 감지","리셋 후 tc-5ac3d0이 체크인했습니다")},1500);return}
+  if(d.range){S.del.range=d.range;renderDelete();if(d.range==="all")setTimeout(()=>document.getElementById("confirmIn")?.focus(),20);return}
+  if(d.scope){S.del.scope=d.scope;renderDelete();return}
+  if(t.id==="doDelete")return doDelete();
+  if(d.pickdev){S.add.node=d.pickdev;return renderAdd()}
+  if(d.iv){S.add.interval=+d.iv;return renderAdd()}
+  if(d.tg){S.add[d.tg]=!S.add[d.tg];return renderAdd()}
+  if(t.id==="back"){S.add.step--;return renderAdd()}
+  if(t.id==="miniMap"){const r=t.getBoundingClientRect();S.add.pin=[(e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100];return renderAdd()}
+  if(t.id==="next"){if(S.add.step<3){S.add.step++;return renderAdd()}closeOv("ov2");toast(S.add.edit?"설정을 저장했습니다":"장치를 연결했습니다",`${S.add.label} · 다음 체크인 때 장치에 전달됩니다`);return}
+  if(d.src){S.dataNode=d.src;resetSel();return renderData()}
+  if(d.kind){S.kind=d.kind;resetSel();return renderData()}
+  if(d.metric){S.metric=d.metric;return renderData()}
+  if(d.exp){S.expanded=S.expanded===+d.exp?null:+d.exp;return renderData()}
+  if(d.shot&&!S.selMode){const id=d.shot,i=+id.split("-").pop(),m=IMG[S.dataNode].find(x=>x.asset_id===id);const dd=document.getElementById("ov2Dialog");dd.removeAttribute("aria-labelledby");dd.setAttribute("aria-label","이미지 미리보기");dd.innerHTML=`<header><div><h3 class="mono" style="font-size:14px">${S.dataNode}/${id.split("-").pop()}.jpg</h3><p>${dt(m.captured_at)} · ${m.width}×${m.height} · ${bytes(m.byte_size)}</p></div><button class="btn btn-ghost btn-icon x" data-close aria-label="닫기">${I("x","i")}</button></header>${plant(i,640,480)}<footer><button class="btn btn-danger-ghost left" data-delone="${id}">${I("trash")}삭제</button><button class="btn btn-secondary">${I("download")}원본 내려받기</button></footer>`;return showOv("ov2")}
+  if(d.shot&&S.selMode){S.picked.has(d.shot)?S.picked.delete(d.shot):S.picked.add(d.shot);return renderData()}
+  if(d.delone){S.picked=new Set([d.delone]);return openDeletePicked()}
+  if(d.w){document.querySelectorAll(".demo-switch button").forEach(b=>b.setAttribute("aria-pressed",b===t));document.getElementById("ws").classList.toggle("wide",d.w==="wide");return}
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){if(document.querySelector(".pop.open"))return closePops();const o=[...document.querySelectorAll(".backdrop.open")].pop();if(o)o.classList.remove("open")}
+  if((e.key==="Enter"||e.key===" ")&&e.target.matches("[data-shot][role=button]")){e.preventDefault();e.target.click()}
+});
+document.querySelectorAll(".backdrop").forEach(b=>b.addEventListener("mousedown",e=>{if(e.target===b)b.classList.remove("open")}));
+document.addEventListener("input",e=>{
+  if(e.target.id==="q"){S.q=e.target.value;renderBeacon()}
+  if(e.target.id==="srcQ")renderSrc();
+  if(e.target.id==="lbl"){S.add.label=e.target.value;document.getElementById("next").disabled=!(S.add.label.trim()&&(S.add.sensor||S.add.image))}
+  if(e.target.id==="confirmIn"){S.del.confirm=e.target.value;const n=nodes.find(x=>x.node_id===S.dataNode);document.getElementById("doDelete").disabled=!(rangeItems().length&&S.del.confirm.trim()===n.label)}
+});
+let last=Date.now();
+setInterval(()=>{const n=nodes.find(x=>x.node_id===S.open);if(n&&n.online&&document.getElementById("ov").classList.contains("open")){const c=cyc(n);const a=document.querySelector('[data-live="deliv"]');if(a)a.textContent=c.late?dur(-c.left)+" 지연":"약 "+dur(c.left)+" 후";const b=document.querySelector('[data-live="cycle"]');if(b)b.style.width=c.pct+"%"}
+  const s=Math.round((Date.now()-last)/1000);document.getElementById("syncTxt").textContent=s<5?"방금 동기화":`${s}초 전 동기화`;if(s>=10)last=Date.now()},1000);
+let rz;new ResizeObserver(()=>{clearTimeout(rz);rz=setTimeout(()=>{if(S.tab==="data"&&S.kind==="sensor")renderData()},120)}).observe(document.querySelector(".dash"));
+renderBeacon();
+</script>
+</body>
+</html>
