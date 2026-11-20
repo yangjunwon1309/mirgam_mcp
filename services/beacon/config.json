@@ -1,0 +1,22 @@
+{
+  "node_port": 8080,
+  "admin_port": 8081,
+  "admin_host": "0.0.0.0",
+  "data_dir": "/beacon-data",
+  "default_interval_s": 300,
+  "vbat_low_mv": 3450,
+  "vbat_critical_mv": 3300,
+  "test_mode": false,
+  "max_image_bytes": 2097152,
+  "energy": {
+    "i_active_ma": 120.0,
+    "i_cam_ma": 160.0,
+    "i_sensor_ma": 20.0,
+    "i_off_ua": 20.0,
+    "usable_mah": 1560.0,
+    "checkin_fast_s": 1.5,
+    "checkin_slow_s": 3.5,
+    "image_active_s": 1.2,
+    "sensor_active_s": 0.2
+  }
+}

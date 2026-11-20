@@ -1,10 +1,15 @@
 .env
 **/.env
+.local/
 **/node_modules/
 **/.next/
 **/__pycache__/
 **/*.py[cod]
 storage/**
+!storage/.gitkeep
 !storage/**/.gitkeep
+# User-provided demo camera frames are bundled into the local API image but are
+# deliberately not source-controlled.
+services/api/app/demo_assets/*.png
+!services/api/app/demo_assets/.gitkeep
 *.egg-info/
-

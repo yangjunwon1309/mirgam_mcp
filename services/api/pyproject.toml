@@ -1,15 +1,22 @@
 [project]
 name = "gemma-mcp-api"
 version = "0.1.0"
-description = "Personal LLM dashboard API with S3-backed conversations"
+description = "Smart-farm LLM dashboard API with SQLite-backed conversations"
 requires-python = ">=3.12"
 dependencies = [
-  "boto3>=1.34",
   "fastapi>=0.115",
+  "httpx>=0.27",
+  "mcp>=1.2,<2.0",
+  "pyproj>=3.6",
+  "shapely>=2.0",
   "openai>=1.0",
   "pydantic-settings>=2.3",
   "python-multipart>=0.0.9",
+  "SQLAlchemy==2.0.22",
+  "sqlalchemy-sqlitecloud==0.1.2",
+  "sqlitecloud==0.0.84",
   "uvicorn[standard]>=0.30",
+  "Werkzeug==3.0.1",
 ]
 
 [build-system]
@@ -18,4 +25,3 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["app"]
-

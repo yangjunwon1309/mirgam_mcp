@@ -1,0 +1,225 @@
+{
+ "note": "approx-centroid는 행정구역 중심점 근사값, approx-place-coordinate는 공천포 대표 좌표의 격자 후보값이다. 기상청 격자 변환 API로 최종 대조할 것.",
+ "areas": {
+  "한림읍": {
+   "nx": 48,
+   "ny": 35,
+   "source": "approx-centroid"
+  },
+  "애월읍": {
+   "nx": 50,
+   "ny": 36,
+   "source": "approx-centroid"
+  },
+  "구좌읍": {
+   "nx": 58,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "조천읍": {
+   "nx": 55,
+   "ny": 37,
+   "source": "approx-centroid"
+  },
+  "한경면": {
+   "nx": 47,
+   "ny": 34,
+   "source": "approx-centroid"
+  },
+  "추자면": {
+   "nx": 49,
+   "ny": 48,
+   "source": "approx-centroid"
+  },
+  "우도면": {
+   "nx": 60,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "일도1동": {
+   "nx": 53,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "일도2동": {
+   "nx": 53,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "이도1동": {
+   "nx": 53,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "이도2동": {
+   "nx": 53,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "삼도1동": {
+   "nx": 53,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "삼도2동": {
+   "nx": 53,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "용담1동": {
+   "nx": 52,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "용담2동": {
+   "nx": 52,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "건입동": {
+   "nx": 53,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "화북동": {
+   "nx": 53,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "삼양동": {
+   "nx": 54,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "봉개동": {
+   "nx": 54,
+   "ny": 37,
+   "source": "approx-centroid"
+  },
+  "아라동": {
+   "nx": 53,
+   "ny": 37,
+   "source": "approx-centroid"
+  },
+  "오라동": {
+   "nx": 52,
+   "ny": 37,
+   "source": "approx-centroid"
+  },
+  "연동": {
+   "nx": 52,
+   "ny": 37,
+   "source": "approx-centroid"
+  },
+  "노형동": {
+   "nx": 52,
+   "ny": 36,
+   "source": "approx-centroid"
+  },
+  "외도동": {
+   "nx": 51,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "이호동": {
+   "nx": 51,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "도두동": {
+   "nx": 52,
+   "ny": 38,
+   "source": "approx-centroid"
+  },
+  "대정읍": {
+   "nx": 48,
+   "ny": 33,
+   "source": "approx-centroid"
+  },
+  "남원읍": {
+   "nx": 56,
+   "ny": 33,
+   "source": "kma-doc"
+  },
+  "성산읍": {
+   "nx": 59,
+   "ny": 36,
+   "source": "approx-centroid"
+  },
+  "안덕면": {
+   "nx": 49,
+   "ny": 33,
+   "source": "approx-centroid"
+  },
+  "표선면": {
+   "nx": 57,
+   "ny": 35,
+   "source": "approx-centroid"
+  },
+  "송산동": {
+   "nx": 54,
+   "ny": 32,
+   "source": "approx-centroid"
+  },
+  "정방동": {
+   "nx": 53,
+   "ny": 32,
+   "source": "approx-centroid"
+  },
+  "중앙동": {
+   "nx": 53,
+   "ny": 33,
+   "source": "approx-centroid"
+  },
+  "천지동": {
+   "nx": 53,
+   "ny": 32,
+   "source": "approx-centroid"
+  },
+  "효돈동": {
+   "nx": 54,
+   "ny": 33,
+   "source": "approx-centroid"
+  },
+  "영천동": {
+   "nx": 54,
+   "ny": 34,
+   "source": "approx-centroid"
+  },
+  "동홍동": {
+   "nx": 53,
+   "ny": 33,
+   "source": "approx-centroid"
+  },
+  "서홍동": {
+   "nx": 53,
+   "ny": 34,
+   "source": "approx-centroid"
+  },
+  "대륜동": {
+   "nx": 53,
+   "ny": 33,
+   "source": "approx-centroid"
+  },
+  "대천동": {
+   "nx": 52,
+   "ny": 33,
+   "source": "approx-centroid"
+  },
+  "중문동": {
+   "nx": 51,
+   "ny": 34,
+   "source": "approx-centroid"
+  },
+  "예래동": {
+   "nx": 50,
+   "ny": 33,
+   "source": "approx-centroid"
+  },
+  "공천포": {
+   "nx": 55,
+   "ny": 33,
+   "source": "approx-place-coordinate"
+  }
+ }
+}

@@ -1,24 +1,70 @@
 services:
-  seaweedfs:
-    image: chrislusf/seaweedfs:latest
-    command: server -dir=/data -s3 -s3.port=8333
-    ports:
-      - "8334:8333"
-      - "9334:9333"
-    volumes:
-      - seaweed-data:/data
-
   api:
     build:
       context: ../services/api
     env_file: ../.env
     environment:
-      S3_ENDPOINT: http://seaweedfs:8333
       MCP_URL: http://mcp:8765/mcp
+      BEACON_ADMIN_URL: http://beacon:8081
+      BEACON_IMAGE_DIR: /beacon-data/images
+      BEACON_POLL_INTERVAL_SECONDS: ${BEACON_POLL_INTERVAL_SECONDS:-5}
+      KMA_API_KEY: ""
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "8100:8000"
     depends_on:
-      - seaweedfs
+      mcp:
+        condition: service_started
+      beacon:
+        condition: service_healthy
+    networks:
+      - default
+      - beacon-admin
+    volumes:
+      - ../storage:/workspace/storage
+      - ${BEACON_DATA_ROOT:-/mnt/nvme/beacon}:/beacon-data:ro
+    restart: unless-stopped
+
+  beacon:
+    build:
+      context: ../services/beacon
+    networks:
+      - beacon-admin
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${BEACON_DATA_ROOT:-/mnt/nvme/beacon}:/beacon-data
+      - /dev:/host-dev:ro
+    device_cgroup_rules:
+      - "c 166:* rw"
+      - "c 188:* rw"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8081/admin/nodes', timeout=2).read()"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 3s
+    restart: unless-stopped
+
+  farmmap-worker:
+    build:
+      context: ../services/api
+    command: ["python", "-m", "app.farmmap.worker"]
+    environment:
+      SQLITE_PATH: /workspace/storage/state/mirgam.db
+      DATA_ROOT: ${DATA_ROOT:-/workspace/storage}
+      VWORLD_KEY: ${VWORLD_KEY:-}
+      VWORLD_DOMAIN: ${VWORLD_DOMAIN:-}
+      VWORLD_SAT_MIN_Z: ${VWORLD_SAT_MIN_Z:-13}
+      VWORLD_SAT_MAX_Z: ${VWORLD_SAT_MAX_Z:-19}
+      TILE_TTL_DAYS: ${TILE_TTL_DAYS:-180}
+      MAX_CROP_TILES: ${MAX_CROP_TILES:-400}
+      MAX_CROP_PIXELS: ${MAX_CROP_PIXELS:-30000000}
+    volumes:
+      - ../storage:/workspace/storage
+    depends_on:
+      - api
 
   mcp:
     build:
@@ -26,9 +72,19 @@ services:
     environment:
       MCP_HTTP_HOST: 0.0.0.0
       MCP_HTTP_PORT: 8765
+      MODEL_RUNNER_URL: ${MODEL_RUNNER_URL:-http://host.docker.internal:8766}
       PARQUET_ROOT: /workspace/storage
+      SQLITE_PATH: /workspace/state/mirgam.db
+      KMA_AREAS_PATH: /app/app/tools/area_grids.json
+      # Only the MCP container receives this credential.
+      KMA_API_KEY: ${KMA_API_KEY:-}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ../storage:/workspace/storage:ro
+      # The farm-data tools use read-only SQLite connections. The weather cache
+      # writes compact KMA responses to the same persistent database.
+      - ../storage/state:/workspace/state
     ports:
       - "8765:8765"
 
@@ -36,11 +92,14 @@ services:
     build:
       context: ../apps/web
     environment:
-      API_URL: http://api:8000
+      API_URL: ${API_URL:-http://api:8000}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "3100:3000"
     depends_on:
       - api
 
-volumes:
-  seaweed-data:
+networks:
+  default: {}
+  beacon-admin: {}
