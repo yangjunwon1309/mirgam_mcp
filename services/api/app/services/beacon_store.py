@@ -8,10 +8,15 @@ and camera tables so the dashboard and MCP SQLite tools share one data model.
 from __future__ import annotations
 
 import json
+import logging
+import re
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+
+logger = logging.getLogger(__name__)
 
 
 FIELD_INFO: dict[str, tuple[str, str, str]] = {
@@ -124,6 +129,22 @@ class BeaconStore:
                     ok INTEGER NOT NULL,
                     raw_json TEXT NOT NULL
                 );
+
+                CREATE TABLE IF NOT EXISTS beacon_data_deletions (
+                    deletion_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    account_id INTEGER NOT NULL,
+                    node_id TEXT NOT NULL,
+                    kind TEXT NOT NULL,
+                    mode TEXT NOT NULL,
+                    matched INTEGER NOT NULL,
+                    deleted INTEGER NOT NULL,
+                    skipped INTEGER NOT NULL DEFAULT 0,
+                    freed_bytes INTEGER NOT NULL DEFAULT 0,
+                    criteria_json TEXT NOT NULL,
+                    created_at TEXT NOT NULL
+                );
+                CREATE INDEX IF NOT EXISTS beacon_data_deletions_node_idx
+                    ON beacon_data_deletions(node_id, created_at DESC);
                 """
             )
             profile_columns = {row[1] for row in db.execute("PRAGMA table_info(beacon_node_profiles)")}
@@ -198,29 +219,60 @@ class BeaconStore:
             ).fetchall()
         return {str(row["node_id"]) for row in rows}
 
+    def _latest_readings(self, db: sqlite3.Connection, node_id: str, limit: int = 4) -> list[dict[str, Any]]:
+        rows = db.execute(
+            """SELECT d.sensor_id,d.display_name,d.sensor_type,d.unit,
+                      r.value,r.unit AS reading_unit,r.recorded_at
+               FROM sensor_devices d
+               LEFT JOIN sensor_readings r ON r.reading_id=(
+                   SELECT reading_id FROM sensor_readings
+                   WHERE sensor_id=d.sensor_id
+                   ORDER BY recorded_at DESC,reading_id DESC LIMIT 1)
+               WHERE json_extract(d.metadata_json,'$.beacon_node_id')=?
+                 AND d.status='active'
+               ORDER BY CASE d.sensor_type
+                   WHEN 'temperature' THEN 0 WHEN 'humidity' THEN 1 ELSE 2 END,
+                   d.display_name
+               LIMIT ?""",
+            (node_id, max(0, limit)),
+        ).fetchall()
+        return [
+            {
+                "sensor_id": row["sensor_id"],
+                "display_name": row["display_name"],
+                "sensor_type": row["sensor_type"],
+                "value": float(row["value"]) if row["value"] is not None else None,
+                "unit": row["reading_unit"] or row["unit"],
+                "recorded_at": row["recorded_at"],
+            }
+            for row in rows
+        ]
+
     def cached_nodes(self, account_id: int) -> list[dict[str, Any]]:
+        output = []
         with self._connect() as db:
             rows = db.execute(
                 "SELECT * FROM beacon_node_profiles WHERE account_id=? ORDER BY updated_at DESC",
                 (account_id,),
             ).fetchall()
-        output=[]
-        for raw in rows:
-            profile=self._profile_dict(dict(raw))
-            if profile is None:
-                continue
-            output.append({
-                "node_id":profile["node_id"],"state":"UNKNOWN","online":False,
-                "farm_id":profile["farm_id"],
-                "first_seen":None,"last_seen":None,"next_given":None,"last_ip":None,
-                "last_rssi":None,"last_vbat_mv":None,"last_seq":None,"last_ch":None,"fw":None,
-                "last_boot":None,"last_wifi_ms":None,"last_fast":None,
-                "last_prev_awake_ms":None,"last_prev_result":None,
-                "label":profile["label"],"metadata":profile["metadata"],
-                "interval_s":profile["interval_s"],"requested_data":profile["requested_data"],
-                "registered":True,"sensor_count":len(profile["metadata"].get("sensors") or []),
-                "pending_commands":0,"next_expected_at":None,
-            })
+            for raw in rows:
+                profile = self._profile_dict(dict(raw))
+                if profile is None:
+                    continue
+                node_id = str(profile["node_id"])
+                output.append({
+                    "node_id": node_id, "state": "UNKNOWN", "online": False,
+                    "farm_id": profile["farm_id"],
+                    "first_seen": None, "last_seen": None, "next_given": None, "last_ip": None,
+                    "last_rssi": None, "last_vbat_mv": None, "last_seq": None, "last_ch": None, "fw": None,
+                    "last_boot": None, "last_wifi_ms": None, "last_fast": None,
+                    "last_prev_awake_ms": None, "last_prev_result": None,
+                    "label": profile["label"], "metadata": profile["metadata"],
+                    "interval_s": profile["interval_s"], "requested_data": profile["requested_data"],
+                    "registered": True, "sensor_count": len(profile["metadata"].get("sensors") or []),
+                    "pending_commands": 0, "next_expected_at": None,
+                    "latest_readings": self._latest_readings(db, node_id),
+                })
         return output
 
     def record_checkin_snapshot(self, node: dict[str, Any]) -> None:
@@ -466,29 +518,78 @@ class BeaconStore:
     def detail(self, account_id: int, node_id: str) -> dict[str, Any]:
         with self._connect() as db:
             self._assert_owner(db, account_id, node_id)
-            profile_row=db.execute("SELECT * FROM beacon_node_profiles WHERE node_id=? AND account_id=?",(node_id,account_id)).fetchone()
+            profile_row = db.execute(
+                "SELECT * FROM beacon_node_profiles WHERE node_id=? AND account_id=?",
+                (node_id, account_id),
+            ).fetchone()
             if profile_row is None:
                 raise KeyError(node_id)
-            sensors=db.execute(
-                "SELECT sensor_id,display_name,sensor_type,unit,status,metadata_json FROM sensor_devices WHERE json_extract(metadata_json,'$.beacon_node_id')=? ORDER BY display_name",
+            sensors = db.execute(
+                """SELECT sensor_id,display_name,sensor_type,unit,status,metadata_json
+                   FROM sensor_devices
+                   WHERE json_extract(metadata_json,'$.beacon_node_id')=?
+                   ORDER BY display_name""",
                 (node_id,),
             ).fetchall()
-            sensor_output=[]
+            sensor_output = []
             for sensor in sensors:
-                sensor_dict=dict(sensor)
-                try: sensor_dict["metadata"]=json.loads(sensor_dict.pop("metadata_json") or "{}")
-                except (TypeError,json.JSONDecodeError): sensor_dict["metadata"]={}
-                latest=db.execute("SELECT value,unit,recorded_at,quality FROM sensor_readings WHERE sensor_id=? ORDER BY recorded_at DESC,reading_id DESC LIMIT 1",(sensor["sensor_id"],)).fetchone()
-                history=db.execute("SELECT value,unit,recorded_at,quality FROM sensor_readings WHERE sensor_id=? ORDER BY recorded_at DESC,reading_id DESC LIMIT 96",(sensor["sensor_id"],)).fetchall()
-                sensor_output.append({"device":sensor_dict,"latest_reading":dict(latest) if latest else None,"readings":[dict(r) for r in reversed(history)]})
-            assets=db.execute(
-                "SELECT a.asset_id,a.captured_at,a.byte_size,a.width,a.height,a.content_type FROM camera_assets a JOIN camera_devices c ON c.camera_id=a.camera_id WHERE json_extract(c.metadata_json,'$.beacon_node_id')=? ORDER BY a.captured_at DESC LIMIT 30",
+                sensor_dict = dict(sensor)
+                try:
+                    sensor_dict["metadata"] = json.loads(sensor_dict.pop("metadata_json") or "{}")
+                except (TypeError, json.JSONDecodeError):
+                    sensor_dict["metadata"] = {}
+                latest = db.execute(
+                    """SELECT reading_id,value,unit,recorded_at,quality FROM sensor_readings
+                       WHERE sensor_id=? ORDER BY recorded_at DESC,reading_id DESC LIMIT 1""",
+                    (sensor["sensor_id"],),
+                ).fetchone()
+                history = db.execute(
+                    """SELECT reading_id,value,unit,recorded_at,quality FROM sensor_readings
+                       WHERE sensor_id=? ORDER BY recorded_at DESC,reading_id DESC LIMIT 96""",
+                    (sensor["sensor_id"],),
+                ).fetchall()
+                reading_count = db.execute(
+                    "SELECT COUNT(*) FROM sensor_readings WHERE sensor_id=?",
+                    (sensor["sensor_id"],),
+                ).fetchone()[0]
+                sensor_output.append({
+                    "device": sensor_dict,
+                    "latest_reading": dict(latest) if latest else None,
+                    "readings": [dict(row) for row in reversed(history)],
+                    "reading_count": int(reading_count),
+                })
+            image_where = """FROM camera_assets a
+                JOIN camera_devices c ON c.camera_id=a.camera_id
+                WHERE json_extract(c.metadata_json,'$.beacon_node_id')=?"""
+            assets = db.execute(
+                """SELECT a.asset_id,a.captured_at,a.byte_size,a.width,a.height,a.content_type """
+                + image_where
+                + " ORDER BY a.captured_at DESC LIMIT 30",
                 (node_id,),
             ).fetchall()
-            checkins=db.execute("SELECT * FROM beacon_node_checkins WHERE node_id=? ORDER BY received_at DESC LIMIT 48",(node_id,)).fetchall()
-        profile=self._profile_dict(dict(profile_row))
-        return {"profile":profile,"sensors":sensor_output,"images":[dict(r) for r in assets],
-                "commands":self.list_history(account_id,node_id),"checkins":[dict(r) for r in reversed(checkins)]}
+            image_count = db.execute(
+                "SELECT COUNT(*) " + image_where,
+                (node_id,),
+            ).fetchone()[0]
+            checkins = db.execute(
+                """SELECT * FROM beacon_node_checkins
+                   WHERE node_id=? ORDER BY received_at DESC LIMIT 48""",
+                (node_id,),
+            ).fetchall()
+            checkin_count = db.execute(
+                "SELECT COUNT(*) FROM beacon_node_checkins WHERE node_id=?",
+                (node_id,),
+            ).fetchone()[0]
+        profile = self._profile_dict(dict(profile_row))
+        return {
+            "profile": profile,
+            "sensors": sensor_output,
+            "images": [dict(row) for row in assets],
+            "image_count": int(image_count),
+            "commands": self.list_history(account_id, node_id),
+            "checkins": [dict(row) for row in reversed(checkins)],
+            "checkin_count": int(checkin_count),
+        }
 
     def update_node_snapshot(self, account_id: int, nodes: list[dict[str, Any]]) -> list[dict[str, Any]]:
         visible=self.visible_node_ids(account_id)
@@ -509,6 +610,7 @@ class BeaconStore:
                 except (TypeError,ValueError): pass
             with self._connect() as db:
                 pending=db.execute("SELECT COUNT(*) FROM beacon_commands WHERE node_id=? AND account_id=? AND state NOT IN ('done','failed','expired')",(node_id,account_id)).fetchone()[0]
+                latest_readings=self._latest_readings(db,node_id)
             output.append({
                 "node_id":node_id,"state":node.get("state","DISCOVERED"),"online":bool(node.get("online")),
                 "farm_id":(profile or {}).get("farm_id"),
@@ -524,6 +626,280 @@ class BeaconStore:
                 "interval_s":(profile or {}).get("interval_s") or node.get("interval_s",300),
                 "requested_data":(profile or {}).get("requested_data") or [],
                 "registered":profile is not None,"sensor_count":sensor_count,"pending_commands":pending,
+                "latest_readings":latest_readings,
                 "next_expected_at":(float(node.get("last_seen") or 0)+int(node.get("next_given") or 0)) or None,
             })
         return output
+
+
+    def delete_data(self, account_id: int, node_id: str, req: dict[str, Any]) -> dict[str, Any]:
+        kind = req.get("kind")
+        mode = req.get("mode")
+        ids = req.get("ids")
+        sensor_ids = req.get("sensor_ids")
+        before = req.get("before")
+        dry_run = bool(req.get("dry_run", False))
+        if kind not in {"sensor", "image", "checkin", "command"}:
+            raise ValueError("삭제 종류가 올바르지 않습니다.")
+        if mode not in {"ids", "before", "all"}:
+            raise ValueError("삭제 방식이 올바르지 않습니다.")
+        if mode == "ids":
+            if not isinstance(ids, list) or not ids:
+                raise ValueError("ids 모드에는 하나 이상의 ID가 필요합니다.")
+            pattern = r"^beacon-command-\d{1,18}$" if kind == "image" else r"^\d{1,18}$"
+            if any(not isinstance(item, str) or re.fullmatch(pattern, item) is None for item in ids):
+                raise ValueError("삭제 ID 형식이 올바르지 않습니다.")
+        if sensor_ids is not None and (
+            kind != "sensor" or mode == "ids" or not isinstance(sensor_ids, list) or not sensor_ids
+        ):
+            raise ValueError("sensor_ids는 센서의 기간·전체 삭제에서만 사용할 수 있습니다.")
+        if mode == "before" and not isinstance(before, datetime):
+            raise ValueError("before에는 시간대가 있는 날짜가 필요합니다.")
+        if isinstance(before, datetime) and before.tzinfo is None:
+            raise ValueError("before에는 시간대가 있어야 합니다.")
+
+        table, pk, time_column = {
+            "sensor": ("sensor_readings", "reading_id", "recorded_at"),
+            "image": ("camera_assets", "asset_id", "captured_at"),
+            "checkin": ("beacon_node_checkins", "checkin_id", "received_at"),
+            "command": ("beacon_commands", "command_id", "created_at"),
+        }[kind]
+        if kind == "image":
+            select_columns = "asset_id AS row_id,captured_at AS happened,file_path,byte_size"
+        else:
+            select_columns = f"{pk} AS row_id,{time_column} AS happened"
+
+        if mode == "before":
+            before_value: str | float = (
+                before.astimezone(timezone.utc).isoformat()
+                if kind in {"sensor", "image"}
+                else before.timestamp()
+            )
+        else:
+            before_value = ""
+
+        def make_where(db: sqlite3.Connection) -> tuple[str, list[Any]]:
+            clauses: list[str] = []
+            params: list[Any] = []
+            if kind == "sensor":
+                owned = [
+                    str(row[0]) for row in db.execute(
+                        """SELECT sensor_id FROM sensor_devices
+                           WHERE json_extract(metadata_json,'$.beacon_node_id')=?""",
+                        (node_id,),
+                    ).fetchall()
+                ]
+                if sensor_ids is not None:
+                    selected = set(str(item) for item in sensor_ids)
+                    owned = [sensor_id for sensor_id in owned if sensor_id in selected]
+                if owned:
+                    clauses.append("sensor_id IN (" + ",".join("?" for _ in owned) + ")")
+                    params.extend(owned)
+                else:
+                    clauses.append("0")
+            elif kind == "image":
+                clauses.append("camera_id=?")
+                params.append(f"beacon:{node_id}")
+            elif kind == "checkin":
+                clauses.append("node_id=?")
+                params.append(node_id)
+            else:
+                clauses.extend(("node_id=?", "account_id=?"))
+                params.extend((node_id, account_id))
+            if mode == "ids":
+                clauses.append(f"{pk} IN (" + ",".join("?" for _ in ids) + ")")
+                params.extend(ids)
+            elif mode == "before":
+                clauses.append(f"{time_column}<?")
+                params.append(before_value)
+            return " AND ".join(clauses), params
+
+        def count_where(db: sqlite3.Connection, where: str, params: list[Any]) -> int:
+            return int(db.execute(
+                f"SELECT COUNT(*) FROM {table} WHERE {where}", params
+            ).fetchone()[0])
+
+        def result_range(db: sqlite3.Connection, where: str, params: list[Any]) -> dict[str, str] | None:
+            row = db.execute(
+                f"SELECT MIN({time_column}) AS first,MAX({time_column}) AS last FROM {table} WHERE {where}",
+                params,
+            ).fetchone()
+            if row["first"] is None:
+                return None
+            def render(value: Any) -> str:
+                if kind in {"checkin", "command"}:
+                    return datetime.fromtimestamp(float(value), timezone.utc).isoformat()
+                return str(value)
+            return {"from": render(row["first"]), "to": render(row["last"])}
+
+        def criteria_json() -> str:
+            criteria = {
+                "ids_count": len(ids) if isinstance(ids, list) else 0,
+                "sensor_ids": sensor_ids,
+                "before": before.astimezone(timezone.utc).isoformat() if isinstance(before, datetime) else None,
+                "all": mode == "all",
+            }
+            return _json(criteria)
+
+        db = self._connect()
+        total_deleted = 0
+        committed_deleted = 0
+        batch_started = False
+        file_errors = 0
+        try:
+            owner = db.execute(
+                "SELECT label FROM beacon_node_profiles WHERE node_id=? AND account_id=?",
+                (node_id, account_id),
+            ).fetchone()
+            if owner is None:
+                raise KeyError(node_id)
+            if mode == "all" and (req.get("confirm_label") or "").strip() != str(owner["label"]).strip():
+                raise ValueError("장치 이름이 일치하지 않습니다.")
+
+            if mode == "ids":
+                db.execute("BEGIN IMMEDIATE")
+            where, params = make_where(db)
+            matched = count_where(db, where, params)
+
+            skipped_current = 0
+            current_id: int | None = None
+            if kind == "checkin":
+                latest = db.execute(
+                    "SELECT checkin_id FROM beacon_node_checkins WHERE node_id=? ORDER BY received_at DESC,checkin_id DESC LIMIT 1",
+                    (node_id,),
+                ).fetchone()
+                if latest is not None:
+                    current_id = int(latest["checkin_id"])
+                    skipped_current = count_where(db, f"({where}) AND checkin_id=?", params + [current_id])
+
+            skipped_busy = 0
+            if kind == "command":
+                skipped_busy = count_where(
+                    db, f"({where}) AND state NOT IN ('done','failed','expired')", params
+                )
+
+            eligible_where = where
+            eligible_params = list(params)
+            if current_id is not None:
+                eligible_where += " AND checkin_id<>?"
+                eligible_params.append(current_id)
+            if kind == "command":
+                eligible_where += " AND state IN ('done','failed','expired')"
+
+            eligible = count_where(db, eligible_where, eligible_params)
+            freed_bytes = 0
+            if kind == "image":
+                freed_bytes = int(db.execute(
+                    f"SELECT COALESCE(SUM(byte_size),0) FROM {table} WHERE {eligible_where}",
+                    eligible_params,
+                ).fetchone()[0] or 0)
+            affected_range = result_range(db, eligible_where, eligible_params)
+            response: dict[str, Any] = {
+                "kind": kind, "mode": mode, "dry_run": dry_run,
+                "matched": matched, "deleted": 0,
+                "skipped_busy": skipped_busy, "skipped_current": skipped_current,
+                "freed_bytes": freed_bytes, "file_errors": 0, "range": affected_range,
+            }
+            if dry_run:
+                return response
+
+            def select_rows(limit: int | None = None) -> list[sqlite3.Row]:
+                sql = f"SELECT {select_columns} FROM {table} WHERE {eligible_where} ORDER BY {pk}"
+                if limit is not None:
+                    sql += f" LIMIT {int(limit)}"
+                return db.execute(sql, eligible_params).fetchall()
+
+            def delete_rows(rows: list[sqlite3.Row]) -> list[tuple[str, str]]:
+                nonlocal total_deleted
+                if not rows:
+                    return []
+                row_ids = [row["row_id"] for row in rows]
+                placeholders = ",".join("?" for _ in row_ids)
+                files: list[tuple[str, str]] = []
+                if kind == "image":
+                    files = [(str(row["row_id"]), str(row["file_path"])) for row in rows]
+                    db.execute(
+                        f"UPDATE beacon_commands SET image_asset_id=NULL WHERE image_asset_id IN ({placeholders})",
+                        row_ids,
+                    )
+                elif kind == "command":
+                    db.execute(
+                        f"DELETE FROM beacon_sensor_results WHERE command_id IN ({placeholders})",
+                        row_ids,
+                    )
+                cursor = db.execute(
+                    f"DELETE FROM {table} WHERE {pk} IN ({placeholders})",
+                    row_ids,
+                )
+                total_deleted += max(0, cursor.rowcount)
+                return files
+
+            def unlink_files(files: list[tuple[str, str]]) -> None:
+                nonlocal file_errors
+                allowed = (self.data_root / "raw" / "beacons" / node_id).resolve()
+                for asset_id, file_path in files:
+                    target = (self.data_root / file_path).resolve()
+                    try:
+                        if allowed not in target.parents:
+                            file_errors += 1
+                            logger.warning("Beacon image file delete blocked asset_id=%s", asset_id)
+                            continue
+                        target.unlink(missing_ok=True)
+                    except OSError:
+                        file_errors += 1
+                        logger.warning("Beacon image file delete failed asset_id=%s", asset_id)
+
+            if mode == "ids":
+                rows = select_rows()
+                files = delete_rows(rows)
+                db.execute(
+                    """INSERT INTO beacon_data_deletions(
+                           account_id,node_id,kind,mode,matched,deleted,skipped,freed_bytes,criteria_json,created_at
+                       ) VALUES(?,?,?,?,?,?,?,?,?,?)""",
+                    (account_id, node_id, kind, mode, matched, total_deleted,
+                     skipped_busy + skipped_current, freed_bytes, criteria_json(),
+                     datetime.now(timezone.utc).isoformat()),
+                )
+                db.commit()
+                unlink_files(files)
+            else:
+                db.execute(
+                    """INSERT INTO beacon_data_deletions(
+                           account_id,node_id,kind,mode,matched,deleted,skipped,freed_bytes,criteria_json,created_at
+                       ) VALUES(?,?,?,?,?,?,?,?,?,?)""",
+                    (account_id, node_id, kind, mode, matched, 0,
+                     skipped_busy + skipped_current, freed_bytes, criteria_json(),
+                     datetime.now(timezone.utc).isoformat()),
+                )
+                audit_id = int(db.execute("SELECT last_insert_rowid()").fetchone()[0])
+                db.commit()
+                batch_started = True
+                while True:
+                    db.execute("BEGIN IMMEDIATE")
+                    rows = select_rows(5000)
+                    if not rows:
+                        db.commit()
+                        break
+                    files = delete_rows(rows)
+                    db.execute(
+                        "UPDATE beacon_data_deletions SET deleted=? WHERE deletion_id=?",
+                        (total_deleted, audit_id),
+                    )
+                    db.commit()
+                    committed_deleted = total_deleted
+                    unlink_files(files)
+
+            response["deleted"] = total_deleted
+            response["file_errors"] = file_errors
+            return response
+        except Exception as exc:
+            if db.in_transaction:
+                db.rollback()
+            if mode in {"before", "all"} and not dry_run and batch_started:
+                total_deleted = committed_deleted
+                error = RuntimeError(f"삭제 도중 오류가 발생했습니다. deleted={total_deleted}")
+                error.deleted = total_deleted
+                raise error from exc
+            raise
+        finally:
+            db.close()

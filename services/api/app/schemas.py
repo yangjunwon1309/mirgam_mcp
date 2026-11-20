@@ -2,7 +2,7 @@ from datetime import datetime
 
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator, model_validator
 
 
 class Message(BaseModel):
@@ -98,3 +98,29 @@ class BeaconCommandRequest(BaseModel):
     fs: Literal["QVGA", "VGA", "SVGA", "XGA", "HD", "SXGA", "UXGA"] = "VGA"
     q: int = Field(12, ge=4, le=40)
     warm: int = Field(500, ge=0, le=3000)
+
+
+class BeaconDataDeleteRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    kind: Literal["sensor", "image", "checkin", "command"]
+    ids: list[str] | None = Field(None, min_length=1, max_length=1000)
+    sensor_ids: list[str] | None = Field(None, min_length=1, max_length=32)
+    before: datetime | None = None
+    all: bool = False
+    confirm_label: str | None = Field(None, max_length=64)
+    dry_run: bool = False
+
+    @model_validator(mode="after")
+    def one_mode(self) -> "BeaconDataDeleteRequest":
+        modes = [self.ids is not None, self.before is not None, self.all]
+        if sum(modes) != 1:
+            raise ValueError("ids, before, all 중 정확히 하나를 지정하세요.")
+        if self.sensor_ids is not None and (self.kind != "sensor" or self.ids is not None):
+            raise ValueError("sensor_ids는 kind=sensor의 기간·전체 삭제에서만 쓸 수 있습니다.")
+        if self.before is not None and self.before.tzinfo is None:
+            raise ValueError("before에는 시간대가 있어야 합니다.")
+        return self
+
+    @property
+    def mode(self) -> str:
+        return "ids" if self.ids is not None else "all" if self.all else "before"

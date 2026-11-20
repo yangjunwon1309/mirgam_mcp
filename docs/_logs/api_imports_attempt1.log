@@ -1,0 +1,7 @@
+[py_compile] command=timeout 30 python -m py_compile app/schemas.py app/main.py app/services/beacon_store.py tests/test_beacon_store_ui.py
+[py_compile] exit=0
+[import_contract] command=timeout 30 python -c import app.schemas, app.services.beacon_store, app.services.sqlite_store
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+NameError: name 'IMPORTS_OK' is not defined
+[import_contract] exit=1

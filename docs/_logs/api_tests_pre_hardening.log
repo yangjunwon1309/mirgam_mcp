@@ -1,0 +1,20 @@
+test_bad_id_format (test_beacon_store_ui.BeaconStoreUiTests.test_bad_id_format) ... ok
+test_delete_all_requires_label (test_beacon_store_ui.BeaconStoreUiTests.test_delete_all_requires_label) ... ok
+test_delete_checkin_keeps_latest (test_beacon_store_ui.BeaconStoreUiTests.test_delete_checkin_keeps_latest) ... ok
+test_delete_command_skips_busy (test_beacon_store_ui.BeaconStoreUiTests.test_delete_command_skips_busy) ... ok
+test_delete_image_path_escape_blocked (test_beacon_store_ui.BeaconStoreUiTests.test_delete_image_path_escape_blocked) ... Beacon image file delete blocked asset_id=beacon-command-205
+ok
+test_delete_image_removes_file_and_row (test_beacon_store_ui.BeaconStoreUiTests.test_delete_image_removes_file_and_row) ... ok
+test_delete_sensor_before_scoped (test_beacon_store_ui.BeaconStoreUiTests.test_delete_sensor_before_scoped) ... ok
+test_delete_sensor_ids (test_beacon_store_ui.BeaconStoreUiTests.test_delete_sensor_ids) ... ok
+test_delete_sensor_ids_foreign_ignored (test_beacon_store_ui.BeaconStoreUiTests.test_delete_sensor_ids_foreign_ignored) ... ok
+test_detail_has_ids_and_counts (test_beacon_store_ui.BeaconStoreUiTests.test_detail_has_ids_and_counts) ... ok
+test_dry_run_writes_nothing (test_beacon_store_ui.BeaconStoreUiTests.test_dry_run_writes_nothing) ... ok
+test_latest_readings_order_and_values (test_beacon_store_ui.BeaconStoreUiTests.test_latest_readings_order_and_values) ... ok
+test_not_owner_is_keyerror (test_beacon_store_ui.BeaconStoreUiTests.test_not_owner_is_keyerror) ... ok
+test_request_model_modes (test_beacon_store_ui.BeaconStoreUiTests.test_request_model_modes) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 2.497s
+
+OK

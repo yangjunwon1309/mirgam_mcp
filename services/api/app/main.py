@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from openai import APIConnectionError, APIStatusError
 
 from .config import get_settings
@@ -20,7 +20,7 @@ from .farmmap.store import FarmMapStore
 from .farmmap.vworld import VWorldClient
 from .schemas import (
     AuthenticatedUser, BeaconActionRequest, BeaconCommandRequest, BeaconConfigureRequest,
-    BeaconIntervalRequest, ChatRequest, ChatResponse, LoginRequest, Message, Thread, ThreadDocument,
+    BeaconDataDeleteRequest, BeaconIntervalRequest, ChatRequest, ChatResponse, LoginRequest, Message, Thread, ThreadDocument,
 )
 from .services.agent import MCPUnavailableError, ProgressCallback, reply_with_tools
 from .services.beacon import BeaconAdminClient, BeaconController, BeaconUnavailable
@@ -318,6 +318,35 @@ async def dashboard_beacon_detail(
                      if item["node_id"] == node_id), None)
         detail = request.app.state.beacon_store.detail(user.account_id, node_id)
     return {"node": node, **detail}
+
+
+@app.post("/dashboard/beacons/{node_id}/data/delete", dependencies=[Depends(require_session)])
+async def delete_dashboard_beacon_data(
+    node_id: str,
+    payload: BeaconDataDeleteRequest,
+    request: Request,
+    user: AuthenticatedUser = Depends(require_session),
+) -> dict[str, object]:
+    if not re.fullmatch(r"tc-[0-9a-f]{6}", node_id):
+        raise HTTPException(status_code=422, detail="Beacon ID 형식이 올바르지 않습니다.")
+    store: BeaconStore = request.app.state.beacon_store
+    try:
+        result = await asyncio.to_thread(
+            store.delete_data,
+            user.account_id,
+            node_id,
+            payload.model_dump(mode="python") | {"mode": payload.mode},
+        )
+        return result
+    except (KeyError, PermissionError):
+        raise HTTPException(status_code=404, detail="등록된 beacon을 찾지 못했습니다.") from None
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except RuntimeError as exc:
+        return JSONResponse(
+            status_code=500,
+            content={"detail": str(exc), "deleted": int(getattr(exc, "deleted", 0))},
+        )
 
 
 @app.put("/dashboard/beacons/{node_id}/configure", dependencies=[Depends(require_session)])

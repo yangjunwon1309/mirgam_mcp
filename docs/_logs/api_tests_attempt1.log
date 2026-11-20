@@ -1,0 +1,168 @@
+test_bad_id_format (test_beacon_store_ui.BeaconStoreUiTests.test_bad_id_format) ... ok
+test_delete_all_requires_label (test_beacon_store_ui.BeaconStoreUiTests.test_delete_all_requires_label) ... ERROR
+test_delete_checkin_keeps_latest (test_beacon_store_ui.BeaconStoreUiTests.test_delete_checkin_keeps_latest) ... ERROR
+test_delete_command_skips_busy (test_beacon_store_ui.BeaconStoreUiTests.test_delete_command_skips_busy) ... ERROR
+test_delete_image_path_escape_blocked (test_beacon_store_ui.BeaconStoreUiTests.test_delete_image_path_escape_blocked) ... ERROR
+test_delete_image_removes_file_and_row (test_beacon_store_ui.BeaconStoreUiTests.test_delete_image_removes_file_and_row) ... ERROR
+test_delete_sensor_before_scoped (test_beacon_store_ui.BeaconStoreUiTests.test_delete_sensor_before_scoped) ... ERROR
+test_delete_sensor_ids (test_beacon_store_ui.BeaconStoreUiTests.test_delete_sensor_ids) ... ERROR
+test_delete_sensor_ids_foreign_ignored (test_beacon_store_ui.BeaconStoreUiTests.test_delete_sensor_ids_foreign_ignored) ... ERROR
+test_detail_has_ids_and_counts (test_beacon_store_ui.BeaconStoreUiTests.test_detail_has_ids_and_counts) ... ERROR
+test_dry_run_writes_nothing (test_beacon_store_ui.BeaconStoreUiTests.test_dry_run_writes_nothing) ... ERROR
+test_latest_readings_order_and_values (test_beacon_store_ui.BeaconStoreUiTests.test_latest_readings_order_and_values) ... FAIL
+test_not_owner_is_keyerror (test_beacon_store_ui.BeaconStoreUiTests.test_not_owner_is_keyerror) ... ok
+test_request_model_modes (test_beacon_store_ui.BeaconStoreUiTests.test_request_model_modes) ... ok
+
+======================================================================
+ERROR: test_delete_all_requires_label (test_beacon_store_ui.BeaconStoreUiTests.test_delete_all_requires_label)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 201, in test_delete_all_requires_label
+    self.delete("sensor", mode="all", all=True, confirm_label="Wrong")
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 138, in delete
+    return self.store.delete_data(1, self.node, {"kind": kind, **kwargs})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/app/services/beacon_store.py", line 737, in delete_data
+    raise KeyError(node_id)
+KeyError: 'tc-abcdef'
+
+======================================================================
+ERROR: test_delete_checkin_keeps_latest (test_beacon_store_ui.BeaconStoreUiTests.test_delete_checkin_keeps_latest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 234, in test_delete_checkin_keeps_latest
+    result = self.delete("checkin", mode="all", all=True, confirm_label=self.label)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 138, in delete
+    return self.store.delete_data(1, self.node, {"kind": kind, **kwargs})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/app/services/beacon_store.py", line 737, in delete_data
+    raise KeyError(node_id)
+KeyError: 'tc-abcdef'
+
+======================================================================
+ERROR: test_delete_command_skips_busy (test_beacon_store_ui.BeaconStoreUiTests.test_delete_command_skips_busy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 244, in test_delete_command_skips_busy
+    result = self.delete("command", mode="all", all=True, confirm_label=self.label)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 138, in delete
+    return self.store.delete_data(1, self.node, {"kind": kind, **kwargs})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/app/services/beacon_store.py", line 737, in delete_data
+    raise KeyError(node_id)
+KeyError: 'tc-abcdef'
+
+======================================================================
+ERROR: test_delete_image_path_escape_blocked (test_beacon_store_ui.BeaconStoreUiTests.test_delete_image_path_escape_blocked)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 229, in test_delete_image_path_escape_blocked
+    result = self.delete("image", mode="ids", ids=["beacon-command-205"])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 138, in delete
+    return self.store.delete_data(1, self.node, {"kind": kind, **kwargs})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/app/services/beacon_store.py", line 737, in delete_data
+    raise KeyError(node_id)
+KeyError: 'tc-abcdef'
+
+======================================================================
+ERROR: test_delete_image_removes_file_and_row (test_beacon_store_ui.BeaconStoreUiTests.test_delete_image_removes_file_and_row)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 207, in test_delete_image_removes_file_and_row
+    result = self.delete("image", mode="ids", ids=["beacon-command-201"])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 138, in delete
+    return self.store.delete_data(1, self.node, {"kind": kind, **kwargs})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/app/services/beacon_store.py", line 737, in delete_data
+    raise KeyError(node_id)
+KeyError: 'tc-abcdef'
+
+======================================================================
+ERROR: test_delete_sensor_before_scoped (test_beacon_store_ui.BeaconStoreUiTests.test_delete_sensor_before_scoped)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 173, in test_delete_sensor_before_scoped
+    result = self.delete("sensor", mode="before",
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 138, in delete
+    return self.store.delete_data(1, self.node, {"kind": kind, **kwargs})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/app/services/beacon_store.py", line 737, in delete_data
+    raise KeyError(node_id)
+KeyError: 'tc-abcdef'
+
+======================================================================
+ERROR: test_delete_sensor_ids (test_beacon_store_ui.BeaconStoreUiTests.test_delete_sensor_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 161, in test_delete_sensor_ids
+    result = self.delete("sensor", mode="ids", ids=self.readings["temp"][:3])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 138, in delete
+    return self.store.delete_data(1, self.node, {"kind": kind, **kwargs})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/app/services/beacon_store.py", line 737, in delete_data
+    raise KeyError(node_id)
+KeyError: 'tc-abcdef'
+
+======================================================================
+ERROR: test_delete_sensor_ids_foreign_ignored (test_beacon_store_ui.BeaconStoreUiTests.test_delete_sensor_ids_foreign_ignored)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 167, in test_delete_sensor_ids_foreign_ignored
+    result = self.delete("sensor", mode="ids",
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 138, in delete
+    return self.store.delete_data(1, self.node, {"kind": kind, **kwargs})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/app/services/beacon_store.py", line 737, in delete_data
+    raise KeyError(node_id)
+KeyError: 'tc-abcdef'
+
+======================================================================
+ERROR: test_detail_has_ids_and_counts (test_beacon_store_ui.BeaconStoreUiTests.test_detail_has_ids_and_counts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 152, in test_detail_has_ids_and_counts
+    detail = self.store.detail(1, self.node)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/app/services/beacon_store.py", line 510, in detail
+    raise KeyError(node_id)
+KeyError: 'tc-abcdef'
+
+======================================================================
+ERROR: test_dry_run_writes_nothing (test_beacon_store_ui.BeaconStoreUiTests.test_dry_run_writes_nothing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 186, in test_dry_run_writes_nothing
+    before = {table: self.count(table) for table in tables}
+                     ^^^^^^^^^^^^^^^^^
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 133, in count
+    return db.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: beacon_data_deletions
+
+======================================================================
+FAIL: test_latest_readings_order_and_values (test_beacon_store_ui.BeaconStoreUiTests.test_latest_readings_order_and_values)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/nano/mirgam_mcp/services/api/tests/test_beacon_store_ui.py", line 146, in test_latest_readings_order_and_values
+    self.assertEqual([r["sensor_type"] for r in rows], ["temperature", "humidity"])
+AssertionError: Lists differ: [] != ['temperature', 'humidity']
+
+Second list contains 2 additional elements.
+First extra element 0:
+'temperature'
+
+- []
++ ['temperature', 'humidity']
+
+----------------------------------------------------------------------
+Ran 14 tests in 2.117s
+
+FAILED (failures=1, errors=10)

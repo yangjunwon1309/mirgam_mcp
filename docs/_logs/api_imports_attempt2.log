@@ -1,0 +1,25 @@
+[py_compile] command=timeout 30 python -m py_compile app/schemas.py app/main.py app/services/beacon_store.py tests/test_beacon_store_ui.py
+[py_compile] exit=0
+[import_contract] command=timeout 30 python -c import app.schemas, app.services.beacon_store, app.services.sqlite_store
+1
+[import_contract] exit=0
+[import_main] command=timeout 30 python -c import app.main
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/home/nano/mirgam_mcp/services/api/app/main.py", line 323, in <module>
+    @app.post("/dashboard/beacons/{node_id}/data/delete", dependencies=[Depends(require_session)])
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/.venvs/mirgam-api/lib/python3.12/site-packages/fastapi/routing.py", line 3284, in decorator
+    self.add_api_route(
+  File "/home/nano/.venvs/mirgam-api/lib/python3.12/site-packages/fastapi/routing.py", line 3193, in add_api_route
+    route = route_class(
+            ^^^^^^^^^^^^
+  File "/home/nano/.venvs/mirgam-api/lib/python3.12/site-packages/fastapi/routing.py", line 1287, in __init__
+    _populate_api_route_state(
+  File "/home/nano/.venvs/mirgam-api/lib/python3.12/site-packages/fastapi/routing.py", line 1198, in _populate_api_route_state
+    route.response_field = create_model_field(
+                           ^^^^^^^^^^^^^^^^^^^
+  File "/home/nano/.venvs/mirgam-api/lib/python3.12/site-packages/fastapi/utils.py", line 75, in create_model_field
+    raise fastapi.exceptions.FastAPIError(
+fastapi.exceptions.FastAPIError: Invalid args for response field! Hint: check that dict[str, object] | starlette.responses.JSONResponse is a valid Pydantic field type. If you are using a return type annotation that is not a valid Pydantic field (e.g. Union[Response, dict, None]) you can disable generating the response model from the type annotation with the path operation decorator parameter response_model=None. Read more: https://fastapi.tiangolo.com/tutorial/response-model/
+[import_main] exit=1 (allowed to fail only for documented settings/external-client initialization)
