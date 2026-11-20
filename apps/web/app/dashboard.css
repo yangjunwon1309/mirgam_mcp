@@ -23,7 +23,7 @@ html,body{height:100%;overflow:hidden}
 .thread i{flex:0 0 auto}
 .chat{height:100%;min-height:0;overflow:hidden}
 .messages{min-height:0;overscroll-behavior:contain;scrollbar-gutter:stable}
-.farm-dashboard{height:100%;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+.farm-dashboard{container-type:inline-size;container-name:dash;height:100%;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
 .resize-handle{position:relative;z-index:5;display:grid;place-items:center;cursor:col-resize;touch-action:none;background:#f0f0e7;outline:none}
 .resize-handle:after{content:"";width:5px;height:100%;border-radius:4px;background:#e67c2d;box-shadow:0 0 0 1px #9b4e21}
 .resize-handle:hover:after,.resize-handle:focus-visible:after{width:8px;background:#f39443;box-shadow:0 0 0 2px #9b4e21}

@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { FormEvent, PointerEvent as ReactPointerEvent } from "react";
-import BeaconDashboard from "./BeaconDashboard";
 import SavedFarmMap from "./SavedFarmMap";
+import { useBeaconFleet } from "./beacon/BeaconFleetProvider";
 
 type GeoPoint = [number, number];
 type Geometry = { type: string; coordinates: unknown };
@@ -14,14 +14,10 @@ type FarmRoute = { id: string; boundary_id: string; label: string | null; geojso
 type Farm = { id: string; name: string; address_input: string | null; pnu: string | null; latest_boundary: Boundary | null; routes: FarmRoute[] };
 type SensorOption = { sensor_id: string; display_name: string; sensor_type: string };
 type CameraOption = { camera_id: string; display_name: string };
-type BeaconMapNode = { node_id: string; label: string; metadata?: { location?: { latitude?: number | null; longitude?: number | null } | null } };
 type ParcelFeature = { type: "Feature"; geometry: Geometry; properties?: Record<string, unknown>; pnu?: string };
 type FetchProtected = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
 type Props = {
   farmName: string;
-  view: "farm" | "beacon";
-  onViewChange: (view: "farm" | "beacon") => void;
-  onOpenData: (nodeId: string, sensorId?: string) => void;
   fetchProtected: FetchProtected;
   sensors: SensorOption[];
   cameras: CameraOption[];
@@ -90,8 +86,11 @@ function mapError(body: unknown, fallback: string) {
 
 export default function FarmGeographyPanel(props: Props) {
   const { farmName, fetchProtected } = props;
-  const [farms, setFarms] = useState<Farm[]>([]);
-  const [selectedFarmId, setSelectedFarmId] = useState<string | null>(null);
+  const fleet = useBeaconFleet();
+  const farms = fleet.farms as unknown as Farm[];
+  const selectedFarmId = fleet.farmId;
+  const setSelectedFarmId = fleet.setFarmId;
+  const reloadFarms = fleet.reloadFarms;
   const [isCreatingFarm, setIsCreatingFarm] = useState(false);
   const [farmDraftName, setFarmDraftName] = useState(farmName);
   const [address, setAddress] = useState("");
@@ -112,41 +111,22 @@ export default function FarmGeographyPanel(props: Props) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [tileError, setTileError] = useState(false);
-  const [beacons, setBeacons] = useState<BeaconMapNode[]>([]);
-  const [beaconPlacementNodeId, setBeaconPlacementNodeId] = useState<string | null>(null);
-  const [pickedBeaconLocation, setPickedBeaconLocation] = useState<{ nodeId: string; point: GeoPoint; nonce: number } | null>(null);
-  const [selectedMapBeaconId, setSelectedMapBeaconId] = useState<string | null>(null);
   const mapRef = useRef<HTMLDivElement | null>(null);
   const savedMapSectionRef = useRef<HTMLDivElement | null>(null);
-  const beaconDashboardSectionRef = useRef<HTMLDivElement | null>(null);
   const pointerRef = useRef<{ x: number; y: number; moved: boolean; world: GeoPoint | null } | null>(null);
   const vertexDragRef = useRef<{ kind: "boundary" | "route"; index: number } | null>(null);
   const lastGeocodedFarmRef = useRef<string | null>(null);
-  const isCreatingFarmRef = useRef(false);
 
   const selectedFarm = farms.find((farm) => farm.id === selectedFarmId) ?? null;
   const boundary = selectedFarm?.latest_boundary ?? null;
 
-  const receiveBeaconNodes = useCallback((_nodes: BeaconMapNode[]) => {}, []);
-  const receiveBeaconLocation = useCallback((nodeId: string, point: GeoPoint) => {
-    setPickedBeaconLocation({ nodeId, point, nonce: Date.now() });
-    setBeaconPlacementNodeId(null);
-    props.onViewChange("beacon");
-  }, [props.onViewChange]);
-  const consumeBeaconSelection = useCallback(() => {
-    setPickedBeaconLocation(null);
-    setSelectedMapBeaconId(null);
-  }, []);
-  const beginBeaconPlacement = useCallback((nodeId: string) => {
-    setBeaconPlacementNodeId(nodeId);
-    props.onViewChange("farm");
-    window.requestAnimationFrame(() => savedMapSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }));
-  }, [props.onViewChange]);
-  const selectBeaconOnMap = useCallback((nodeId: string) => {
-    setSelectedMapBeaconId(nodeId);
-    window.requestAnimationFrame(() => beaconDashboardSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
-  }, []);
-  const cancelBeaconPlacement = useCallback(() => { setBeaconPlacementNodeId(null); }, []);
+  const beacons = fleet.nodes.map((node) => ({ node_id: node.node_id, label: node.label, metadata: { location: node.metadata?.location } }));
+  const beaconPlacementNodeId = fleet.placement?.nodeId ?? null;
+  const receiveBeaconLocation = useCallback((nodeId: string, point: GeoPoint) => fleet.completePlacement(nodeId, point), [fleet.completePlacement]);
+  const selectBeaconOnMap = useCallback((nodeId: string) => fleet.openData(nodeId), [fleet.openData]);
+  useEffect(() => {
+    if (fleet.placement) window.requestAnimationFrame(() => savedMapSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }));
+  }, [fleet.placement?.nodeId]);
 
   const setMapMode = useCallback((nextMode: "pan" | "boundary" | "route" | "parcel") => {
     pointerRef.current = null;
@@ -154,41 +134,9 @@ export default function FarmGeographyPanel(props: Props) {
     setMode(nextMode);
   }, []);
 
-  const loadFarms = useCallback(async () => {
-    try {
-      const response = await fetchProtected(`${API}/farms`);
-      if (!response.ok) throw new Error("농장 목록을 불러오지 못했습니다.");
-      const data = (await response.json()) as Farm[];
-      setFarms(data);
-      setSelectedFarmId((current) => current && data.some((farm) => farm.id === current)
-        ? current : isCreatingFarmRef.current ? null : data[0]?.id ?? null);
-      setError(null);
-    } catch (reason) {
-      setError(reason instanceof Error ? reason.message : "농장 목록을 불러오지 못했습니다.");
-    }
-  }, [fetchProtected]);
-
-  useEffect(() => { void loadFarms(); }, [loadFarms]);
   useEffect(() => {
-    if (!selectedFarmId) { setBeacons([]); return; }
-    let active = true;
-    const refresh = async () => {
-      try {
-        const response = await fetchProtected("/api/backend/dashboard/beacons", { cache: "no-store" });
-        if (!response.ok) return;
-        const data = await response.json();
-        if (active) setBeacons((data.nodes ?? []).filter((node: { registered: boolean; farm_id: string | null }) => node.registered && node.farm_id === selectedFarmId));
-      } catch { /* Keep last markers visible during a temporary connection failure. */ }
-    };
-    void refresh();
-    const timer = window.setInterval(() => void refresh(), 10000);
-    return () => { active = false; window.clearInterval(timer); };
-  }, [fetchProtected, selectedFarmId, props.view]);
-
-  useEffect(() => {
-    setBeaconPlacementNodeId(null);
-    setPickedBeaconLocation(null);
-    setSelectedMapBeaconId(null);
+    if (!selectedFarmId) return;
+    setBoundaryDraft([]); setRouteDraft([]);
   }, [selectedFarmId]);
 
   useEffect(() => {
@@ -265,7 +213,7 @@ export default function FarmGeographyPanel(props: Props) {
         if (!response.ok) return;
         const job = await response.json();
         if (!active) return;
-        await loadFarms();
+        await reloadFarms();
         if (job.status === "done" || job.status === "failed") {
           if (timer !== undefined) window.clearInterval(timer);
           if (job.status === "failed") setError(String(job.error || "위성영상 크롭에 실패했습니다."));
@@ -275,7 +223,7 @@ export default function FarmGeographyPanel(props: Props) {
     timer = window.setInterval(() => { void refresh(); }, 2000);
     void refresh();
     return () => { active = false; if (timer !== undefined) window.clearInterval(timer); };
-  }, [boundary?.imagery?.job_id, boundary?.imagery?.status, fetchProtected, loadFarms]);
+  }, [boundary?.imagery?.job_id, boundary?.imagery?.status, fetchProtected, reloadFarms]);
 
   const tiles = useMemo(() => {
     const centerWorld = worldPixel(center, zoom);
@@ -336,8 +284,8 @@ export default function FarmGeographyPanel(props: Props) {
       const data = await response.json();
       if (!response.ok) throw new Error(mapError(data, "농장을 등록하지 못했습니다."));
       if (geocoded) lastGeocodedFarmRef.current = data.id;
-      isCreatingFarmRef.current = false; setIsCreatingFarm(false);
-      await loadFarms();
+      setIsCreatingFarm(false);
+      await reloadFarms();
       setSelectedFarmId(data.id);
       if (geocoded) setCenter(geocoded);
     } catch (reason) {
@@ -347,14 +295,14 @@ export default function FarmGeographyPanel(props: Props) {
 
   function selectFarm(id: string | null) {
     setMapMode("pan"); setBoundaryDraft([]); setRouteDraft([]);
-    isCreatingFarmRef.current = !id; setIsCreatingFarm(!id); setSelectedFarmId(id);
+    setIsCreatingFarm(!id); setSelectedFarmId(id);
     setGeocoded(null); setParcel(null); setPnu(farms.find((farm) => farm.id === id)?.pnu ?? null);
     lastGeocodedFarmRef.current = null;
     if (!id) { setFarmDraftName(farmName); setAddress(""); setSetupOpen(true); }
   }
 
   function startNewFarm() {
-    isCreatingFarmRef.current = true; setIsCreatingFarm(true); setSelectedFarmId(null);
+    setIsCreatingFarm(true); setSelectedFarmId(null);
     setFarmDraftName(farmName); setAddress(""); setPnu(null); setGeocoded(null); setParcel(null);
     setBoundaryDraft([]); setRouteDraft([]); setMapMode("pan"); setError(null); setSetupOpen(true);
   }
@@ -370,7 +318,7 @@ export default function FarmGeographyPanel(props: Props) {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(mapError(data, "농장 정보를 저장하지 못했습니다."));
-      await loadFarms();
+      await reloadFarms();
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : "농장 정보를 저장하지 못했습니다.");
     } finally { setBusy(false); }
@@ -405,7 +353,7 @@ export default function FarmGeographyPanel(props: Props) {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(mapError(data, "농장 경계를 저장하지 못했습니다."));
-      setBoundaryDraft([]); setMapMode("pan"); await loadFarms();
+      setBoundaryDraft([]); setMapMode("pan"); await reloadFarms();
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : "농장 경계를 저장하지 못했습니다.");
     } finally { setBusy(false); }
@@ -422,7 +370,7 @@ export default function FarmGeographyPanel(props: Props) {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(mapError(data, "작업 경로를 저장하지 못했습니다."));
-      setRouteDraft([]); setRouteLabel(""); setMapMode("pan"); await loadFarms();
+      setRouteDraft([]); setRouteLabel(""); setMapMode("pan"); await reloadFarms();
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : "작업 경로를 저장하지 못했습니다.");
     } finally { setBusy(false); }
@@ -431,7 +379,7 @@ export default function FarmGeographyPanel(props: Props) {
   async function deleteRoute(routeId: string) {
     if (!selectedFarm) return;
     const response = await fetchProtected(`${API}/routes/${encodeURIComponent(routeId)}`, { method: "DELETE" });
-    if (response.ok) await loadFarms();
+    if (response.ok) await reloadFarms();
     else setError("경로를 삭제하지 못했습니다.");
   }
 
@@ -443,7 +391,7 @@ export default function FarmGeographyPanel(props: Props) {
       const response = await fetchProtected(`${API}/boundaries/${encodeURIComponent(boundary.id)}/tiles/rebuild?force=true`, { method: "POST" });
       const data = await response.json();
       if (!response.ok) throw new Error(mapError(data, "배율별 지도 이미지 작업을 시작하지 못했습니다."));
-      await loadFarms();
+      await reloadFarms();
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : "배율별 지도 이미지 작업을 시작하지 못했습니다.");
     } finally { setBusy(false); }
@@ -542,7 +490,7 @@ export default function FarmGeographyPanel(props: Props) {
   const draftLine = mode === "route" ? routeDraft : [];
 
   return <>
-  <section className="plant-view farm-map-panel" hidden={props.view !== "farm"}>
+  <section className="plant-view farm-map-panel">
     <div className="farm-map-heading"><div><span className="farm-map-kicker">FIELD MAP</span><h2>농장 지도</h2><p>저장된 위성 타일을 이동하고 배율을 바꿔 농장 경계를 살펴봅니다.</p></div>
       <div className="farm-map-counts"><span>{boundary ? `경계 ${boundary.area_m2.toLocaleString("ko-KR")}m²` : "경계 미등록"}</span><span>경로 {selectedFarm?.routes.length ?? 0}</span></div>
     </div>
@@ -554,7 +502,7 @@ export default function FarmGeographyPanel(props: Props) {
       <button type="button" className="farm-map-primary" onClick={() => setSetupOpen(true)}>{selectedFarm ? "농장 설정 열기" : "농장 위치·경계 설정"}</button>
     </div>
 
-    <div ref={savedMapSectionRef} className="farm-saved-map-section"><SavedFarmMap farmName={selectedFarm?.name ?? farmName} boundary={boundary} routes={selectedFarm?.routes ?? []} configuredMinZoom={minZoom} configuredMaxZoom={maxZoom} onOpenSetup={() => setSetupOpen(true)} onPrepareTiles={() => void prepareBoundaryTiles()} beacons={beacons.map((node) => ({ node_id: node.node_id, label: node.label, location: node.metadata?.location }))} placementNodeId={beaconPlacementNodeId} onBeaconLocationPicked={receiveBeaconLocation} onCancelPlacement={() => { cancelBeaconPlacement(); props.onViewChange("beacon"); }} onSelectBeacon={selectBeaconOnMap} /></div>
+    <div ref={savedMapSectionRef} className="farm-saved-map-section"><SavedFarmMap farmName={selectedFarm?.name ?? farmName} boundary={boundary} routes={selectedFarm?.routes ?? []} configuredMinZoom={minZoom} configuredMaxZoom={maxZoom} onOpenSetup={() => setSetupOpen(true)} onPrepareTiles={() => void prepareBoundaryTiles()} beacons={beacons.map((node) => ({ node_id: node.node_id, label: node.label, location: node.metadata?.location }))} placementNodeId={beaconPlacementNodeId} onBeaconLocationPicked={receiveBeaconLocation} onCancelPlacement={fleet.cancelPlacement} onSelectBeacon={selectBeaconOnMap} /></div>
 
 
 
@@ -642,6 +590,6 @@ export default function FarmGeographyPanel(props: Props) {
     <div className="farm-map-devices"><div><strong>기존 센서·카메라</strong><small>ESP32 Beacon은 지도에 표시되며 Beacon 관리 탭에서 설정할 수 있습니다.</small></div><div className="farm-device-picks">{props.sensors.map((sensor) => <button key={sensor.sensor_id} type="button" className={props.dashboardMode === "sensor" && props.selectedSensorId === sensor.sensor_id ? "active" : ""} onClick={() => props.onSelectSensor(sensor.sensor_id)}>◉ {sensor.display_name}</button>)}{props.cameras.map((camera) => <button key={camera.camera_id} type="button" className={props.dashboardMode === "camera" && props.selectedCameraId === camera.camera_id ? "active camera" : "camera"} onClick={() => props.onSelectCamera(camera.camera_id)}>▣ {camera.display_name}</button>)}{!props.sensors.length && !props.cameras.length && <small>등록된 센서·카메라가 없습니다.</small>}</div></div>
     {error && !setupOpen && <p className="farm-map-error" role="alert">{error}</p>}
   </section>
-  <div ref={beaconDashboardSectionRef} className="farm-beacon-dashboard-section" hidden={props.view !== "beacon"}><div className="beacon-farm-picker"><label htmlFor="beacon-farm">농장 선택</label><select id="beacon-farm" value={selectedFarmId ?? ""} onChange={(event) => selectFarm(event.target.value || null)}><option value="">농장을 선택하세요</option>{farms.map((farm) => <option key={farm.id} value={farm.id}>{farm.name}</option>)}</select></div><BeaconDashboard onOpenData={props.onOpenData} farmId={selectedFarm?.id ?? null} farmName={selectedFarm?.name ?? farmName} hasFarmBoundary={Boolean(boundary)} fetchProtected={fetchProtected} placementNodeId={beaconPlacementNodeId} pickedLocation={pickedBeaconLocation} selectedMapBeaconId={selectedMapBeaconId} onNodesChange={receiveBeaconNodes} onPlacementStart={beginBeaconPlacement} onPlacementCancel={cancelBeaconPlacement} onMapBeaconConsumed={consumeBeaconSelection} /></div>
+
   </>;
 }

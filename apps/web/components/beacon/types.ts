@@ -28,3 +28,5 @@ export type DeleteKind = "sensor" | "image" | "checkin" | "command";
 export type DeleteRequest = { kind: DeleteKind; ids?: string[]; sensor_ids?: string[]; before?: string; all?: boolean; confirm_label?: string; dry_run?: boolean };
 export type DeleteResponse = { kind: DeleteKind; mode: "ids" | "before" | "all"; dry_run: boolean; matched: number; deleted: number; skipped_busy: number; skipped_current: number; freed_bytes: number; file_errors: number; range: { from: string; to: string } | null };
 export type ConfigureBody = { farm_id: string | null; metadata: BeaconMetadata; interval_s: number; requested_data: ("sensor" | "image")[]; attach: boolean };
+
+export type AddDraft = { mode: "add" | "edit"; step: 1 | 2 | 3; nodeId: string | null; label: string; intervalS: number; sensor: boolean; image: boolean; location: Location; metadata: BeaconMetadata };

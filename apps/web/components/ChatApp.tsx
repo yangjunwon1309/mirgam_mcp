@@ -6,7 +6,11 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import JejuWeatherDashboard from "./JejuWeatherDashboard";
 import FarmGeographyPanel from "./FarmGeographyPanel";
-import DataServerDashboard from "./DataServerDashboard";
+import { BeaconFleetProvider } from "./beacon/BeaconFleetProvider";
+import { DashboardTabs } from "./beacon/shell/DashboardTabs";
+import { ContextBar } from "./beacon/shell/ContextBar";
+import { ToastProvider } from "./beacon/ui/Toasts";
+import { EmptyState } from "./beacon/ui/EmptyState";
 
 type ProgressEvent =
   | { type: "status"; phase: string; message: string }
@@ -101,7 +105,6 @@ export default function ChatApp() {
   const [dashboardError, setDashboardError] = useState<string | null>(null);
   const [chatPercent, setChatPercent] = useState(50);
   const [dashboardCollapsed, setDashboardCollapsed] = useState(false);
-  const [dataSelection, setDataSelection] = useState<{ nodeId: string; sensorId?: string } | null>(null);
   const [dashboardTab, setDashboardTab] = useState<"farm" | "jeju-weather" | "data-server" | "beacon">("farm");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const workspaceRef = useRef<HTMLElement | null>(null);
@@ -486,23 +489,23 @@ export default function ChatApp() {
 
       {!dashboardCollapsed && <section className="farm-dashboard" aria-label="Smart farm dashboard">
         <header className="dashboard-header"><div><p className="eyebrow">{dashboardTab === "farm" ? "FIELD OVERVIEW" : dashboardTab === "jeju-weather" ? "JEJU WEATHER" : dashboardTab === "beacon" ? "BEACON DEVICES" : "DATA SERVER"}</p><h1>{dashboardTab === "farm" ? `${authUser.farm_name} · 재배 현황` : dashboardTab === "jeju-weather" ? "제주 기상 정보" : dashboardTab === "beacon" ? "Beacon 관리" : "농장 데이터 서버"}</h1></div><button className="dashboard-collapse-button" onClick={() => setDashboardCollapsed(true)} aria-label="대시보드 접기">접기 ⟶</button></header>
-        <nav className="dashboard-folder-tabs" role="tablist" aria-label="대시보드 화면 선택">{([["farm", "농장 현황"], ["jeju-weather", "제주 날씨"], ["data-server", "데이터 서버"], ["beacon", "Beacon 관리"]] as const).map(([key, label]) => <button type="button" role="tab" aria-selected={dashboardTab === key} key={key} className={dashboardTab === key ? "active" : ""} onClick={() => { if (key === "data-server") setDataSelection(null); setDashboardTab(key); }}><span aria-hidden="true">▰</span>{label}</button>)}</nav>
-        {dashboardTab === "jeju-weather" ? <JejuWeatherDashboard fetchProtected={fetchProtected} /> : dashboardTab === "data-server" ? <DataServerDashboard farmName={authUser.farm_name} selectedNodeId={dataSelection?.nodeId ?? null} selectedSensorId={dataSelection?.sensorId ?? null} fetchProtected={fetchProtected} /> : <>
-        <FarmGeographyPanel
-          view={dashboardTab === "beacon" ? "beacon" : "farm"}
-          onViewChange={setDashboardTab}
-          onOpenData={(nodeId, sensorId) => { setDataSelection({ nodeId, sensorId }); setDashboardTab("data-server"); }}
-          farmName={authUser.farm_name}
-          fetchProtected={fetchProtected}
-          sensors={sensors.map((sensor) => ({ sensor_id: sensor.sensor_id, display_name: displayFarmText(sensor.display_name, authUser.farm_name), sensor_type: sensor.sensor_type }))}
-          cameras={cameras.map((camera) => ({ camera_id: camera.camera_id, display_name: displayFarmText(cameraMarkerLabel(camera.display_name), authUser.farm_name) }))}
-          selectedSensorId={selectedSensorId}
-          selectedCameraId={selectedCameraId}
-          dashboardMode={dashboardMode}
-          onSelectSensor={(sensorId) => { setSelectedSensorId(sensorId); setDashboardMode("sensor"); }}
-          onSelectCamera={(cameraId) => { setSelectedCameraId(cameraId); setDashboardMode("camera"); }}
-        />
-        {dashboardTab === "farm" && <section className="sensor-panel"><div className="section-heading"><div><h2>{dashboardMode === "sensor" ? displayFarmText(currentSensorDetail?.device.display_name ?? "센서 데이터", authUser.farm_name) : displayFarmText(currentCameraDetail?.camera.display_name ?? "카메라 이미지", authUser.farm_name)}</h2><p>선택한 위치의 최신 센서값 또는 카메라 기록</p></div><button className="refresh-data" onClick={() => { if (dashboardMode === "sensor" && selectedSensorId) void loadSensorDetail(selectedSensorId); if (dashboardMode === "camera" && selectedCameraId) void loadCameraDetail(selectedCameraId); }}>새로고침</button></div>
+        <ToastProvider>
+          <BeaconFleetProvider fetchProtected={fetchProtected} activeTab={dashboardTab} onNavigate={setDashboardTab}>
+            <div className="bx-root"><DashboardTabs value={dashboardTab} onChange={setDashboardTab} /></div>
+            {dashboardTab === "jeju-weather" && <JejuWeatherDashboard fetchProtected={fetchProtected} />}
+            {dashboardTab === "farm" && <>
+              <FarmGeographyPanel
+                farmName={authUser.farm_name}
+                fetchProtected={fetchProtected}
+                sensors={sensors.map((sensor) => ({ sensor_id: sensor.sensor_id, display_name: displayFarmText(sensor.display_name, authUser.farm_name), sensor_type: sensor.sensor_type }))}
+                cameras={cameras.map((camera) => ({ camera_id: camera.camera_id, display_name: displayFarmText(cameraMarkerLabel(camera.display_name), authUser.farm_name) }))}
+                selectedSensorId={selectedSensorId}
+                selectedCameraId={selectedCameraId}
+                dashboardMode={dashboardMode}
+                onSelectSensor={(sensorId) => { setSelectedSensorId(sensorId); setDashboardMode("sensor"); }}
+                onSelectCamera={(cameraId) => { setSelectedCameraId(cameraId); setDashboardMode("camera"); }}
+              />
+                      {dashboardTab === "farm" && <section className="sensor-panel"><div className="section-heading"><div><h2>{dashboardMode === "sensor" ? displayFarmText(currentSensorDetail?.device.display_name ?? "센서 데이터", authUser.farm_name) : displayFarmText(currentCameraDetail?.camera.display_name ?? "카메라 이미지", authUser.farm_name)}</h2><p>선택한 위치의 최신 센서값 또는 카메라 기록</p></div><button className="refresh-data" onClick={() => { if (dashboardMode === "sensor" && selectedSensorId) void loadSensorDetail(selectedSensorId); if (dashboardMode === "camera" && selectedCameraId) void loadCameraDetail(selectedCameraId); }}>새로고침</button></div>
           {dashboardMode === "sensor" && currentSensorDetail && <div className="sensor-detail">
             <div className="sensor-reading"><span>{sensorIcon(currentSensorDetail.device.sensor_type)}</span><div><small>{latestReading?.unit ?? currentSensorDetail.device.unit} · {displayFarmText(currentSensorDetail.device.zone_id, authUser.farm_name) || "미지정"}</small><strong>{latestReading ? latestReading.value.toFixed(1) : "—"}</strong><p>{latestRollup ? `${latestRollup.local_date} 평균 ${latestRollup.avg_value.toFixed(1)} · ${latestRollup.sample_count}개 측정값` : "기록된 raw 값이 없습니다."}</p></div></div>
             <div className="sensor-graph" aria-label="최근 SQLite raw 추이"><div className="graph-labels"><span>{currentSensorDetail.readings.length ? "최근 raw 추이" : "마지막 저장값"}</span><span>{latestReading ? timestamp(latestReading.recorded_at) : "수집 대기"}</span></div><svg viewBox="0 0 320 95" preserveAspectRatio="none">{chart && <polyline points={chart} fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />}</svg></div>
@@ -518,7 +521,11 @@ export default function ChatApp() {
           {!dashboardError && !sensors.length && !cameras.length && <p className="dashboard-empty">등록된 장치가 없습니다. demo seed를 실행하면 이 영역에 센서와 카메라가 표시됩니다.</p>}
           {dashboardError && <p className="dashboard-empty">{dashboardError}</p>}
         </section>}
-        </>}
+            </>}
+            {dashboardTab === "beacon" && <div className="bx-root"><ContextBar onNavigate={setDashboardTab} /><EmptyState icon="beacon" title="준비 중" body="Beacon 화면을 불러오고 있습니다." /></div>}
+            {dashboardTab === "data-server" && <div className="bx-root"><ContextBar onNavigate={setDashboardTab} /><EmptyState icon="db" title="준비 중" body="데이터 서버 화면을 불러오고 있습니다." /></div>}
+          </BeaconFleetProvider>
+        </ToastProvider>
       </section>}
     </main>
   );
