@@ -13,6 +13,8 @@ export function SystemPopover({ anchor, open, onClose }: { anchor: RefObject<HTM
   const [usbReachable, setUsbReachable] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
   const [resetting, setResetting] = useState<string | null>(null);
+  const nodesRef = useRef(fleet.allNodes);
+  nodesRef.current = fleet.allNodes;
   useEffect(() => {
     const pop = ref.current;
     const button = anchor.current;
@@ -39,10 +41,9 @@ export function SystemPopover({ anchor, open, onClose }: { anchor: RefObject<HTM
       const deadline = Date.now() + 45000;
       let confirmed = false;
       while (Date.now() < deadline) {
-        await new Promise((resolve) => window.setTimeout(resolve, 1800));
-        const result = await fleet.api.listNodes();
         fleet.refreshNodes();
-        confirmed = result.nodes.some((node) => Boolean(node.last_seen && node.last_seen > (before.get(node.node_id) ?? 0) + 0.5));
+        await new Promise((resolve) => window.setTimeout(resolve, 1800));
+        confirmed = nodesRef.current.some((node) => Boolean(node.last_seen && node.last_seen > (before.get(node.node_id) ?? 0) + 0.5));
         if (confirmed) break;
       }
       toasts.push({ title: confirmed ? "리셋 후 새 체크인을 확인했습니다." : "리셋 신호를 보냈지만 새 체크인은 아직 없습니다.", body: confirmed ? "USB 포트와 장치의 연결 관계는 확인되지 않았습니다." : "Wi-Fi 설정과 서버 주소를 확인하세요.", tone: confirmed ? "ok" : "wait" });

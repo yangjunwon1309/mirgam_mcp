@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { createBeaconApi } from "./api";
+import { readUi, writeUi } from "./session";
 import { BeaconApiContext } from "./api-context";
 import type { AddDraft, BeaconNode, Farm, Location, NodesResponse } from "./types";
 import { usePolling } from "./hooks/usePolling";
@@ -46,7 +47,7 @@ export function BeaconFleetProvider({ fetchProtected, activeTab, onNavigate, chi
   const farmId = farmIdState;
   const setFarmId = useCallback((id: string | null) => {
     setFarmIdState(id);
-    try { sessionStorage.setItem("mirgam.beacon.ui", JSON.stringify({ farmId: id })); } catch { /* Storage may be unavailable. */ }
+    writeUi({ farmId: id });
   }, []);
   const reloadFarms = useCallback(async () => {
     const loaded = await api.listFarms();
@@ -55,7 +56,7 @@ export function BeaconFleetProvider({ fetchProtected, activeTab, onNavigate, chi
       if (!initialFarmLoaded.current) {
         initialFarmLoaded.current = true;
         let stored: string | null = null;
-        try { stored = (JSON.parse(sessionStorage.getItem("mirgam.beacon.ui") ?? "{}") as { farmId?: string }).farmId ?? null; } catch { stored = null; }
+        const value = readUi().farmId; stored = typeof value === "string" ? value : null;
         if (stored && loaded.some((farm) => farm.id === stored)) return stored;
         return loaded[0]?.id ?? null;
       }
@@ -65,7 +66,7 @@ export function BeaconFleetProvider({ fetchProtected, activeTab, onNavigate, chi
   useEffect(() => { void reloadFarms().catch((cause: unknown) => setError(cause instanceof Error ? cause.message : "농장 목록을 불러오지 못했습니다.")); }, [reloadFarms]);
   useEffect(() => {
     if (initialFarmLoaded.current) {
-      try { sessionStorage.setItem("mirgam.beacon.ui", JSON.stringify({ farmId })); } catch { /* Storage may be unavailable. */ }
+      writeUi({ farmId });
     }
   }, [farmId]);
   const farm = farms.find((item) => item.id === farmId) ?? null;

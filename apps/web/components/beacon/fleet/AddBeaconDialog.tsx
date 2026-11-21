@@ -17,7 +17,7 @@ export function AddBeaconDialog() {
   const [customText, setCustomText] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
-  const available = useMemo(() => draft?.mode === "edit" ? [] : fleet.allNodes.filter((node) => !node.registered || node.farm_id === fleet.farmId), [draft?.mode, fleet.allNodes, fleet.farmId]);
+  const available = useMemo(() => draft?.mode === "edit" ? [] : fleet.discoverable, [draft?.mode, fleet.discoverable]);
   useEffect(() => {
     if (draft) {
       const isPreset = presets.includes(draft.intervalS);
@@ -67,7 +67,7 @@ export function AddBeaconDialog() {
       {draft.step === 3 ? <>
         <p>{locationValid ? `선택된 위치: ${draft.location.latitude?.toFixed(6)}, ${draft.location.longitude?.toFixed(6)}` : "지도에서 설치 위치를 선택하세요."}</p>
         <Button variant="secondary" icon="pin" disabled={!fleet.hasBoundary || !draft.nodeId} onClick={fleet.beginPlacement}>지도에서 위치 {locationValid ? "변경" : "선택"}</Button>
-        {!fleet.hasBoundary ? <p className="bx-hint">먼저 농장 경계를 등록하세요. 지도 위치 선택은 경계가 있어야 사용할 수 있습니다.</p> : null}
+        {!fleet.hasBoundary ? <><p className="bx-hint">먼저 농장 경계를 등록하세요. 지도 위치 선택은 경계가 있어야 사용할 수 있습니다.</p><Button variant="ghost" onClick={() => fleet.navigate("farm")}>농장 지도로 이동</Button></> : null}
       </> : null}
       {error ? <p role="alert" className="bx-form-error">{error}</p> : null}
     </div>

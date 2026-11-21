@@ -34,7 +34,7 @@ export function signalLevel(rssi: number | null): number {
 export function relTime(sec: number | null): string {
   if (sec === null || !Number.isFinite(sec) || sec < 45) return "방금";
   if (sec < 3600) return Math.floor(sec / 60) + "분 전";
-  if (sec < 86400) return Math.floor(sec / 3600) + "시간 전";
+  if (sec < 86400) return Math.floor(sec / 3600) + "시간 " + Math.floor((sec % 3600) / 60) + "분 전";
   return Math.floor(sec / 86400) + "일 전";
 }
 export function countdown(sec: number): string {

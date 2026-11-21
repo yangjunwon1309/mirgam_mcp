@@ -38,6 +38,7 @@ export function DeviceDialog() {
   const [confirmKind, setConfirmKind] = useState<"hibernate" | "detach" | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [resolution, setResolution] = useState("VGA");
+  useEffect(() => { setEnergy(null); setTab("status"); setOptimistic([]); setMenuOpen(false); }, [id]);
   const menuAnchor = useRef<HTMLButtonElement>(null);
   const detail = detailState.detail;
   const activeNode = detail?.node ?? node;
@@ -74,12 +75,12 @@ export function DeviceDialog() {
     setConfirmKind(null); fleet.closeDevice(); fleet.refreshNodes();
   }
   const menuItems = [
-    { label: "1분간 즉시 응답", icon: "zap" as const, onSelect: () => void fleet.api.action(id!, "session", { hold_s: 60 }).then(() => toasts.push({ title: "즉시 응답을 요청했습니다", body: "다음 체크인부터 적용됩니다.", tone: "ok" })).catch((e: unknown) => toasts.push({ title: "요청 실패", body: e instanceof Error ? e.message : undefined, tone: "error", durationMs: null })) },
-    { label: "10분간 자주 확인", icon: "clock" as const, onSelect: () => void fleet.api.action(id!, "watch", { minutes: 10 }).then(() => { toasts.push({ title: "자주 확인을 요청했습니다", body: "다음 체크인부터 적용됩니다.", tone: "ok" }); fleet.refreshNodes(); }).catch((e: unknown) => toasts.push({ title: "요청 실패", body: e instanceof Error ? e.message : undefined, tone: "error", durationMs: null })) },
+    { label: "1분간 즉시 응답", disabled: !canCommand, icon: "zap" as const, onSelect: () => void fleet.api.action(id!, "session", { hold_s: 60 }).then(() => toasts.push({ title: "즉시 응답을 요청했습니다", body: "다음 체크인부터 적용됩니다.", tone: "ok" })).catch((e: unknown) => toasts.push({ title: "요청 실패", body: e instanceof Error ? e.message : undefined, tone: "error", durationMs: null })) },
+    { label: "10분간 자주 확인", disabled: !canCommand, icon: "clock" as const, onSelect: () => void fleet.api.action(id!, "watch", { minutes: 10 }).then(() => { toasts.push({ title: "자주 확인을 요청했습니다", body: "다음 체크인부터 적용됩니다.", tone: "ok" }); fleet.refreshNodes(); }).catch((e: unknown) => toasts.push({ title: "요청 실패", body: e instanceof Error ? e.message : undefined, tone: "error", durationMs: null })) },
     "sep" as const,
     { label: "설정 편집", icon: "gear" as const, onSelect: () => { fleet.closeDevice(); fleet.openEdit(id!); } },
-    { label: "절전", icon: "moon" as const, danger: true, onSelect: () => setConfirmKind("hibernate") },
-    { label: "연결 해제", icon: "unlink" as const, danger: true, onSelect: () => setConfirmKind("detach") },
+    { label: "절전", disabled: !activeNode.registered, icon: "moon" as const, danger: true, onSelect: () => setConfirmKind("hibernate") },
+    { label: "연결 해제", disabled: !activeNode.registered, icon: "unlink" as const, danger: true, onSelect: () => setConfirmKind("detach") },
   ];
   return <>
     <Dialog open={open} onClose={fleet.closeDevice} size="lg" labelledBy="bx-device-title">
