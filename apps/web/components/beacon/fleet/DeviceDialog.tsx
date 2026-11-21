@@ -83,7 +83,7 @@ export function DeviceDialog() {
     { label: "연결 해제", disabled: !activeNode.registered, icon: "unlink" as const, danger: true, onSelect: () => setConfirmKind("detach") },
   ];
   return <>
-    <Dialog open={open} onClose={fleet.closeDevice} size="lg" labelledBy="bx-device-title">
+    <Dialog open={open} onClose={fleet.closeDevice} size="lg" className="bx-device-dialog" labelledBy="bx-device-title">
       <div className="bx-dialog-head bx-device-head">
         <span className="bx-device-mark"><Icon name="beacon" size={22} /></span><div className="bx-device-heading"><h2 id="bx-device-title">{activeNode.label}</h2><div><code>{activeNode.node_id}</code><button type="button" className="bx-copy-id" onClick={() => { void navigator.clipboard.writeText(activeNode.node_id).then(() => toasts.push({ title: "ID를 복사했습니다", tone: "ok" })).catch(() => toasts.push({ title: "클립보드에 복사하지 못했습니다", tone: "error" })); }}>ID 복사</button></div><small>{[activeNode.metadata.location?.site, activeNode.metadata.location?.zone, activeNode.metadata.location?.row].filter(Boolean).join(" · ") || "설치 위치 미지정"}</small></div>
         {status ? <Badge tone={status.tone} dot>{status.label}</Badge> : null}<button type="button" className="bx-btn bx-btn--icon" data-dialog-close aria-label="닫기" onClick={fleet.closeDevice}>×</button>

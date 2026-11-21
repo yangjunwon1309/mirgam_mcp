@@ -1,0 +1,403 @@
+PASS Docker 접근
+PASS 브랜치
+FAIL 작업 트리 (exit 1)
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.33kB done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 272B done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context:
+#4 transferring context: 2B done
+#4 DONE 0.2s
+
+#5 [1/5] FROM docker.io/library/python:3.12-slim
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 9.43MB 0.1s done
+#6 DONE 0.2s
+
+#7 [2/5] WORKDIR /app
+#7 CACHED
+
+#8 [3/5] COPY pyproject.toml ./
+#8 CACHED
+
+#9 [4/5] COPY app ./app
+#9 DONE 1.8s
+
+#10 [5/5] RUN pip install --no-cache-dir --timeout=120 --retries=5 .
+#10 4.024 Processing /app
+#10 4.030   Installing build dependencies: started
+#10 8.840   Installing build dependencies: finished with status 'done'
+#10 8.843   Getting requirements to build wheel: started
+#10 9.045   Getting requirements to build wheel: finished with status 'done'
+#10 9.049   Preparing metadata (pyproject.toml): started
+#10 10.06   Preparing metadata (pyproject.toml): finished with status 'done'
+#10 10.36 Collecting fastapi>=0.115 (from gemma-mcp-api==0.1.0)
+#10 10.46   Downloading fastapi-0.165.0-py3-none-any.whl.metadata (27 kB)
+#10 10.55 Collecting httpx>=0.27 (from gemma-mcp-api==0.1.0)
+#10 10.57   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#10 10.64 Collecting mcp<2.0,>=1.2 (from gemma-mcp-api==0.1.0)
+#10 10.66   Downloading mcp-1.30.0-py3-none-any.whl.metadata (9.3 kB)
+#10 10.86 Collecting openai>=1.0 (from gemma-mcp-api==0.1.0)
+#10 10.88   Downloading openai-3.57.0-py3-none-any.whl.metadata (45 kB)
+#10 10.95 Collecting pydantic-settings>=2.3 (from gemma-mcp-api==0.1.0)
+#10 10.97   Downloading pydantic_settings-2.16.3-py3-none-any.whl.metadata (4.0 kB)
+#10 11.17 Collecting pyproj>=3.6 (from gemma-mcp-api==0.1.0)
+#10 11.19   Downloading pyproj-3.8.0-cp312-cp312-manylinux_2_28_aarch64.whl.metadata (40 kB)
+#10 11.24 Collecting python-multipart>=0.0.9 (from gemma-mcp-api==0.1.0)
+#10 11.25   Downloading python_multipart-0.0.34-py3-none-any.whl.metadata (6.3 kB)
+#10 11.43 Collecting shapely>=2.0 (from gemma-mcp-api==0.1.0)
+#10 11.46   Downloading shapely-2.2.0-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl.metadata (6.7 kB)
+#10 11.66 Collecting sqlalchemy-sqlitecloud==0.1.2 (from gemma-mcp-api==0.1.0)
+#10 11.68   Downloading sqlalchemy_sqlitecloud-0.1.2-py3-none-any.whl.metadata (5.0 kB)
+#10 12.33 Collecting sqlalchemy==2.0.22 (from gemma-mcp-api==0.1.0)
+#10 12.54   Downloading SQLAlchemy-2.0.22-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (9.4 kB)
+#10 13.30 Collecting sqlitecloud==0.0.84 (from gemma-mcp-api==0.1.0)
+#10 13.50   Downloading sqlitecloud-0.0.84-py3-none-any.whl.metadata (9.1 kB)
+#10 13.59 Collecting uvicorn>=0.30 (from uvicorn[standard]>=0.30->gemma-mcp-api==0.1.0)
+#10 13.61   Downloading uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+#10 13.68 Collecting werkzeug==3.0.1 (from gemma-mcp-api==0.1.0)
+#10 13.70   Downloading werkzeug-3.0.1-py3-none-any.whl.metadata (4.1 kB)
+#10 13.75 Collecting typing-extensions>=4.2.0 (from sqlalchemy==2.0.22->gemma-mcp-api==0.1.0)
+#10 13.77   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#10 14.08 Collecting greenlet!=0.4.17 (from sqlalchemy==2.0.22->gemma-mcp-api==0.1.0)
+#10 14.10   Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl.metadata (3.8 kB)
+#10 14.31 Collecting lz4>=3.1.10 (from sqlitecloud==0.0.84->gemma-mcp-api==0.1.0)
+#10 14.33   Downloading lz4-4.4.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (3.8 kB)
+#10 14.45 Collecting MarkupSafe>=2.1.1 (from werkzeug==3.0.1->gemma-mcp-api==0.1.0)
+#10 14.47   Downloading markupsafe-3.0.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (2.7 kB)
+#10 14.55 Collecting starlette>=1.6.0 (from fastapi>=0.115->gemma-mcp-api==0.1.0)
+#10 14.56   Downloading starlette-1.10.0-py3-none-any.whl.metadata (6.6 kB)
+#10 14.61 Collecting anyio>=4.1.0 (from fastapi>=0.115->gemma-mcp-api==0.1.0)
+#10 14.63   Downloading anyio-4.16.0-py3-none-any.whl.metadata (4.7 kB)
+#10 14.88 Collecting pydantic>=2.9.0 (from fastapi>=0.115->gemma-mcp-api==0.1.0)
+#10 14.90   Downloading pydantic-2.14.4-py3-none-any.whl.metadata (143 kB)
+#10 14.98 Collecting typing-inspection>=0.4.2 (from fastapi>=0.115->gemma-mcp-api==0.1.0)
+#10 15.01   Downloading typing_inspection-0.4.5-py3-none-any.whl.metadata (2.6 kB)
+#10 15.04 Collecting annotated-doc>=0.0.2 (from fastapi>=0.115->gemma-mcp-api==0.1.0)
+#10 15.06   Downloading annotated_doc-0.0.7-py3-none-any.whl.metadata (6.4 kB)
+#10 15.15 Collecting opentelemetry-api>=1.44.0 (from fastapi>=0.115->gemma-mcp-api==0.1.0)
+#10 15.17   Downloading opentelemetry_api-1.45.2-py3-none-any.whl.metadata (1.4 kB)
+#10 15.24 Collecting certifi (from httpx>=0.27->gemma-mcp-api==0.1.0)
+#10 15.26   Downloading certifi-2026.11.20-py3-none-any.whl.metadata (2.5 kB)
+#10 15.31 Collecting httpcore==1.* (from httpx>=0.27->gemma-mcp-api==0.1.0)
+#10 15.33   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#10 15.38 Collecting idna (from httpx>=0.27->gemma-mcp-api==0.1.0)
+#10 15.40   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+#10 15.44 Collecting h11>=0.16 (from httpcore==1.*->httpx>=0.27->gemma-mcp-api==0.1.0)
+#10 15.46   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#10 15.52 Collecting httpx-sse>=0.4 (from mcp<2.0,>=1.2->gemma-mcp-api==0.1.0)
+#10 15.54   Downloading httpx_sse-0.4.3-py3-none-any.whl.metadata (9.7 kB)
+#10 15.63 Collecting jsonschema>=4.20.0 (from mcp<2.0,>=1.2->gemma-mcp-api==0.1.0)
+#10 15.65   Downloading jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)
+#10 15.75 Collecting pyjwt>=2.10.1 (from pyjwt[crypto]>=2.10.1->mcp<2.0,>=1.2->gemma-mcp-api==0.1.0)
+#10 15.77   Downloading pyjwt-2.15.1-py3-none-any.whl.metadata (3.5 kB)
+#10 15.82 Collecting sse-starlette>=1.6.1 (from mcp<2.0,>=1.2->gemma-mcp-api==0.1.0)
+#10 15.84   Downloading sse_starlette-3.7.0-py3-none-any.whl.metadata (15 kB)
+#10 15.95 Collecting httpx2<3,>=2.12.0 (from openai>=1.0->gemma-mcp-api==0.1.0)
+#10 15.98   Downloading httpx2-2.16.2-py3-none-any.whl.metadata (10.0 kB)
+#10 16.19 Collecting jiter<1,>=0.16.0 (from openai>=1.0->gemma-mcp-api==0.1.0)
+#10 16.22   Downloading jiter-0.19.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl.metadata (5.2 kB)
+#10 16.30 Collecting sniffio (from openai>=1.0->gemma-mcp-api==0.1.0)
+#10 16.32   Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+#10 16.43 Collecting python-dotenv>=1.2.2 (from pydantic-settings>=2.3->gemma-mcp-api==0.1.0)
+#10 16.45   Downloading python_dotenv-1.2.4-py3-none-any.whl.metadata (29 kB)
+#10 16.88 Collecting numpy>=1.26 (from shapely>=2.0->gemma-mcp-api==0.1.0)
+#10 16.91   Downloading numpy-2.5.5-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl.metadata (6.6 kB)
+#10 17.05 Collecting click>=7.0 (from uvicorn>=0.30->uvicorn[standard]>=0.30->gemma-mcp-api==0.1.0)
+#10 17.07   Downloading click-8.5.1-py3-none-any.whl.metadata (2.6 kB)
+#10 17.16 Collecting httptools>=0.8.0 (from uvicorn[standard]>=0.30->gemma-mcp-api==0.1.0)
+#10 17.18   Downloading httptools-0.9.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (3.5 kB)
+#10 17.28 Collecting pyyaml>=5.1 (from uvicorn[standard]>=0.30->gemma-mcp-api==0.1.0)
+#10 17.30   Downloading pyyaml-6.0.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (2.3 kB)
+#10 17.40 Collecting uvloop>=0.15.1 (from uvicorn[standard]>=0.30->gemma-mcp-api==0.1.0)
+#10 17.42   Downloading uvloop-0.23.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (5.1 kB)
+#10 17.59 Collecting watchfiles>=0.20 (from uvicorn[standard]>=0.30->gemma-mcp-api==0.1.0)
+#10 17.61   Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (4.9 kB)
+#10 17.88 Collecting websockets>=13.0 (from uvicorn[standard]>=0.30->gemma-mcp-api==0.1.0)
+#10 17.90   Downloading websockets-17.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (6.3 kB)
+#10 17.97 Collecting httpcore2==2.16.2 (from httpx2<3,>=2.12.0->openai>=1.0->gemma-mcp-api==0.1.0)
+#10 17.99   Downloading httpcore2-2.16.2-py3-none-any.whl.metadata (28 kB)
+#10 18.03 Collecting truststore>=0.10 (from httpx2<3,>=2.12.0->openai>=1.0->gemma-mcp-api==0.1.0)
+#10 18.05   Downloading truststore-0.10.5-py3-none-any.whl.metadata (4.5 kB)
+#10 18.11 Collecting attrs>=22.2.0 (from jsonschema>=4.20.0->mcp<2.0,>=1.2->gemma-mcp-api==0.1.0)
+#10 18.13   Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+#10 18.17 Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=4.20.0->mcp<2.0,>=1.2->gemma-mcp-api==0.1.0)
+#10 18.19   Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+#10 18.27 Collecting referencing>=0.28.4 (from jsonschema>=4.20.0->mcp<2.0,>=1.2->gemma-mcp-api==0.1.0)
+#10 18.29   Downloading referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+#10 18.82 Collecting rpds-py>=0.25.0 (from jsonschema>=4.20.0->mcp<2.0,>=1.2->gemma-mcp-api==0.1.0)
+#10 18.85   Downloading rpds_py-2026.9.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (4.1 kB)
+#10 18.89 Collecting annotated-types>=0.6.0 (from pydantic>=2.9.0->fastapi>=0.115->gemma-mcp-api==0.1.0)
+#10 18.91   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#10 20.40 Collecting pydantic-core==2.50.5 (from pydantic>=2.9.0->fastapi>=0.115->gemma-mcp-api==0.1.0)
+#10 20.43   Downloading pydantic_core-2.50.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl.metadata (6.6 kB)
+#10 20.97 Collecting cryptography>=3.4.0 (from pyjwt[crypto]>=2.10.1->mcp<2.0,>=1.2->gemma-mcp-api==0.1.0)
+#10 20.99   Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_aarch64.whl.metadata (4.4 kB)
+#10 21.33 Collecting cffi>=2.0.0 (from cryptography>=3.4.0->pyjwt[crypto]>=2.10.1->mcp<2.0,>=1.2->gemma-mcp-api==0.1.0)
+#10 21.35   Downloading cffi-2.1.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl.metadata (2.5 kB)
+#10 21.43 Collecting pycparser (from cffi>=2.0.0->cryptography>=3.4.0->pyjwt[crypto]>=2.10.1->mcp<2.0,>=1.2->gemma-mcp-api==0.1.0)
+#10 21.45   Downloading pycparser-3.12-py3-none-any.whl.metadata (9.7 kB)
+#10 21.48 Downloading SQLAlchemy-2.0.22-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (3.2 MB)
+#10 21.86    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 8.5 MB/s eta 0:00:00
+#10 21.88 Downloading sqlalchemy_sqlitecloud-0.1.2-py3-none-any.whl (7.1 kB)
+#10 21.90 Downloading sqlitecloud-0.0.84-py3-none-any.whl (49 kB)
+#10 21.93 Downloading werkzeug-3.0.1-py3-none-any.whl (226 kB)
+#10 21.97 Downloading fastapi-0.165.0-py3-none-any.whl (159 kB)
+#10 22.01 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#10 22.04 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#10 22.06 Downloading mcp-1.30.0-py3-none-any.whl (234 kB)
+#10 22.11 Downloading openai-3.57.0-py3-none-any.whl (2.5 MB)
+#10 22.37    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.5/2.5 MB 9.7 MB/s eta 0:00:00
+#10 22.39 Downloading pydantic_settings-2.16.3-py3-none-any.whl (82 kB)
+#10 22.42 Downloading pyproj-3.8.0-cp312-cp312-manylinux_2_28_aarch64.whl (10.1 MB)
+#10 23.46    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 9.7 MB/s eta 0:00:00
+#10 23.48 Downloading python_multipart-0.0.34-py3-none-any.whl (32 kB)
+#10 23.51 Downloading shapely-2.2.0-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl (2.2 MB)
+#10 23.74    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 9.6 MB/s eta 0:00:00
+#10 23.76 Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+#10 23.79 Downloading annotated_doc-0.0.7-py3-none-any.whl (5.3 kB)
+#10 23.81 Downloading anyio-4.16.0-py3-none-any.whl (134 kB)
+#10 23.84 Downloading click-8.5.1-py3-none-any.whl (126 kB)
+#10 23.87 Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl (611 kB)
+#10 23.94    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 611.7/611.7 kB 10.0 MB/s eta 0:00:00
+#10 23.96 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#10 23.98 Downloading httptools-0.9.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (549 kB)
+#10 24.04    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 549.2/549.2 kB 10.4 MB/s eta 0:00:00
+#10 24.06 Downloading httpx_sse-0.4.3-py3-none-any.whl (9.0 kB)
+#10 24.08 Downloading httpx2-2.16.2-py3-none-any.whl (97 kB)
+#10 24.11 Downloading httpcore2-2.16.2-py3-none-any.whl (85 kB)
+#10 24.14 Downloading idna-3.20-py3-none-any.whl (69 kB)
+#10 24.16 Downloading jiter-0.19.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (335 kB)
+#10 24.22 Downloading jsonschema-4.26.0-py3-none-any.whl (90 kB)
+#10 24.25 Downloading lz4-4.4.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (1.3 MB)
+#10 24.38    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 9.7 MB/s eta 0:00:00
+#10 24.40 Downloading markupsafe-3.0.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (24 kB)
+#10 24.42 Downloading numpy-2.5.5-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl (15.3 MB)
+#10 26.00    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.3/15.3 MB 9.7 MB/s eta 0:00:00
+#10 26.02 Downloading opentelemetry_api-1.45.2-py3-none-any.whl (60 kB)
+#10 26.05 Downloading pydantic-2.14.4-py3-none-any.whl (494 kB)
+#10 26.12 Downloading pydantic_core-2.50.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (2.1 MB)
+#10 26.34    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 9.8 MB/s eta 0:00:00
+#10 26.37 Downloading pyjwt-2.15.1-py3-none-any.whl (33 kB)
+#10 26.39 Downloading python_dotenv-1.2.4-py3-none-any.whl (23 kB)
+#10 26.41 Downloading pyyaml-6.0.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (814 kB)
+#10 26.50    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 814.7/814.7 kB 10.1 MB/s eta 0:00:00
+#10 26.52 Downloading sse_starlette-3.7.0-py3-none-any.whl (18 kB)
+#10 26.54 Downloading starlette-1.10.0-py3-none-any.whl (80 kB)
+#10 26.57 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#10 26.59 Downloading typing_inspection-0.4.5-py3-none-any.whl (14 kB)
+#10 26.61 Downloading uvloop-0.23.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (4.4 MB)
+#10 27.07    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 9.7 MB/s eta 0:00:00
+#10 27.09 Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (454 kB)
+#10 27.16 Downloading websockets-17.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (227 kB)
+#10 27.20 Downloading certifi-2026.11.20-py3-none-any.whl (127 kB)
+#10 27.23 Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+#10 27.25 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#10 27.28 Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+#10 27.30 Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_aarch64.whl (4.7 MB)
+#10 27.79    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 9.8 MB/s eta 0:00:00
+#10 27.81 Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+#10 27.83 Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+#10 27.86 Downloading rpds_py-2026.9.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (373 kB)
+#10 27.91 Downloading truststore-0.10.5-py3-none-any.whl (19 kB)
+#10 27.94 Downloading cffi-2.1.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (222 kB)
+#10 27.98 Downloading pycparser-3.12-py3-none-any.whl (62 kB)
+#10 28.22 Building wheels for collected packages: gemma-mcp-api
+#10 28.22   Building wheel for gemma-mcp-api (pyproject.toml): started
+#10 28.30   Building wheel for gemma-mcp-api (pyproject.toml): finished with status 'done'
+#10 28.32   Created wheel for gemma-mcp-api: filename=gemma_mcp_api-0.1.0-py3-none-any.whl size=8566624 sha256=bb2ac43d7f0dc1d8b7b712061e0dc6c3d2fab6ac922644dac6212fe3143584f4
+#10 28.32   Stored in directory: /tmp/pip-ephem-wheel-cache-tmj97b7f/wheels/54/1b/b7/aa63e25c8f14f4f2ae7b04e6097bdecb770e455c5c1ee0a600
+#10 28.32 Successfully built gemma-mcp-api
+#10 28.55 Installing collected packages: websockets, uvloop, typing-extensions, truststore, sniffio, rpds-py, pyyaml, python-multipart, python-dotenv, pyjwt, pycparser, numpy, MarkupSafe, lz4, jiter, idna, httpx-sse, httptools, h11, greenlet, click, certifi, attrs, annotated-types, annotated-doc, werkzeug, uvicorn, typing-inspection, sqlitecloud, sqlalchemy, shapely, referencing, pyproj, pydantic-core, opentelemetry-api, httpcore2, httpcore, cffi, anyio, watchfiles, starlette, sqlalchemy-sqlitecloud, pydantic, jsonschema-specifications, httpx2, httpx, cryptography, sse-starlette, pydantic-settings, openai, jsonschema, fastapi, mcp, gemma-mcp-api
+#10 57.95 Successfully installed MarkupSafe-3.0.4 annotated-doc-0.0.7 annotated-types-0.8.0 anyio-4.16.0 attrs-26.1.0 certifi-2026.11.20 cffi-2.1.1 click-8.5.1 cryptography-50.0.2 fastapi-0.165.0 gemma-mcp-api-0.1.0 greenlet-3.5.6 h11-0.16.0 httpcore-1.0.9 httpcore2-2.16.2 httptools-0.9.0 httpx-0.28.1 httpx-sse-0.4.3 httpx2-2.16.2 idna-3.20 jiter-0.19.0 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 lz4-4.4.5 mcp-1.30.0 numpy-2.5.5 openai-3.57.0 opentelemetry-api-1.45.2 pycparser-3.12 pydantic-2.14.4 pydantic-core-2.50.5 pydantic-settings-2.16.3 pyjwt-2.15.1 pyproj-3.8.0 python-dotenv-1.2.4 python-multipart-0.0.34 pyyaml-6.0.4 referencing-0.37.0 rpds-py-2026.9.1 shapely-2.2.0 sniffio-1.3.1 sqlalchemy-2.0.22 sqlalchemy-sqlitecloud-0.1.2 sqlitecloud-0.0.84 sse-starlette-3.7.0 starlette-1.10.0 truststore-0.10.5 typing-extensions-4.16.0 typing-inspection-0.4.5 uvicorn-0.54.0 uvloop-0.23.0 watchfiles-1.3.0 websockets-17.4 werkzeug-3.0.1
+#10 57.95 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#10 58.72 
+#10 58.72 [notice] A new release of pip is available: 25.0.1 -> 26.3
+#10 58.72 [notice] To update, run: pip install --upgrade pip
+#10 DONE 72.9s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 4.0s done
+#11 writing image sha256:5d530fdf7e3dcabfbfd0f6ec291ac78d67122a876ea17df4f399757d64a5b49d done
+#11 naming to docker.io/library/infra-api 0.0s done
+#11 DONE 4.0s
+
+#12 resolving provenance for metadata file
+#12 DONE 0.0s
+ infra-api  Built
+PASS API 이미지 빌드
+test_bad_id_format (test_beacon_store_ui.BeaconStoreUiTests.test_bad_id_format) ... ok
+test_delete_all_requires_label (test_beacon_store_ui.BeaconStoreUiTests.test_delete_all_requires_label) ... ok
+test_delete_checkin_keeps_latest (test_beacon_store_ui.BeaconStoreUiTests.test_delete_checkin_keeps_latest) ... ok
+test_delete_command_skips_busy (test_beacon_store_ui.BeaconStoreUiTests.test_delete_command_skips_busy) ... ok
+test_delete_image_path_escape_blocked (test_beacon_store_ui.BeaconStoreUiTests.test_delete_image_path_escape_blocked) ... Beacon image file delete blocked asset_id=beacon-command-205
+ok
+test_delete_image_removes_file_and_row (test_beacon_store_ui.BeaconStoreUiTests.test_delete_image_removes_file_and_row) ... ok
+test_delete_sensor_before_scoped (test_beacon_store_ui.BeaconStoreUiTests.test_delete_sensor_before_scoped) ... ok
+test_delete_sensor_ids (test_beacon_store_ui.BeaconStoreUiTests.test_delete_sensor_ids) ... ok
+test_delete_sensor_ids_foreign_ignored (test_beacon_store_ui.BeaconStoreUiTests.test_delete_sensor_ids_foreign_ignored) ... ok
+test_detail_has_ids_and_counts (test_beacon_store_ui.BeaconStoreUiTests.test_detail_has_ids_and_counts) ... ok
+test_dry_run_writes_nothing (test_beacon_store_ui.BeaconStoreUiTests.test_dry_run_writes_nothing) ... ok
+test_latest_readings_order_and_values (test_beacon_store_ui.BeaconStoreUiTests.test_latest_readings_order_and_values) ... ok
+test_not_owner_is_keyerror (test_beacon_store_ui.BeaconStoreUiTests.test_not_owner_is_keyerror) ... ok
+test_request_model_modes (test_beacon_store_ui.BeaconStoreUiTests.test_request_model_modes) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 3.853s
+
+OK
+FAIL API 단위 테스트 (exit 124)
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.72kB done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 375B done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/node:22-alpine
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context:
+#4 transferring context: 2B done
+#4 DONE 0.1s
+
+#5 [build 1/6] FROM docker.io/library/node:22-alpine
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 324.09MB 6.2s
+#6 transferring context: 354.83MB 11.7s
+#6 transferring context: 354.92MB 17.8s
+#6 transferring context: 354.97MB 23.3s
+#6 transferring context: 355.01MB 29.6s
+#6 transferring context: 533.76MB 34.2s done
+#6 DONE 34.4s
+
+#7 [build 2/6] WORKDIR /app
+#7 CACHED
+
+#8 [build 3/6] COPY package.json ./
+#8 CACHED
+
+#9 [build 4/6] RUN npm install
+#9 CACHED
+
+#10 [build 5/6] COPY . .
+#10 DONE 77.9s
+
+#11 [build 6/6] RUN npm run build
+#11 2.070 
+#11 2.070 > gemma-mcp-web@0.1.0 build
+#11 2.070 > next build
+#11 2.070 
+#11 3.592 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+#11 3.593 This information is used to shape Next.js' roadmap and prioritize features.
+#11 3.593 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+#11 3.593 https://nextjs.org/telemetry
+#11 3.593 
+#11 3.870    ▲ Next.js 15.5.29
+#11 3.870 
+#11 4.438    Creating an optimized production build ...
+#11 6.447  ⚠ Mismatching @next/swc version, detected: 15.5.28 while Next.js is on 15.5.29. Please ensure these match
+#11 19.83  ⚠ Mismatching @next/swc version, detected: 15.5.28 while Next.js is on 15.5.29. Please ensure these match
+#11 22.29  ⚠ Mismatching @next/swc version, detected: 15.5.28 while Next.js is on 15.5.29. Please ensure these match
+#11 35.08  ✓ Compiled successfully in 23.1s
+#11 35.10    Linting and checking validity of types ...
+#11 47.87    Collecting page data ...
+#11 48.04  ⚠ Mismatching @next/swc version, detected: 15.5.28 while Next.js is on 15.5.29. Please ensure these match
+#11 51.30    Generating static pages (0/4) ...
+#11 52.81    Generating static pages (1/4) 
+#11 52.81    Generating static pages (2/4) 
+#11 52.81    Generating static pages (3/4) 
+#11 52.81  ✓ Generating static pages (4/4)
+#11 55.63    Finalizing page optimization ...
+#11 55.63    Collecting build traces ...
+#11 102.8 
+#11 102.8 Route (app)                                 Size  First Load JS
+#11 102.8 ┌ ○ /                                    95.8 kB         199 kB
+#11 102.8 ├ ○ /_not-found                            991 B         104 kB
+#11 102.8 └ ƒ /api/backend/[...path]                 123 B         103 kB
+#11 102.8 + First Load JS shared by all             103 kB
+#11 102.8   ├ chunks/255-73938ce8a8eac1ad.js       46.6 kB
+#11 102.8   ├ chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB
+#11 102.8   └ other shared chunks (total)           1.9 kB
+#11 102.8 
+#11 102.8 
+#11 102.8 ○  (Static)   prerendered as static content
+#11 102.8 ƒ  (Dynamic)  server-rendered on demand
+#11 102.8 
+#11 103.0 npm notice
+#11 103.0 npm notice New major version of npm available! 10.9.9 -> 12.2.3
+#11 103.0 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.3
+#11 103.0 npm notice To update run: npm install -g npm@12.2.3
+#11 103.0 npm notice
+#11 DONE 103.5s
+
+#7 [build 2/6] WORKDIR /app
+#7 CACHED
+
+#12 [stage-1 3/5] COPY --from=build /app/.next/standalone ./
+#12 DONE 8.7s
+
+#13 [stage-1 4/5] COPY --from=build /app/.next/static ./.next/static
+#13 DONE 0.5s
+
+#14 [stage-1 5/5] COPY --from=build /app/public ./public
+#14 DONE 0.3s
+
+#15 exporting to image
+#15 exporting layers
+#15 exporting layers 1.3s done
+#15 writing image sha256:21230d70e4e794268a0cd41c96cb269baa440d662a6e14fad5b50d4bb31f008e 0.0s done
+#15 naming to docker.io/library/infra-web 0.1s done
+#15 DONE 1.4s
+
+#16 resolving provenance for metadata file
+#16 DONE 0.0s
+ infra-web  Built
+PASS 웹 이미지 빌드
+service "api" is not running
+FAIL 배포 전 DB 행 수 (exit 1)
+ Network infra_beacon-admin  Creating
+ Network infra_beacon-admin  Created
+ Network infra_default  Creating
+ Network infra_default  Created
+ Container infra-mcp-1  Creating
+ Container infra-beacon-1  Creating
+ Container infra-mcp-1  Created
+ Container infra-beacon-1  Created
+ Container infra-api-1  Creating
+ Container infra-api-1  Created
+ Container infra-web-1  Creating
+ Container infra-web-1  Created
+ Container infra-mcp-1  Starting
+ Container infra-beacon-1  Starting
+ Container infra-mcp-1  Started
+ Container infra-beacon-1  Started
+ Container infra-beacon-1  Waiting
+ Container infra-beacon-1  Healthy
+ Container infra-api-1  Starting
+ Container infra-api-1  Started
+ Container infra-web-1  Starting
+ Container infra-web-1  Started
+PASS 서비스 시작
+curl: (56) Recv failure: 상대편이 연결을 끊음
+curl: (56) Recv failure: 상대편이 연결을 끊음
+curl: (56) Recv failure: 상대편이 연결을 끊음
+curl: (56) Recv failure: 상대편이 연결을 끊음
+PASS API 준비
+PASS 웹 HTTP 200
+beacon_data_deletions 존재
