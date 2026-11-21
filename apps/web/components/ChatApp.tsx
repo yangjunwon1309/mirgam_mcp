@@ -8,6 +8,7 @@ import JejuWeatherDashboard from "./JejuWeatherDashboard";
 import FarmGeographyPanel from "./FarmGeographyPanel";
 import { BeaconFleetProvider } from "./beacon/BeaconFleetProvider";
 import { BeaconWorkspace } from "./beacon/fleet/BeaconWorkspace";
+import { DataWorkspace } from "./beacon/data/DataWorkspace";
 import { DashboardTabs } from "./beacon/shell/DashboardTabs";
 import { ContextBar } from "./beacon/shell/ContextBar";
 import { ToastProvider } from "./beacon/ui/Toasts";
@@ -524,7 +525,7 @@ export default function ChatApp() {
         </section>}
             </>}
             {dashboardTab === "beacon" && <div className="bx-root"><ContextBar onNavigate={setDashboardTab} /><BeaconWorkspace /></div>}
-            {dashboardTab === "data-server" && <div className="bx-root"><ContextBar onNavigate={setDashboardTab} /><EmptyState icon="db" title="준비 중" body="데이터 서버 화면을 불러오고 있습니다." /></div>}
+            {dashboardTab === "data-server" && <div className="bx-root"><ContextBar onNavigate={setDashboardTab} /><DataWorkspace /></div>}
           </BeaconFleetProvider>
         </ToastProvider>
       </section>}

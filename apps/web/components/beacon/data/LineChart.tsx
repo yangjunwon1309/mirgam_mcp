@@ -1,0 +1,11 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
+import { dateTime } from "../format";
+export function LineChart({ points, unit }: { points: {t:number;v:number;flag?:boolean}[]; unit:string }) {
+  const ref=useRef<HTMLDivElement>(null); const [width,setWidth]=useState(600); const [active,setActive]=useState<number|null>(null);
+  useEffect(()=>{if(!ref.current)return;const observer=new ResizeObserver(([entry])=>setWidth(Math.max(180,entry.contentRect.width)));observer.observe(ref.current);return()=>observer.disconnect();},[]);
+  if(!points.length)return <div className="bx-empty">측정 기록이 없습니다.</div>;
+  const height=200, left=45,right=10,top=15,bottom=30, min=Math.min(...points.map(p=>p.v)),max=Math.max(...points.map(p=>p.v)),span=Math.max(max-min,1), x=(i:number)=>left+i*(width-left-right)/Math.max(points.length-1,1), y=(v:number)=>top+(max-v)*(height-top-bottom)/span;
+  const path=points.map((p,i)=>`${x(i)},${y(p.v)}`).join(" ");
+  return <div ref={ref} className="bx-chart" tabIndex={0} aria-label="센서 추이. 좌우 화살표로 측정값 이동" onKeyDown={(e)=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"||e.key==="Home"||e.key==="End"){e.preventDefault();setActive(i=>e.key==="Home"?0:e.key==="End"?points.length-1:Math.max(0,Math.min(points.length-1,(i??0)+(e.key==="ArrowRight"?1:-1))));}}}><svg viewBox={`0 0 ${width} ${height}`} onMouseLeave={()=>setActive(null)} onMouseMove={(e)=>{const r=e.currentTarget.getBoundingClientRect();setActive(Math.max(0,Math.min(points.length-1,Math.round(((e.clientX-r.left)-left)/(width-left-right)*Math.max(points.length-1,1)))));}}><line x1={left} x2={width-right} y1={height-bottom} y2={height-bottom} stroke="#c8d5c7"/><text x="0" y={top+5}>{max.toFixed(1)}</text><text x="0" y={height-bottom}>{min.toFixed(1)}</text><polyline fill="none" stroke="#d9782f" strokeWidth="2" points={path}/>{active!==null&&<><line x1={x(active)} x2={x(active)} y1={top} y2={height-bottom} stroke="#65826b" strokeDasharray="4 4"/><circle cx={x(active)} cy={y(points[active].v)} r="4" fill="#fff" stroke="#295b3b" strokeWidth="2"/></>}</svg><div aria-live="polite">{active!==null?`${points[active].v} ${unit} · ${dateTime(points[active].t/1000)}`:"그래프를 선택하면 측정 시각과 값을 볼 수 있습니다."}</div></div>;
+}
