@@ -15,15 +15,16 @@ export function usePendingDeletes(api: Api, toasts: Toasts, onCommitted: (nodeId
   const [pending, setPending] = useState<Pending[]>([]);
   const latest = useRef(pending); latest.current = pending;
   const commit = useCallback(async (entry: Pending) => {
-    setPending((all) => all.filter((p) => p.key !== entry.key));
     try {
       const result = await api.deleteData(entry.nodeId, entry.request);
       if (result.deleted < entry.count) {
         const reason = result.skipped_current ? " 최신 체크인은 보존했습니다." : result.skipped_busy ? " 진행 중 작업은 건너뛰었습니다." : "";
         toasts.push({ title: "요청 " + entry.count + "건 중 " + result.deleted + "건만 삭제되었습니다.", body: reason, tone: "wait" });
       } else toasts.push({ title: entry.label + " " + result.deleted + kindUnit[entry.kind] + " 삭제했습니다.", tone: "ok" });
+      setPending((all) => all.filter((p) => p.key !== entry.key));
       onCommitted(entry.nodeId);
     } catch (error) {
+      setPending((all) => all.filter((p) => p.key !== entry.key));
       const message = error instanceof Error ? error.message : "삭제하지 못했습니다.";
       const retry = async () => {
         try {
