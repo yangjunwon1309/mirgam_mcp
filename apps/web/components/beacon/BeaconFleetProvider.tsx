@@ -16,7 +16,7 @@ type FleetContextValue = {
   addDraft: AddDraft | null; openAdd(): void; openEdit(nodeId: string): void; updateDraft(p: Partial<AddDraft>): void; closeAdd(): void;
   placement: { nodeId: string } | null; beginPlacement(): void; completePlacement(nodeId: string, point: [number, number]): void; cancelPlacement(): void;
   dataSelection: { nodeId: string; sensorId?: string } | null; openData(nodeId: string, sensorId?: string): void;
-  pendingDeletes: ReturnType<typeof usePendingDeletes>;
+  pendingDeletes: ReturnType<typeof usePendingDeletes>; navigate(tab: DashboardTab): void;
 };
 const FleetContext = createContext<FleetContextValue | null>(null);
 type Props = { fetchProtected: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>; activeTab: DashboardTab; onNavigate(tab: DashboardTab): void; children: ReactNode };
@@ -119,8 +119,8 @@ export function BeaconFleetProvider({ fetchProtected, activeTab, onNavigate, chi
     openDeviceId, openDevice, closeDevice, highlightId,
     addDraft, openAdd, openEdit, updateDraft, closeAdd,
     placement, beginPlacement, completePlacement, cancelPlacement,
-    dataSelection, openData, pendingDeletes, markHighlight,
-  }), [api, farms, farmId, farm, setFarmId, reloadFarms, allNodes, nodes, discoverable, reachable, error, lastSyncAt, refreshNodes, openDeviceId, openDevice, closeDevice, highlightId, addDraft, openAdd, openEdit, updateDraft, closeAdd, placement, beginPlacement, completePlacement, cancelPlacement, dataSelection, openData, pendingDeletes, markHighlight]);
+    dataSelection, openData, pendingDeletes, markHighlight, navigate: onNavigate,
+  }), [api, farms, farmId, farm, setFarmId, reloadFarms, allNodes, nodes, discoverable, reachable, error, lastSyncAt, refreshNodes, openDeviceId, openDevice, closeDevice, highlightId, addDraft, openAdd, openEdit, updateDraft, closeAdd, placement, beginPlacement, completePlacement, cancelPlacement, dataSelection, openData, pendingDeletes, markHighlight, onNavigate]);
   return <BeaconApiContext.Provider value={api}><FleetContext.Provider value={value}>{children}</FleetContext.Provider></BeaconApiContext.Provider>;
 }
 export function useBeaconFleet(): FleetContextValue {
